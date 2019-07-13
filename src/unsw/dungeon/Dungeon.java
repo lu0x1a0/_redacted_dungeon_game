@@ -4,6 +4,7 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -15,12 +16,12 @@ import java.util.List;
  * @author Robert Clifton-Everest
  *
  */
-public class Dungeon {
+public class Dungeon implements Observer{
 
     private int width, height;
     private List<Entity> entities;
     private Player player;
-
+    private HashMap<String, String> map;
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
@@ -47,4 +48,10 @@ public class Dungeon {
     public void addEntity(Entity entity) {
         entities.add(entity);
     }
+
+	@Override
+	public void update(Observable o) {
+		// TODO Auto-generated method stub
+		
+	}
 }
