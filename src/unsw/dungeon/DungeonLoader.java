@@ -72,5 +72,12 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Wall wall);
 
     // TODO Create additional abstract methods for the other entities
+    public abstract void onLoad(Enemy enemy);
+    
+    public abstract void onLoad(Collectible collectible);
+    
+//    public abstract void onLoad(Door door);
+    	// can use entity and super()
+//    public abstract void onLoad(FloorSwitch);
 
 }

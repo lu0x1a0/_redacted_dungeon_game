@@ -21,14 +21,15 @@ public class Dungeon implements Observer{
     private int width, height;
     private List<Entity> entities;
     private Player player;
-    private HashMap<String, String> map;
+    private HashMap<Coord, Entity> map;
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
         this.entities = new ArrayList<>();
         this.player = null;
+        this.map = new HashMap<Coord, Entity>();
     }
-
+    
     public int getWidth() {
         return width;
     }
@@ -47,6 +48,7 @@ public class Dungeon implements Observer{
 
     public void addEntity(Entity entity) {
         entities.add(entity);
+        map.put(new Coord(entity.getX(),entity.getY()), entity);
     }
 
 	@Override
