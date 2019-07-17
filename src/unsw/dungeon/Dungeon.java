@@ -50,7 +50,44 @@ public class Dungeon implements Observer{
         entities.add(entity);
         map.put(new Coord(entity.getX(),entity.getY()), entity);
     }
-
+    /*
+    public Entity getEntityAtCoord(int x, int y) {
+    	Coord coord = new Coord(x,y);
+    	if (map.containsKey(coord)) {
+    		return map.get(coord);
+    	}
+    	return null;
+    }*/
+    public boolean ispassable(int x, int y) {
+    	Coord coord = new Coord(x,y);
+    	if (map.containsKey(coord)) {
+    		hasEntity(x,y);
+    		return map.get(coord).ispassable();
+    	}
+		System.out.println("Note");
+    	return true;
+    }
+    private void hasEntity(int x, int y) {
+    	Coord coord = new Coord(x,y);
+    	if (map.containsKey(coord)) {
+    		System.out.printf("%d,%d hasEntity: ",x,y);
+    		System.out.println(map.get(coord).getClass());
+    	}
+		
+    }
+    public Collectible hasCollectibleAt(int x, int y) {
+    	Coord coord = new Coord(x,y);
+    	if (map.containsKey(coord)) {
+    		if (map.get(coord) instanceof Collectible)
+    			return (Collectible) map.get(coord);
+    	} 
+    	return null;
+    }
+    public void removeEntityAtCoord(int x, int y) {
+    	Coord coord = new Coord(x,y);
+    	map.remove(coord);
+    }
+    
 	@Override
 	public void update(Observable o) {
 		// TODO Auto-generated method stub

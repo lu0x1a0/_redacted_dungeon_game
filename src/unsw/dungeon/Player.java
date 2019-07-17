@@ -20,22 +20,26 @@ public class Player extends Entity implements Movable{
     }
     @Override
     public void moveUp() {
-        if (getY() > 0)
+        if (getY() > 0 && 
+			dungeon.ispassable(getX(), getY() - 1) == true)
             y().set(getY() - 1);
     }
     @Override
     public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1)
+        if (getY() < dungeon.getHeight() - 1 && 
+			dungeon.ispassable(getX(), getY() + 1) == true)
             y().set(getY() + 1);
     }
     @Override
     public void moveLeft() {
-        if (getX() > 0)
+    	if (getX() > 0 && 
+			dungeon.ispassable(getX() - 1, getY()) == true)
             x().set(getX() - 1);
     }
     @Override
     public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1)
+        if (getX() < dungeon.getWidth() - 1 && 
+			dungeon.ispassable(getX() + 1, getY()) == true)
             x().set(getX() + 1);
     }
 	@Override
