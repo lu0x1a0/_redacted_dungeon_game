@@ -22,29 +22,127 @@ public class DungeonControllerLoader extends DungeonLoader {
     private List<ImageView> entities;
 
     //Images
-    private Image playerImage;
-    private Image wallImage;
+    private Image playerImg;
+    private Image wallImg;
+    private Image enemyImg;
+    private Image boulderImg;
+    private Image bombUnlitImg;
+	private Image bombLit1Img;
+	private Image bombLit2Img;
+	private Image bombLit3Img;
+    private Image bombExplodeImg;
+    private Image swordImg;
+    private Image keyImg;
+    private Image treasureImg;
+    private Image potionImg;
+    private Image switchImg;
+    private Image closedDoorImg;
+    private Image openedDoorImg;
+    private Image exitImg;
+
+
+    
 
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
         super(filename);
         entities = new ArrayList<>();
-        playerImage = new Image("/human_new.png");
-        wallImage = new Image("/brick_brown_0.png");
+        playerImg = new Image("/human_new.png");
+        wallImg = new Image("/brick_brown_0.png");
+        enemyImg = new Image("/gnome.png");
+        boulderImg = new Image("/boulder.png");
+        bombUnlitImg = new Image("/bomb_unlit.png");
+        bombLit1Img = new Image("/bomb_lit_1.png");
+        bombLit2Img = new Image("/bomb_lit_2.png");
+        bombLit3Img = new Image("/bomb_lit_3.png");
+        bombExplodeImg = new Image("/bomb_lit_4.png");
+     	swordImg = new Image("/greatsword_1_new.png");
+     	keyImg = new Image("/key.png");
+     	treasureImg = new Image("/gold_pile.png");
+     	potionImg = new Image("/brilliant_blue_new.png");
+     	switchImg = new Image("/pressure_plate.png");
+     	closedDoorImg = new Image("/closed_door.png");
+     	openedDoorImg = new Image("/open_door.png");
+     	exitImg = new Image("/exit.png");  
     }
 
     @Override
-    public void onLoad(Entity player) {
-        ImageView view = new ImageView(playerImage);
+    public void onLoad(Player player) {
+        ImageView view = new ImageView(playerImg);
         addEntity(player, view);
     }
 
     @Override
     public void onLoad(Wall wall) {
-        ImageView view = new ImageView(wallImage);
+        ImageView view = new ImageView(wallImg);
         addEntity(wall, view);
     }
+    
+	@Override
+	public void onLoad(Enemy enemy) {
+        ImageView view = new ImageView(enemyImg);
+        addEntity(enemy, view);
+	}
+	@Override
+	public void onLoad(Boulder boulder) {
+        ImageView view = new ImageView(boulderImg);
+        addEntity(boulder, view);
+	}
 
+	@Override
+	public void onLoad(Bomb bomb) {
+        ImageView view = new ImageView(bombUnlitImg);
+        addEntity(bomb, view);
+	}
+
+	@Override
+	public void onLoad(Sword sword) {
+        ImageView view = new ImageView(swordImg);
+        addEntity(sword, view);
+	}
+
+	@Override
+	public void onLoad(Key key) {
+        ImageView view = new ImageView(keyImg);
+        addEntity(key, view);
+	}
+
+	@Override
+	public void onLoad(Treasure treasure) {
+        ImageView view = new ImageView(treasureImg);
+        addEntity(treasure, view);
+	}
+
+	@Override
+	public void onLoad(Potion potion) {
+        ImageView view = new ImageView(potionImg);
+        addEntity(potion, view);
+	}
+
+	@Override
+	public void onLoad(FloorSwitch floorswitch) {
+        ImageView view = new ImageView(switchImg);
+        addEntity(floorswitch, view);
+	}
+
+	@Override
+	public void onLoad(Door door) {
+        ImageView view = new ImageView(closedDoorImg);
+        addEntity(door, view);
+	}
+	
+	@Override
+	public void onLoad(ExitGoal exit) {
+        ImageView view = new ImageView(exitImg);
+        addEntity(exit, view);
+	}
+	
+	@Override
+	public void onLoad(Goal goal) {
+		// TODO Auto-generated method stub
+		
+	} 
+	
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entities.add(view);
@@ -88,6 +186,4 @@ public class DungeonControllerLoader extends DungeonLoader {
     public DungeonController loadController() throws FileNotFoundException {
         return new DungeonController(load(), entities);
     }
-
-
 }

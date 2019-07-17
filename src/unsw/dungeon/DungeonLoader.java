@@ -46,7 +46,7 @@ public abstract class DungeonLoader {
         String type = json.getString("type");
         int x = json.getInt("x");
         int y = json.getInt("y");
-
+        System.out.println(type);
         Entity entity = null;
         switch (type) {
         case "player":
@@ -62,22 +62,41 @@ public abstract class DungeonLoader {
             break;
         // TODO Handle other possible entities
         case "exit":
-        	ExitGoal exit = new ExitGoal();
+        	ExitGoal exit = new ExitGoal(x,y);
+            onLoad(exit);
+            entity = exit;
+        	break;
         }
-        dungeon.addEntity(entity);
+        // FIXME
+        if(entity != null) {
+        	dungeon.addEntity(entity);
+        }
     }
 
-    public abstract void onLoad(Entity player);
-
-    public abstract void onLoad(Wall wall);
-
+    public abstract void onLoad(Player player);
     // TODO Create additional abstract methods for the other entities
+    
     public abstract void onLoad(Enemy enemy);
     
-    public abstract void onLoad(Collectible collectible);
+    public abstract void onLoad(Boulder boulder);
     
-//    public abstract void onLoad(Door door);
-    	// can use entity and super()
-//    public abstract void onLoad(FloorSwitch);
+    public abstract void onLoad(Bomb bomb);
 
+    public abstract void onLoad(Sword sword);    
+
+    public abstract void onLoad(Key key);
+
+    public abstract void onLoad(Treasure treasure);
+    
+    public abstract void onLoad(Potion potion);
+
+    public abstract void onLoad(FloorSwitch floorswitch);
+
+    public abstract void onLoad(Door door);
+
+    public abstract void onLoad(Goal goal);
+
+	public abstract void onLoad(ExitGoal exit);
+	
+	public abstract void onLoad(Wall wall);
 }
