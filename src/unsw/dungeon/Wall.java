@@ -6,4 +6,10 @@ public class Wall extends Entity {
         super(x, y);
     }
 
+	@Override
+	public boolean ispassable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

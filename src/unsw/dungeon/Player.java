@@ -58,5 +58,10 @@ public class Player extends Entity implements Movable{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	@Override
+	public boolean ispassable() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
 }
