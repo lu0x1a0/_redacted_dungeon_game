@@ -89,8 +89,13 @@ public class Dungeon implements Observer{
     }
     
 	@Override
-	public void update(Observable o) {
-		// TODO Auto-generated method stub
-		
+	public void update(Observable o, Object info) {
+		if(o instanceof Movable) {
+			Coord oldCoord = (Coord) info;
+			Entity m = (Entity) o;
+			map.remove(oldCoord);
+			map.put(new Coord(m.getX(), m.getY()), m);
+		}
+		//TODO add more cases
 	}
 }

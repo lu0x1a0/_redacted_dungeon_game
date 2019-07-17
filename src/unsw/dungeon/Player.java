@@ -39,24 +39,13 @@ public class Player extends Entity implements Movable{
     @Override
     public void moveRight() {
         if (getX() < dungeon.getWidth() - 1 && 
-			dungeon.ispassable(getX() + 1, getY()) == true)
-            x().set(getX() + 1);
+			dungeon.ispassable(getX() + 1, getY()) == true) {
+        	int oldx = getX();
+        	x().set(oldx + 1);
+        	notifyObservers(this,new Coord(oldx,getY()));
+        }
     }
-	@Override
-	public void notifyObservers() {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void removeObserver(Observer o) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void registerObserver(Observer o) {
-		// TODO Auto-generated method stub
-		
-	}
+
 	@Override
 	public boolean checkPositionAvail() {
 		// TODO Auto-generated method stub
