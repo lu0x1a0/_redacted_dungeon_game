@@ -32,4 +32,10 @@ public class ExitGoal extends Entity implements Goal {
 		return otherGoalsCompleted;
 	}
 
+	@Override
+	public void react(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

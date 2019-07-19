@@ -12,4 +12,10 @@ public class Wall extends Entity {
 		return false;
 	}
 
+	@Override
+	public void react(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

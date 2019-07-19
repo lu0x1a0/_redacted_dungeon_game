@@ -1,6 +1,12 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+import javafx.scene.image.ImageView;
 
 /**
  * The player entity
@@ -8,7 +14,7 @@ import java.util.ArrayList;
  *
  */
 public class Player extends Entity implements Movable{
-
+	static int count = 0;
     private Dungeon dungeon;
     private ArrayList<Collectible> inventory;
     /**
@@ -23,6 +29,20 @@ public class Player extends Entity implements Movable{
     }
     @Override
     public void moveUp() {
+
+        final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        ScheduledFuture<?> result = executorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                System.out.printf("%d,olalala\n",count++);
+            }
+        }, 0, 1, TimeUnit.SECONDS);
+        
+        if(count >= 10) {
+        	executorService.shutdownNow();
+        }
+        
+        
         if (getY() > 0 && 
 			dungeon.ispassable(getX(), getY() - 1) == true) {
     		int oldY = getY();
@@ -65,7 +85,16 @@ public class Player extends Entity implements Movable{
     		inventory.add(c);
     	}
     }
-    
+    @Override
+    public void react(Entity e) {
+    	if(e instanceof Enemy) {
+    		react( (Enemy) e);
+    	}
+    	// TODO more cases
+    }
+    public void react(Enemy e) {
+    	
+    }
 	@Override
 	public boolean checkPositionAvail() {
 		// TODO Auto-generated method stub

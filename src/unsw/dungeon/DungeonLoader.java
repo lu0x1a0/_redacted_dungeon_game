@@ -66,7 +66,42 @@ public abstract class DungeonLoader {
             onLoad(exit);
             entity = exit;
         	break;
-        }
+        case "enemy":
+        	Enemy enemy = new Enemy(dungeon,x,y);
+        	onLoad(enemy);
+        	entity = enemy;
+        	break;
+        case "boulder":
+        	Boulder boulder = new Boulder(x,y);
+        	onLoad(boulder);
+        	entity = boulder;
+        	break;
+        case "bomb":
+        	Bomb bomb = new Bomb(x,y);
+        	onLoad(bomb);
+        	entity = bomb;
+        	break;
+        case "sword":
+        	Sword sword = new Sword(x,y);
+        	onLoad(sword);
+        	entity = sword;
+        	break;      	
+	    case "key":
+        	Key key = new Key(x,y);
+        	onLoad(key);
+        	entity = key;
+        	break;
+		case "treasure":
+        	Treasure t = new Treasure(x,y);
+        	onLoad(t);
+        	entity = t;
+        	break;
+		case "invincibility":
+        	Potion p = new Potion(x,y);
+        	onLoad(p);
+        	entity = p;
+			break;      	
+		}
         // FIXME
         if(entity != null) {
         	dungeon.addEntity(entity);

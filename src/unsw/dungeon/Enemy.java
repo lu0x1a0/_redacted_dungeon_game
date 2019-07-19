@@ -1,12 +1,21 @@
 package unsw.dungeon;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
+
+import javafx.scene.image.ImageView;
+
 public class Enemy extends Entity implements Movable {
-
-	public Enemy(int x, int y) {
+// being observed by the dungeon, observing the player
+	Dungeon dungeon;
+	public Enemy(Dungeon dungeon, int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
+		this.dungeon = dungeon;
 	}
-
+	public void start() {
+		
+	}
 	@Override
 	public boolean checkPositionAvail() {
 		// TODO Auto-generated method stub
@@ -42,5 +51,38 @@ public class Enemy extends Entity implements Movable {
 		// TODO Auto-generated method stub
 		return true;
 	}
-
+	public Coord pathsearch() {
+		// THIS_coord, coord came from
+		HashMap<Coord,Coord> visited = new HashMap<Coord,Coord>();
+		Coord ptr =  new Coord(getX(),getY());
+		Coord ori =  new Coord(getX(),getY());
+		Coord player = dungeon.getPlayerCoord();
+		
+		Queue<Coord> queue = new LinkedList<Coord>();
+		while ( ptr!=null || ptr != player) {
+			LinkedList<Coord> potential = dungeon.getSurroundPassable(ptr);
+			//queue.addAll(potential);
+			for(Coord c:potential) {
+				if(!visited.containsKey(c)) {
+					visited.put(c, ptr);
+					queue.add(c);
+				}
+			}
+			ptr = queue.poll();
+		}
+		if (ptr == player) {
+			Coord key = ptr;
+			while(visited.get(key)!=ori) {
+				key = visited.get(key);
+			}
+			return key;
+		}else {
+			return null;
+		}
+	}
+	@Override
+	public void react(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

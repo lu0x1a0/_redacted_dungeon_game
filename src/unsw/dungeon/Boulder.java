@@ -1,9 +1,11 @@
 package unsw.dungeon;
 
+import javafx.scene.image.ImageView;
+
 public class Boulder extends Entity implements Movable {
 
 	public Boulder(int x, int y) {
-		super(x, y);
+        super(x, y);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -53,6 +55,12 @@ public class Boulder extends Entity implements Movable {
 	public boolean ispassable() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void react(Entity e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

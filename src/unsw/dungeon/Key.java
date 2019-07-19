@@ -25,4 +25,10 @@ public class Key extends Entity implements Collectible {
 		return true;
 	}
 
+	@Override
+	public void react(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

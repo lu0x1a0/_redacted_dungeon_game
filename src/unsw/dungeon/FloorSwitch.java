@@ -13,4 +13,10 @@ public class FloorSwitch extends Entity {
 		return true;
 	}
 
+	@Override
+	public void react(Entity e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
