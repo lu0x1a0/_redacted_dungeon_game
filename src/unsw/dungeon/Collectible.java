@@ -11,7 +11,7 @@ public abstract class Collectible extends Entity implements Observable{
 		registerObserver(dungeon);
 		collected = false;
 	}
-	public boolean iscollected() {
+	public boolean isCollected() {
 		return collected;
 	}
 	public abstract void use(Object info);

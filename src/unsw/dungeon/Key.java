@@ -8,12 +8,6 @@ public class Key extends Collectible {
 	}
 
 	@Override
-	public boolean iscollected() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public void use(Object info) {
 		// TODO Auto-generated method stub
 

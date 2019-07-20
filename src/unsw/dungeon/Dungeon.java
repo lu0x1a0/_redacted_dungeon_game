@@ -19,7 +19,7 @@ import javafx.scene.image.ImageView;
  * @author Robert Clifton-Everest
  *
  */
-public class Dungeon implements Observer{
+public class Dungeon implements Observer {
 
     private int width, height;
     //private List<Entity> entities;
@@ -129,6 +129,12 @@ public class Dungeon implements Observer{
     	Coord coord = new Coord(x,y);
     	map.remove(coord);
     }
+    
+//    public ArrayList<Entity> getEntitiesAtCoord(int x, int y) {
+//    	Coord coord = new Coord(x,y);
+//    	return map.get(coord);
+//    	
+//    }
     
 	@Override
 	public void update(Observable o, Object info) {

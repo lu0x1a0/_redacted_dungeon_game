@@ -129,7 +129,7 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(Door door);
 
-    public abstract void onLoad(Goal goal);
+    public abstract void onLoad(GoalComponent goal);
 
 	public abstract void onLoad(ExitGoal exit);
 	

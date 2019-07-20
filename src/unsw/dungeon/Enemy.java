@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 public class Enemy extends Movable {
 // being observed by the dungeon, observing the player
 	Dungeon dungeon;
+	boolean alive = true;
 	public Enemy(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.dungeon = dungeon;
@@ -80,9 +81,15 @@ public class Enemy extends Movable {
 			return null;
 		}
 	}
+	
+	
+	
+	public boolean isAlive() {
+		return alive;
+	}
+	
 	@Override
 	public void react(Entity e) {
-		// TODO Auto-generated method stub
 		if (e instanceof Sword) {
 			Sword s = (Sword) e;
 			s.setCount(s.getCount()-1);
@@ -91,6 +98,7 @@ public class Enemy extends Movable {
 	}
 	private void killed() {
 		removeFromView();
-		notifyObservers(this,"die");
+		notifyObservers(this,"dead");
+		alive = false;
 	}
 }

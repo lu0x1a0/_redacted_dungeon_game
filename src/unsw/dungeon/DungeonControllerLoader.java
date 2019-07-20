@@ -137,12 +137,6 @@ public class DungeonControllerLoader extends DungeonLoader {
         addEntity(exit, view);
 	}
 	
-	@Override
-	public void onLoad(Goal goal) {
-		// TODO Auto-generated method stub
-		
-	} 
-	
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entity.setIv(view);
@@ -190,4 +184,10 @@ public class DungeonControllerLoader extends DungeonLoader {
     	this.dungeonController = new DungeonController(load(), entities);
         return this.dungeonController;
     }
+
+	@Override
+	public void onLoad(GoalComponent goal) {
+		// TODO Auto-generated method stub
+		
+	}
 }

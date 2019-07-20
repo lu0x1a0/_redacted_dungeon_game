@@ -12,7 +12,7 @@ public class Bomb extends Collectible {
 	@Override
 	public void postCollect() {
 		// TODO Auto-generated method stub
-		
+		return;
 	}
 	@Override
 	public void use(Object info) {

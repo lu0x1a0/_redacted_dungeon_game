@@ -41,6 +41,8 @@ public abstract class Entity {
     public int getX() {
         return x().get();
     }
+
+    public abstract boolean ispassable();
     
     public void setIv(ImageView iv) {
 		this.iv = iv;
@@ -48,7 +50,6 @@ public abstract class Entity {
 	public ImageView getIv() {
 		return iv;
 	}
-	public abstract boolean ispassable();
 	
     public void removeFromView() {
 		dungeon.removeFromView(iv);
@@ -58,5 +59,10 @@ public abstract class Entity {
 	public String toString() {
 		return ""+this.getClass();
 	}
+	public Dungeon getDungeon() {
+		return dungeon;
+	}
 
+    
+    
 }
