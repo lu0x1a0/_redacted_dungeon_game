@@ -24,7 +24,6 @@ public class Treasure extends Collectible implements Observable {
 	@Override
 	public void use(Object info) {
 		return;
-		
 	}
 
 	public void postCollect() {

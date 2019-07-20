@@ -8,7 +8,7 @@ public class Potion extends Collectible {
 	}
 	@Override
 	public void use(Object info) {
-	
+		
 	}
 	
 	@Override

@@ -92,6 +92,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 	@Override
 	public void onLoad(Bomb bomb) {
         ImageView view = new ImageView(bombUnlitImg);
+        ImageView blow = new ImageView(bombExplodeImg);
+        bomb.setImages(view, blow);
         addEntity(bomb, view);
 	}
 
