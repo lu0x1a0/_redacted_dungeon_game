@@ -40,8 +40,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image openedDoorImg;
     private Image exitImg;
 
+	private DungeonController dungeonController;
 
-    
 
     public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
@@ -145,7 +145,10 @@ public class DungeonControllerLoader extends DungeonLoader {
 	
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
+        entity.setIv(view);
         entities.add(view);
+    }
+    public void removeEntity() {
     }
 
     /**
@@ -184,6 +187,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException
      */
     public DungeonController loadController() throws FileNotFoundException {
-        return new DungeonController(load(), entities);
+    	this.dungeonController = new DungeonController(load(), entities);
+        return this.dungeonController;
     }
 }

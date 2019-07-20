@@ -3,8 +3,8 @@ package unsw.dungeon;
 public class ExitGoal extends Entity implements Goal {
 	private boolean otherGoalsCompleted = false;
 
-	public ExitGoal(int x, int y) {
-		super(x, y);
+	public ExitGoal(int x, int y, Dungeon dungeon ) {
+        super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -30,6 +30,12 @@ public class ExitGoal extends Entity implements Goal {
 	public boolean ispassable() {
 		// TODO Auto-generated method stub
 		return otherGoalsCompleted;
+	}
+
+	@Override
+	public void react(Entity e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

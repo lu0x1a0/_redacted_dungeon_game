@@ -5,6 +5,7 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,15 +20,16 @@ import java.util.List;
 public class Dungeon implements Observer{
 
     private int width, height;
-    private List<Entity> entities;
+    //private List<Entity> entities;
     private Player player;
-    private HashMap<Coord, Entity> map;
+    private HashMap<Coord, ArrayList<Entity> > map;
+	private DungeonController dc;
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
-        this.entities = new ArrayList<>();
+        //this.entities = new ArrayList<>();
         this.player = null;
-        this.map = new HashMap<Coord, Entity>();
+        this.map = new HashMap<Coord, ArrayList<Entity> >();
     }
     
     public int getWidth() {
@@ -46,25 +48,56 @@ public class Dungeon implements Observer{
         this.player = player;
     }
 
-    public void addEntity(Entity entity) {
-        entities.add(entity);
-        map.put(new Coord(entity.getX(),entity.getY()), entity);
+    public Coord getPlayerCoord() {
+    	return new Coord(player.getX(), player.getY());
     }
-    /*
-    public Entity getEntityAtCoord(int x, int y) {
-    	Coord coord = new Coord(x,y);
-    	if (map.containsKey(coord)) {
-    		return map.get(coord);
-    	}
-    	return null;
-    }*/
+    public void addEntity(Entity entity) {
+        //entities.add(entity);
+        //map.put(new Coord(entity.getX(),entity.getY()), entity);
+        Coord newCoord = new Coord(entity.getX(), entity.getY());
+		if(map.containsKey(newCoord)) {
+			map.get(newCoord).add(entity);
+		}else {
+			ArrayList<Entity> arr = new ArrayList<Entity>();
+			arr.add(entity);
+			map.put( newCoord, arr);
+		}
+    }
+	public LinkedList<Coord> getSurroundPassable(Coord c) {
+		LinkedList<Coord> ret = new LinkedList<Coord>();
+		if(c.getX()!=0) {
+			if( ispassable(c.getX()-1,c.getY()) ) {
+				ret.add(new Coord(c.getX()-1,c.getY()));
+			}
+		}
+		if(c.getY()!=0) {
+			if( ispassable(c.getX(),c.getY()-1) ) {
+				ret.add(new Coord(c.getX(),c.getY()-1));
+			}
+		}
+		if(c.getX()!=width){
+			if( ispassable(c.getX()+1,c.getY()) ) {
+				ret.add(new Coord(c.getX()+1,c.getY()));
+			}
+		}
+		if(c.getY()!=height){
+			if( ispassable(c.getX(),c.getY()+1) ) {
+				ret.add(new Coord(c.getX(),c.getY()+1));
+			}			
+		}
+		return ret;
+	}
     public boolean ispassable(int x, int y) {
     	Coord coord = new Coord(x,y);
     	if (map.containsKey(coord)) {
-    		hasEntity(x,y);
-    		return map.get(coord).ispassable();
+    		//return map.get(coord).ispassable();
+    		for(Entity e : map.get(coord)) {
+    			if (!e.ispassable()) {
+    				return false;
+    			}
+    		}
     	}
-		System.out.println("Note");
+		System.out.println("Not");
     	return true;
     }
     private void hasEntity(int x, int y) {
@@ -78,9 +111,11 @@ public class Dungeon implements Observer{
     public Collectible hasCollectibleAt(int x, int y) {
     	Coord coord = new Coord(x,y);
     	if (map.containsKey(coord)) {
-    		if (map.get(coord) instanceof Collectible)
-    			return (Collectible) map.get(coord);
-    	} 
+    		for(Entity e : map.get(coord)) {
+    			if ( e instanceof Collectible)
+    				return (Collectible) e;
+    		}
+		} 
     	return null;
     }
     public void removeEntityAtCoord(int x, int y) {
@@ -94,8 +129,15 @@ public class Dungeon implements Observer{
 			Coord oldCoord = (Coord) info;
 			Entity m = (Entity) o;
 			map.remove(oldCoord);
-			map.put(new Coord(m.getX(), m.getY()), m);
+			Coord newCoord = new Coord(m.getX(), m.getY());
+			for (Entity e : map.get(newCoord)) {
+				e.react(m);
+			}
+			addEntity( (Entity) o);		
 		}
 		//TODO add more cases
+	}
+	public void setController(DungeonController dc) {
+		this.dc = dc;
 	}
 }

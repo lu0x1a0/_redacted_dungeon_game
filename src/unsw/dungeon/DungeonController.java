@@ -30,7 +30,16 @@ public class DungeonController {
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
     }
-
+    public void giveDungeonMyself() {
+    	dungeon.setController(this);
+    }
+    public void removeEntityFromView(ImageView v) {
+    	//initialEntities.remove(v);
+    	squares.getChildren().remove(v);
+    }
+    public void addEntityToView(ImageView v) {
+    	squares.getChildren().add(v);
+    }
     @FXML
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");

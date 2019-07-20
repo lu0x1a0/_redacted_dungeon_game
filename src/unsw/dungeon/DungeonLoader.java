@@ -50,23 +50,58 @@ public abstract class DungeonLoader {
         Entity entity = null;
         switch (type) {
         case "player":
-            Player player = new Player(dungeon, x, y);
+            Player player = new Player(x, y, dungeon);
             dungeon.setPlayer(player);
             onLoad(player);
             entity = player;
             break;
         case "wall":
-            Wall wall = new Wall(x, y);
+            Wall wall = new Wall(x, y,dungeon);
             onLoad(wall);
             entity = wall;
             break;
         // TODO Handle other possible entities
         case "exit":
-        	ExitGoal exit = new ExitGoal(x,y);
+        	ExitGoal exit = new ExitGoal(x,y,dungeon);
             onLoad(exit);
             entity = exit;
         	break;
-        }
+        case "enemy":
+        	Enemy enemy = new Enemy(x,y,dungeon);
+        	onLoad(enemy);
+        	entity = enemy;
+        	break;
+        case "boulder":
+        	Boulder boulder = new Boulder(x,y,dungeon);
+        	onLoad(boulder);
+        	entity = boulder;
+        	break;
+        case "bomb":
+        	Bomb bomb = new Bomb(x,y,dungeon);
+        	onLoad(bomb);
+        	entity = bomb;
+        	break;
+        case "sword":
+        	Sword sword = new Sword(x,y,dungeon);
+        	onLoad(sword);
+        	entity = sword;
+        	break;      	
+	    case "key":
+        	Key key = new Key(x,y,dungeon);
+        	onLoad(key);
+        	entity = key;
+        	break;
+		case "treasure":
+        	Treasure t = new Treasure(x,y,dungeon);
+        	onLoad(t);
+        	entity = t;
+        	break;
+		case "invincibility":
+        	Potion p = new Potion(x,y,dungeon);
+        	onLoad(p);
+        	entity = p;
+			break;      	
+		}
         // FIXME
         if(entity != null) {
         	dungeon.addEntity(entity);
