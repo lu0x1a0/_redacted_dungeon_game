@@ -23,6 +23,7 @@ public class Dungeon implements Observer{
     //private List<Entity> entities;
     private Player player;
     private HashMap<Coord, ArrayList<Entity> > map;
+	private DungeonController dc;
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
@@ -135,5 +136,8 @@ public class Dungeon implements Observer{
 			addEntity( (Entity) o);		
 		}
 		//TODO add more cases
+	}
+	public void setController(DungeonController dc) {
+		this.dc = dc;
 	}
 }

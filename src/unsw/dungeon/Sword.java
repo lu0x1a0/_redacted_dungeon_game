@@ -2,8 +2,8 @@ package unsw.dungeon;
 
 public class Sword extends Entity implements Collectible {
 
-	public Sword(int x, int y) {
-		super(x, y);
+	public Sword(int x, int y, Dungeon dungeon ) {
+        super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -27,8 +27,13 @@ public class Sword extends Entity implements Collectible {
 
 	@Override
 	public void react(Entity e) {
-		// TODO Auto-generated method stub
-		
+		if (e instanceof Player)
+			collect((Player) e);
+	}
+
+	@Override
+	public void collect(Player player) {
+		//player.
 	}
 
 }

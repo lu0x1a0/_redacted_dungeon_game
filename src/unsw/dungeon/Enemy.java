@@ -9,8 +9,8 @@ import javafx.scene.image.ImageView;
 public class Enemy extends Entity implements Movable {
 // being observed by the dungeon, observing the player
 	Dungeon dungeon;
-	public Enemy(Dungeon dungeon, int x, int y) {
-		super(x, y);
+	public Enemy(int x, int y, Dungeon dungeon) {
+		super(x, y, dungeon);
 		this.dungeon = dungeon;
 	}
 	public void start() {

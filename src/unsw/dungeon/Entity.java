@@ -14,15 +14,17 @@ public abstract class Entity {
     // externally observed.
     private IntegerProperty x, y;
     private ImageView iv;
+	protected Dungeon dungeon;
 
     /**
      * Create an entity positioned in square (x,y)
      * @param x
      * @param y
      */
-    public Entity(int x, int y) {
+    public Entity(int x, int y, Dungeon dungeon) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
+        this.dungeon = dungeon;
     }
     public abstract void react(Entity e);
     public IntegerProperty x() {

@@ -2,8 +2,8 @@ package unsw.dungeon;
 
 public class FloorSwitch extends Entity {
 
-	public FloorSwitch(int x, int y) {
-		super(x, y);
+	public FloorSwitch(int x, int y, Dungeon dungeon ) {
+        super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
 	}
 

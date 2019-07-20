@@ -15,16 +15,14 @@ import javafx.scene.image.ImageView;
  */
 public class Player extends Entity implements Movable{
 	static int count = 0;
-    private Dungeon dungeon;
     private ArrayList<Collectible> inventory;
     /**
      * Create a player positioned in square (x,y)
      * @param x
      * @param y
      */
-    public Player(Dungeon dungeon, int x, int y) {
-        super(x, y);
-        this.dungeon = dungeon;
+    public Player(int x, int y, Dungeon dungeon) {
+        super(x, y, dungeon);
         this.inventory = new ArrayList<Collectible>();
     }
     @Override
@@ -93,6 +91,9 @@ public class Player extends Entity implements Movable{
     	// TODO more cases
     }
     public void react(Enemy e) {
+    	
+    }
+    public void addToInventory(Collectible c) {
     	
     }
 	@Override

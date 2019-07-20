@@ -4,8 +4,8 @@ import javafx.scene.image.ImageView;
 
 public class Door extends Entity {
 	private boolean isopen = false;
-	public Door(int x, int y, ImageView iv) {
-        super(x, y);
+	public Door(int x, int y, Dungeon dungeon) {
+        super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
 	}
 	@Override

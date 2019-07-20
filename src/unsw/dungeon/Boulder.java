@@ -4,8 +4,8 @@ import javafx.scene.image.ImageView;
 
 public class Boulder extends Entity implements Movable {
 
-	public Boulder(int x, int y) {
-        super(x, y);
+	public Boulder(int x, int y, Dungeon dungeon) {
+        super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
 	}
 
