@@ -2,8 +2,6 @@ package unsw.dungeon;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.junit.jupiter.api.Test;
 
 class Milestone2Test {
