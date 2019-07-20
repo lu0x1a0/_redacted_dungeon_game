@@ -1,0 +1,175 @@
+2,1:new coord outsideloop
+finishedUPDATE
+
+
+3,1:new coord outsideloop
+finishedUPDATE
+
+
+4,1:new coord outsideloop
+finishedUPDATE
+
+
+4,2:new coord outsideloop
+finishedUPDATE
+
+
+5,2:new coord outsideloop
+finishedUPDATE
+
+
+5,3:new coord outsideloop
+finishedUPDATE
+
+
+5,4:new coord outsideloop
+finishedUPDATE
+
+
+5,5:new coord outsideloop
+finishedUPDATE
+
+
+6,5:new coord outsideloop
+finishedUPDATE
+
+
+7,5:new coord outsideloop
+finishedUPDATE
+
+
+7,6:new coord outsideloop
+finishedUPDATE
+
+
+7,7:new coord outsideloop
+finishedUPDATE
+
+
+8,7:new coord outsideloop
+finishedUPDATE
+
+
+9,7:new coord outsideloop
+finishedUPDATE
+
+
+10,7:new coord outsideloop
+finishedUPDATE
+
+
+11,7:new coord outsideloop
+finishedUPDATE
+
+
+11,8:new coord outsideloop
+finishedUPDATE
+
+
+11,9:new coord outsideloop
+finishedUPDATE
+
+
+11,10:new coord outsideloop
+Collect Reached
+[class unsw.dungeon.Potion]
+finishedUPDATE
+
+
+11,11:new coord outsideloop
+finishedUPDATE
+
+
+11,12:new coord outsideloop
+finishedUPDATE
+
+
+11,13:new coord outsideloop
+finishedUPDATE
+
+
+xxx
+10,13:new coord outsideloop
+finishedUPDATE
+
+
+9,13:new coord outsideloop
+finishedUPDATE
+
+
+8,13:new coord outsideloop
+finishedUPDATE
+
+
+8,14:new coord outsideloop
+finishedUPDATE
+
+
+7,14:new coord outsideloop
+finishedUPDATE
+
+
+6,14:new coord outsideloop
+finishedUPDATE
+
+
+5,14:new coord outsideloop
+finishedUPDATE
+
+
+6,14:new coord outsideloop
+finishedUPDATE
+
+
+7,14:new coord outsideloop
+finishedUPDATE
+
+
+8,14:new coord outsideloop
+finishedUPDATE
+
+
+9,14:new coord outsideloop
+finishedUPDATE
+
+
+10,14:new coord outsideloop
+finishedUPDATE
+
+
+11,14:new coord outsideloop
+finishedUPDATE
+
+
+12,14:new coord outsideloop
+finishedUPDATE
+
+
+13,14:new coord outsideloop
+finishedUPDATE
+
+
+14,14:new coord outsideloop
+finishedUPDATE
+
+
+15,14:new coord outsideloop
+finishedUPDATE
+
+
+16,14:new coord outsideloop
+finishedUPDATE
+
+
+16,13:new coord outsideloop
+finishedUPDATE
+
+
+16,12:new coord outsideloop
+finishedUPDATE
+
+
+16,11:new coord outsideloop
+finishedUPDATE
+
+
