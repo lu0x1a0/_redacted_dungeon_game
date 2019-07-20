@@ -147,7 +147,7 @@ public class Player extends Movable{
     	// TODO more cases
     }
     public void react(Enemy e) {
-    	
+    	e.react(this);
     }
     public void addToInventory(Collectible c) {
     	inventory.add(c);
