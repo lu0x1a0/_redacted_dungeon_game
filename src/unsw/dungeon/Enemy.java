@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.scene.image.ImageView;
 
 public class Enemy extends Movable {
@@ -13,9 +16,19 @@ public class Enemy extends Movable {
 	public Enemy(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.dungeon = dungeon;
+		//start();
 	}
 	public void start() {
-		
+		Enemy e = this;
+		Timer timer= new Timer(true);
+		TimerTask task = new TimerTask() {
+			@Override
+		    public void run() {
+		    	System.out.println(e.pathSearch());
+		    }
+		};
+		timer.scheduleAtFixedRate(task, 0, 1000);
+		//System.out.println(e.pathSearch());
 	}
 	@Override
 	public boolean checkPositionAvail() {
@@ -52,7 +65,7 @@ public class Enemy extends Movable {
 		// TODO Auto-generated method stub
 		return true;
 	}
-	public Coord pathsearch() {
+	public Coord pathSearch() {
 		// THIS_coord, coord came from
 		HashMap<Coord,Coord> visited = new HashMap<Coord,Coord>();
 		Coord ptr =  new Coord(getX(),getY());
@@ -60,7 +73,8 @@ public class Enemy extends Movable {
 		Coord player = dungeon.getPlayerCoord();
 		
 		Queue<Coord> queue = new LinkedList<Coord>();
-		while ( ptr!=null || ptr != player) {
+		while ( ptr!=null && ptr != player) {
+			//System.out.println(ptr);
 			LinkedList<Coord> potential = dungeon.getSurroundPassable(ptr);
 			//queue.addAll(potential);
 			for(Coord c:potential) {

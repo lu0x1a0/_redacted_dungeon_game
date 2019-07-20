@@ -106,6 +106,8 @@ public class DungeonController {
             }
         });
     }
-
+    public void start() {
+    	dungeon.startEnemies();
+    }
 }
 

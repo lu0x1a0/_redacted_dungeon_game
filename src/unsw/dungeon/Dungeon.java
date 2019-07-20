@@ -74,6 +74,7 @@ public class Dungeon implements Observer {
 		}
     }
 	public LinkedList<Coord> getSurroundPassable(Coord c) {
+		//System.out.println(c);
 		LinkedList<Coord> ret = new LinkedList<Coord>();
 		if(c.getX()!=0) {
 			if( ispassable(c.getX()-1,c.getY()) ) {
@@ -261,5 +262,14 @@ public class Dungeon implements Observer {
 	
 	public void setController(DungeonController dc) {
 		this.dc = dc;
+	}
+	public void startEnemies() {
+		for(ArrayList<Entity> arr :map.values()) {
+			for(Entity e: arr) {
+				if(e instanceof Enemy) {
+					((Enemy) e).start();
+				}
+			}
+		}
 	}
 }
