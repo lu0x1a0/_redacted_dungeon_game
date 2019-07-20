@@ -49,8 +49,14 @@ public abstract class Entity {
 		return iv;
 	}
 	public abstract boolean ispassable();
-    public void removeFromView(DungeonController dc) {
-		
+	
+    public void removeFromView() {
+		dungeon.removeFromView(iv);
+		dungeon.removeEntityAtCoord(getX(), getY());
+	}
+	@Override
+	public String toString() {
+		return ""+this.getClass();
 	}
 
 }

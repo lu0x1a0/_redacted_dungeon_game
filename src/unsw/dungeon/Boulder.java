@@ -1,24 +1,14 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.ImageView;
 
-public class Boulder extends Entity implements Movable {
+public class Boulder extends Movable {
 
 	public Boulder(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void removeObserver(Observer o) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void registerObserver(Observer o) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

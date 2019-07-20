@@ -30,6 +30,9 @@ public class DungeonController {
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
     }
+    public Dungeon getDungeon() {
+    	return dungeon;
+    }
     public void giveDungeonMyself() {
     	dungeon.setController(this);
     }
@@ -58,8 +61,7 @@ public class DungeonController {
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
-    	System.out.printf("\n%d,%d\n",player.getX(),player.getY());
-        switch (event.getCode()) {
+    	switch (event.getCode()) {
         case UP:
             player.moveUp();
             break;
@@ -72,11 +74,12 @@ public class DungeonController {
         case RIGHT:
             player.moveRight();
             break;
+        case Q:
+        	player.waveSword();
         default:
             break;
-        }
-        System.out.printf("\n%d,%d",player.getX(),player.getY());
-    }
+        }    
+	}
 
 }
 

@@ -38,4 +38,22 @@ public class ExitGoal extends Entity implements Goal {
 		
 	}
 
+	@Override
+	public void notifyObservers(Observable e, Object info) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void registerObserver(Observer o) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

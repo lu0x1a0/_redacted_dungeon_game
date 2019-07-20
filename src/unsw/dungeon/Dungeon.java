@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import javafx.scene.image.ImageView;
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -35,7 +37,7 @@ public class Dungeon implements Observer{
     public int getWidth() {
         return width;
     }
-
+    
     public int getHeight() {
         return height;
     }
@@ -51,6 +53,11 @@ public class Dungeon implements Observer{
     public Coord getPlayerCoord() {
     	return new Coord(player.getX(), player.getY());
     }
+    
+    public void removeFromView(ImageView v) {
+    	dc.removeEntityFromView(v);
+    }
+    
     public void addEntity(Entity entity) {
         //entities.add(entity);
         //map.put(new Coord(entity.getX(),entity.getY()), entity);
@@ -97,7 +104,7 @@ public class Dungeon implements Observer{
     			}
     		}
     	}
-		System.out.println("Not");
+		//System.out.println("Not");
     	return true;
     }
     private void hasEntity(int x, int y) {
@@ -125,18 +132,40 @@ public class Dungeon implements Observer{
     
 	@Override
 	public void update(Observable o, Object info) {
+		System.out.println("----");
+		System.out.println(map.get(new Coord(6,1)));
+		System.out.println("----");
+		
 		if(o instanceof Movable) {
+			System.out.println(map.get(new Coord(6,1)));
 			Coord oldCoord = (Coord) info;
 			Entity m = (Entity) o;
-			map.remove(oldCoord);
+			map.get(oldCoord).remove(m);
+			if(map.get(oldCoord).size()==0) {
+				map.remove(oldCoord);
+			}
 			Coord newCoord = new Coord(m.getX(), m.getY());
-			for (Entity e : map.get(newCoord)) {
-				e.react(m);
+			System.out.printf("%d,%d:new coord outsideloop\n", m.getX(),m.getY()); 
+			System.out.println(map.get(newCoord));
+			if(map.containsKey(newCoord)) {
+				for (Entity e : map.get(newCoord)) {
+					System.out.println("In LOOP");
+					System.out.println(e.getClass());
+					e.react(m);
+				}
 			}
 			addEntity( (Entity) o);		
+			System.out.println("finishedUPDATE\n\n");
 		}
 		//TODO add more cases
+		else if(o instanceof Sword) {
+			
+		}
 	}
+	public HashMap<Coord, ArrayList<Entity> > getEntities() {
+		return map;
+	}
+	
 	public void setController(DungeonController dc) {
 		this.dc = dc;
 	}

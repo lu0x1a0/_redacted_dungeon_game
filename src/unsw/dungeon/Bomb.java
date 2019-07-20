@@ -2,7 +2,7 @@ package unsw.dungeon;
 
 import javafx.scene.image.ImageView;
 
-public class Bomb extends Entity implements Collectible {
+public class Bomb extends Collectible {
 
 	public Bomb(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
@@ -10,32 +10,13 @@ public class Bomb extends Entity implements Collectible {
 	}
 
 	@Override
-	public boolean iscollected() {
+	public void postCollect() {
 		// TODO Auto-generated method stub
-		return false;
+		
 	}
-
 	@Override
 	public void use() {
 		// TODO Auto-generated method stub
 
 	}
-
-	@Override
-	public boolean ispassable() {
-		return true;
-	}
-
-	@Override
-	public void react(Entity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void collect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

@@ -6,7 +6,7 @@ import java.util.Queue;
 
 import javafx.scene.image.ImageView;
 
-public class Enemy extends Entity implements Movable {
+public class Enemy extends Movable {
 // being observed by the dungeon, observing the player
 	Dungeon dungeon;
 	public Enemy(int x, int y, Dungeon dungeon) {
