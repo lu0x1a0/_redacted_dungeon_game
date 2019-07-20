@@ -80,16 +80,15 @@ public class DungeonController {
             break;
         case Q:
         	player.waveSword();
+        	break;
         case E:
         	player.litBomb();
+        	break;
         default:
             break;
         }    
 	}
     public void trackPosition(Entity entity, Node node) {
-    	System.out.println("ahahahahahahahaha");
-    	System.out.println(entity);
-    	System.out.println(node);
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
         entity.x().addListener(new ChangeListener<Number>() {
@@ -107,6 +106,8 @@ public class DungeonController {
             }
         });
     }
-
+    public void start() {
+    	dungeon.startEnemies();
+    }
 }
 

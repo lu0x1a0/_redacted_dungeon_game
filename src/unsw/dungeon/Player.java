@@ -33,7 +33,22 @@ public class Player extends Movable{
     	}
     	return false;
     }
-    
+    public Key getKey() {
+    	for( Collectible e: inventory) {
+    		if(e instanceof Key) {
+    			return (Key) e;    		
+			}
+    	}
+    	return null;
+    }
+    public void removeKey() {
+    	for(Collectible c:inventory) {
+    		if (c instanceof Key) {
+    			inventory.remove(c);
+    			break;
+    		}
+    	}
+    }
     public ArrayList<Collectible> getInventory() {
 		return inventory;
 	}
@@ -53,39 +68,55 @@ public class Player extends Movable{
         }
         */
         
-        if (getY() > 0 && 
-			dungeon.ispassable(getX(), getY() - 1) == true) {
-    		int oldY = getY();
-        	y().set(oldY - 1);
-        	notifyObservers(this,new Coord(getX(),oldY));
+        if (getY() > 0 ) { 
+			if(dungeon.ispassable(getX(), getY() - 1) == true) {
+	    		int oldY = getY();
+	        	y().set(oldY - 1);
+	        	notifyObservers(this,new Coord(getX(),oldY));
+			}
+        	else {
+	        	notifyObservers(this,Direction.UP);
+	        }
         }
     }
     @Override
     public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1 && 
-			dungeon.ispassable(getX(), getY() + 1) == true) {
-    		int oldY = getY();
-        	y().set(oldY + 1);
-        	notifyObservers(this,new Coord(getX(),oldY));
+        if (getY() < dungeon.getHeight() - 1) {
+	        if(dungeon.ispassable(getX(), getY() + 1) == true) {
+        		int oldY = getY();
+	        	y().set(oldY + 1);
+	        	notifyObservers(this,new Coord(getX(),oldY));
+	        }else {
+	        	notifyObservers(this,Direction.DOWN);
+	        }
         }
     }
     @Override
     public void moveLeft() {
-    	if (getX() > 0 && 
-			dungeon.ispassable(getX() - 1, getY()) == true) {
-    		int oldx = getX();
-	    	x().set(oldx - 1);
-	    	notifyObservers(this,new Coord(oldx,getY()));
+    	if (getX() > 0) { 
+			if(dungeon.ispassable(getX() - 1, getY()) == true) {
+	    		int oldx = getX();
+		    	x().set(oldx - 1);
+		    	notifyObservers(this,new Coord(oldx,getY()));
+			}
+	    	else {
+	        	notifyObservers(this,Direction.LEFT);
+	        }
     	}
     }
     @Override
     public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1 && 
-			dungeon.ispassable(getX() + 1, getY()) == true) {
-        	int oldx = getX();
-        	x().set(oldx + 1);
-        	notifyObservers(this,new Coord(oldx,getY()));
+        if (getX() < dungeon.getWidth() - 1) { 
+			if(dungeon.ispassable(getX() + 1, getY()) == true) {
+	        	int oldx = getX();
+	        	x().set(oldx + 1);
+	        	notifyObservers(this,new Coord(oldx,getY()));
+			}
+        	else {
+	        	notifyObservers(this,Direction.RIGHT);
+	        }
         }
+        
     }
     public void waveSword() {
     	for(Collectible c:inventory) {
@@ -112,7 +143,17 @@ public class Player extends Movable{
     		}
     	}
     }
-    
+    public boolean hasPotion() {
+    	for(Collectible c:inventory) {
+    		if (c instanceof Potion) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    public void potionEffectOff(Potion p) {
+    	inventory.remove(p);
+    }
     @Override
     public void react(Entity e) {
     	if(e instanceof Enemy) {
@@ -121,7 +162,7 @@ public class Player extends Movable{
     	// TODO more cases
     }
     public void react(Enemy e) {
-    	
+    	e.react(this);
     }
     public void addToInventory(Collectible c) {
     	inventory.add(c);

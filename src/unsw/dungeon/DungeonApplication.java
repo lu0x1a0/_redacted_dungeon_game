@@ -13,13 +13,12 @@ public class DungeonApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Dungeon");
 
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
+        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("boulders.json");
 
         DungeonController controller = dungeonLoader.loadController();
 
         controller.giveDungeonMyself();
         
-        System.out.print(controller.getDungeon().getEntities());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
         loader.setController(controller);
         Parent root = loader.load();
@@ -28,6 +27,8 @@ public class DungeonApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        controller.start();
+        
     }
 
     public static void main(String[] args) {

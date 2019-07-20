@@ -18,8 +18,8 @@ public abstract class Collectible extends Entity implements Observable{
 	
 	@Override
 	public void notifyObservers(Observable e, Object info) {
-		for(Observer o: observers) {
-			o.update(e, info);
+		for(int i = 0; i<observers.size();i++) {
+    		observers.get(i).update(e, info);
 		}
 	}
 	@Override
