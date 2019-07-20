@@ -33,7 +33,22 @@ public class Player extends Movable{
     	}
     	return false;
     }
-    
+    public Key getKey() {
+    	for( Collectible e: inventory) {
+    		if(e instanceof Key) {
+    			return (Key) e;    		
+			}
+    	}
+    	return null;
+    }
+    public void removeKey() {
+    	for(Collectible c:inventory) {
+    		if (c instanceof Key) {
+    			inventory.remove(c);
+    			break;
+    		}
+    	}
+    }
     public ArrayList<Collectible> getInventory() {
 		return inventory;
 	}

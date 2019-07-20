@@ -46,6 +46,7 @@ public abstract class DungeonLoader {
         String type = json.getString("type");
         int x = json.getInt("x");
         int y = json.getInt("y");
+        int id = json.getInt("id");
         Entity entity = null;
         switch (type) {
         case "player":
@@ -86,7 +87,7 @@ public abstract class DungeonLoader {
         	entity = sword;
         	break;      	
 	    case "key":
-        	Key key = new Key(x,y,dungeon);
+	    	Key key = new Key(x,y,dungeon,id);
         	onLoad(key);
         	entity = key;
         	break;
@@ -100,6 +101,16 @@ public abstract class DungeonLoader {
         	onLoad(p);
         	entity = p;
 			break;      	
+		case "switch":
+	    	FloorSwitch s = new FloorSwitch(x,y,dungeon);
+	    	onLoad(s);
+	    	entity = s;
+			break;      	
+		case "door":
+			Door d = new Door(x,y,dungeon,id);
+			onLoad(d);
+			entity = d;
+			break;     	
 		}
         // FIXME
         if(entity != null) {

@@ -1,16 +1,21 @@
 package unsw.dungeon;
 
 public class Key extends Collectible {
-
-	public Key(int x, int y, Dungeon dungeon ) {
+	private int id;
+	public Key(int x, int y, Dungeon dungeon,int id) {
         super(x, y, dungeon);
-		// TODO Auto-generated constructor stub
+        this.id = id;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	@Override
 	public void use(Object info) {
-		// TODO Auto-generated method stub
-
+		if(info instanceof Player) {
+			((Player) info).removeKey();
+		}
 	}
 
 	@Override

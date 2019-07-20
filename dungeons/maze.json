@@ -1033,9 +1033,16 @@
       "type": "wall"
     },
     {
+      "x": 1,
+      "y": 3,
+      "key":0,
+      "type": "key"
+    },
+    {
       "x": 2,
       "y": 3,
-      "type": "enemy"
+      "key":0,
+      "type": "door"
     }
   ],
   "goal-condition": {
