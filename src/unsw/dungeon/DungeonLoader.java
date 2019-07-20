@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,14 +35,97 @@ public abstract class DungeonLoader {
 
         Dungeon dungeon = new Dungeon(width, height);
 
+        System.out.println(json);
+        
         JSONArray jsonEntities = json.getJSONArray("entities");
 
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        JSONObject jsonGoals = json.getJSONObject("goal-condition");
+        
+        System.out.println(jsonGoals);
+        
+        System.out.println(dungeon.getEntitiesByType(Enemy.class));
+        
+        
+        System.out.println(dungeon.getEntitiesByType(Wall.class));
+        
+        
+        
+        if(jsonGoals.getString("goal").equals("AND")) {
+        	// This is an AND goal type. All the subgoals must be combined with AND
+        	//Loop through JSON array
+        	GoalCompositeComponent parentGoal = new GoalCompositeComponent(true);
+        	JSONArray subGoals = jsonGoals.getJSONArray("subgoals");
+        	for (int i = 0; i < subGoals.length(); i++) {
+                parentGoal.addChild(loadGoal(dungeon, subGoals.getJSONObject(i)));
+            }
+        	dungeon.addGoal(parentGoal);
+        	
+        }
+        else if (jsonGoals.getString("goal").equals("OR")) {
+        	//This is an OR goal type. All the sub goals are combined with OR
+        	// Loop through the JSON array "subgoals" :
+        	
+        	GoalCompositeComponent parentGoal = new GoalCompositeComponent(false);
+        	JSONArray subGoals = jsonGoals.getJSONArray("subgoals");
+        	for (int i = 0; i < subGoals.length(); i++) {
+                parentGoal.addChild(loadGoal(dungeon, subGoals.getJSONObject(i)));
+            }
+        	dungeon.addGoal(parentGoal);
+        }
+        else {
+        	dungeon.addGoal(loadGoal(dungeon, jsonGoals));
+        	
+        }
+        
         return dungeon;
     }
 
+    private GoalLeafNode loadGoal(Dungeon dungeon, JSONObject json) {
+    	if(json.getString("goal").equals("enemies")) {
+    		ArrayList<Entity> enemies = dungeon.getEntitiesByType(Enemy.class);
+    		GoalLeafEnemiesKilled enemyGoal = new GoalLeafEnemiesKilled();
+    		for (Entity e: enemies) {
+    			((Enemy) e).registerObserver(enemyGoal);
+    			enemyGoal.addEnemy(((Enemy) e));
+    			
+    		}
+    		return enemyGoal;
+    	}
+    	else if(json.getString("goal").equals("treasure")) {
+    		ArrayList<Entity> treasures = dungeon.getEntitiesByType(Treasure.class);
+    		GoalLeafTreasureCollected treasureGoal = new GoalLeafTreasureCollected();
+    		for (Entity t: treasures) {
+    			((Treasure) t).registerObserver(treasureGoal);
+    			treasureGoal.addTreasure(((Treasure) t));
+    			
+    		}
+    		return treasureGoal;
+    	}
+    	else if(json.getString("goal").equals("boulders")) {
+    		ArrayList<Entity> floorSwitches = dungeon.getEntitiesByType(Treasure.class);
+    		GoalLeafFloorSwitch floorSwitchGoal = new GoalLeafFloorSwitch();
+    		for (Entity f: floorSwitches) {
+    			((FloorSwitch) f).registerObserver(floorSwitchGoal);
+    			floorSwitchGoal.addFloorSwitch(((FloorSwitch) f));
+    			
+    		}
+    		return floorSwitchGoal;
+    	}
+    	else {
+    		ArrayList<Entity> exit = dungeon.getEntitiesByType(Exit.class);
+    		GoalLeafExit exitGoal = new GoalLeafExit((Exit) exit.get(0));
+    		return exitGoal;
+    		
+
+
+    	}
+    }
+    
+    
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
@@ -62,7 +146,7 @@ public abstract class DungeonLoader {
             break;
         // TODO Handle other possible entities
         case "exit":
-        	ExitGoal exit = new ExitGoal(x,y,dungeon);
+        	Exit exit = new Exit(x,y,dungeon);
             onLoad(exit);
             entity = exit;
         	break;
@@ -131,7 +215,7 @@ public abstract class DungeonLoader {
 
     public abstract void onLoad(GoalComponent goal);
 
-	public abstract void onLoad(ExitGoal exit);
+	public abstract void onLoad(Exit exit);
 	
 	public abstract void onLoad(Wall wall);
 }

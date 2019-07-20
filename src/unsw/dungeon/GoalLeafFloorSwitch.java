@@ -2,15 +2,21 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-public class FloorSwitchGoalLeaf extends GoalLeafNode implements Observer, Observable {
+public class GoalLeafFloorSwitch extends GoalLeafNode implements Observer, Observable {
 
 	ArrayList<FloorSwitch> switches = new ArrayList<FloorSwitch>();
 	
-	public FloorSwitchGoalLeaf(ArrayList<FloorSwitch> newSwitches) {
+	public GoalLeafFloorSwitch(ArrayList<FloorSwitch> newSwitches) {
 		for(FloorSwitch s: newSwitches) {
 			s.registerObserver(this);
 			switches.add(s);
 		}
+	}
+	public GoalLeafFloorSwitch() {
+	}
+	
+	public void addFloorSwitch(FloorSwitch fSwitch) {
+		switches.add(fSwitch);
 	}
 	
 	@Override
@@ -28,6 +34,11 @@ public class FloorSwitchGoalLeaf extends GoalLeafNode implements Observer, Obser
 		if(isComplete() == true) {
 			notifyObservers(this, true);
 		}
+	}
+	@Override
+	public String printGoal(String message) {
+		// TODO Auto-generated method stub
+		return message + " floor switch bitch";
 	}
 
 }

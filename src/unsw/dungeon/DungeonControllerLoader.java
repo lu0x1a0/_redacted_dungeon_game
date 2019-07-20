@@ -132,7 +132,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 	}
 	
 	@Override
-	public void onLoad(ExitGoal exit) {
+	public void onLoad(Exit exit) {
         ImageView view = new ImageView(exitImg);
         addEntity(exit, view);
 	}

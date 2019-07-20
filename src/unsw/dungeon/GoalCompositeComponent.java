@@ -2,13 +2,13 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-public class GoalCompsiteComponent implements GoalComponent, Observer, Observable {
+public class GoalCompositeComponent implements GoalComponent, Observer, Observable {
 
 	private boolean andFlag; //If true then the goal type is an AND condition
 	private ArrayList<GoalComponent> goals = new ArrayList<GoalComponent>();
 	
 	
-	public GoalCompsiteComponent(boolean flag) {
+	public GoalCompositeComponent(boolean flag) {
 		// TODO Auto-generated constructor stub
 		this.andFlag = flag;
 	}
@@ -32,6 +32,17 @@ public class GoalCompsiteComponent implements GoalComponent, Observer, Observabl
 			}
 		}
 		return false;
+	}
+	
+	
+
+	@Override
+	public String printGoal(String message) {
+		String addedMessage = message;
+		for(GoalComponent g: goals) {
+			addedMessage = " + " + g.printGoal(addedMessage);
+		}
+		return addedMessage;
 	}
 
 	public void addChild(GoalComponent child) {

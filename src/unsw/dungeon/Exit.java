@@ -1,50 +1,52 @@
 package unsw.dungeon;
 
-public class ExitGoal extends Entity implements GoalComponent, Observer, Observable {
-	private boolean otherGoalsCompleted = false;
-	private boolean isComplete;
+public class Exit extends Entity implements Observer, Observable {
+	private boolean playerIsTouching = false;
 
-	public ExitGoal(int x, int y, Dungeon dungeon ) {
+	public Exit(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
-		isComplete = false;
 	}
 
-	
-	
-	@Override
-	public boolean isComplete() {
-		// TODO Auto-generated method stub
-		return isComplete;
-	}
 
 	@Override
 	public boolean ispassable() {
 		// TODO Auto-generated method stub
-		return otherGoalsCompleted;
+		return false;
 	}
 
 	@Override
 	public void react(Entity e) {
 		if(e instanceof Player) {
 			((Player) e).registerObserver(this);
-			isComplete = true;
-			
+			setPlayerIsTouching(true);
 		}
 		
 	}
+	
+	
+	
+
+	public void setPlayerIsTouching(boolean playerIsTouching) {
+		notifyObservers(this, playerIsTouching);
+		this.playerIsTouching = playerIsTouching;
+	}
+
+
+	public boolean isPlayerIsTouching() {
+		return playerIsTouching;
+	}
+
 
 	@Override
 	public void update(Observable o, Object info) {
 		if(o instanceof Player) {
 			if(((Player) o).getX() != getX() || ((Player) o).getY() != getY()){
-				isComplete = false;
+				setPlayerIsTouching(false);
 				((Player) o).removeObserver(this);
 			}
 		}
 		
 	}
-
-
 
 	@Override
 	public void notifyObservers(Observable e, Object info) {
