@@ -40,4 +40,6 @@ public abstract class Entity {
         return x().get();
     }
     public abstract boolean ispassable();
+    public abstract void react(Entity obj);
+    
 }
