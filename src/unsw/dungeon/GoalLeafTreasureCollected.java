@@ -17,6 +17,7 @@ public class GoalLeafTreasureCollected extends GoalLeafNode implements Observabl
 	}
 	
 	public void addTreasure(Treasure t) {
+		t.registerObserver(this);
 		Treasures.add(t);
 	}
 

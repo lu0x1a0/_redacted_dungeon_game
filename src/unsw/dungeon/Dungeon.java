@@ -28,7 +28,7 @@ public class Dungeon implements Observer {
     private Player player;
     private HashMap<Coord, ArrayList<Entity> > map;
 	private DungeonController dc;
-	ArrayList<GoalComponent> goals = new ArrayList<GoalComponent>();
+	private ArrayList<GoalComponent> goals = new ArrayList<GoalComponent>();
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
@@ -68,13 +68,6 @@ public class Dungeon implements Observer {
     	goal.registerObserver(this);
     	goals.add(goal);
     }
-    
-    
-    
-    //WARNING JUST FOR TESTING DELETE BEFORE SUBMISSION
-    public GoalComponent getGoals() {
-		return goals.get(0);
-	}
 
 	public void addEntity(Entity entity) {
         //entities.add(entity);
