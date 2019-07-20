@@ -1,22 +1,18 @@
 package unsw.dungeon;
 
-public class Treasure extends Entity implements Collectible {
+public class Treasure extends Entity implements Collectible, Observable {
 
+	private boolean collected = false;
+	
 	public Treasure(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public boolean iscollected() {
+	public boolean isCollected() {
 		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void use() {
-		// TODO Auto-generated method stub
-
+		return collected;
 	}
 
 	@Override
@@ -27,13 +23,22 @@ public class Treasure extends Entity implements Collectible {
 
 	@Override
 	public void react(Entity e) {
-		// TODO Auto-generated method stub
+		if(e instanceof Player) {
+			collect((Player) e);
+			notifyObservers(this, true);
+		}
 		
 	}
 
 	@Override
 	public void collect(Player player) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void use() {
+		return;
 		
 	}
 

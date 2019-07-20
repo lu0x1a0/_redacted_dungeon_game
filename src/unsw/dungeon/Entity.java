@@ -53,5 +53,10 @@ public abstract class Entity {
     public void removeFromView(DungeonController dc) {
 		
 	}
+	public Dungeon getDungeon() {
+		return dungeon;
+	}
 
+    
+    
 }

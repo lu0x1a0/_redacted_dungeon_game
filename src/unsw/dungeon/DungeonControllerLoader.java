@@ -138,7 +138,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 	}
 	
 	@Override
-	public void onLoad(Goal goal) {
+	public void onLoad(GoalComponent goal) {
 		// TODO Auto-generated method stub
 		
 	} 

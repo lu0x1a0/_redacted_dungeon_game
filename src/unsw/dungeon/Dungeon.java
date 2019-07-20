@@ -123,6 +123,12 @@ public class Dungeon implements Observer{
     	map.remove(coord);
     }
     
+//    public ArrayList<Entity> getEntitiesAtCoord(int x, int y) {
+//    	Coord coord = new Coord(x,y);
+//    	return map.get(coord);
+//    	
+//    }
+    
 	@Override
 	public void update(Observable o, Object info) {
 		if(o instanceof Movable) {

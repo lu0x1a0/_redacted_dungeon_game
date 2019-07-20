@@ -8,7 +8,7 @@ public class Sword extends Entity implements Collectible {
 	}
 
 	@Override
-	public boolean iscollected() {
+	public boolean isCollected() {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -1,29 +1,18 @@
 package unsw.dungeon;
 
-public class ExitGoal extends Entity implements Goal {
+public class ExitGoal extends Entity implements GoalComponent, Observer, Observable {
 	private boolean otherGoalsCompleted = false;
+	private boolean isComplete;
 
 	public ExitGoal(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
-		// TODO Auto-generated constructor stub
+		isComplete = false;
 	}
 
 	@Override
-	public boolean iscomplete() {
+	public boolean isComplete() {
 		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setComplete() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean canComplete() {
-		// TODO Auto-generated method stub
-		return false;
+		return isComplete;
 	}
 
 	@Override
@@ -34,7 +23,22 @@ public class ExitGoal extends Entity implements Goal {
 
 	@Override
 	public void react(Entity e) {
-		// TODO Auto-generated method stub
+		if(e instanceof Player) {
+			((Player) e).registerObserver(this);
+			isComplete = true;
+			
+		}
+		
+	}
+
+	@Override
+	public void update(Observable o, Object info) {
+		if(o instanceof Player) {
+			if(((Player) o).getX() != getX() || ((Player) o).getY() != getY()){
+				isComplete = false;
+				((Player) o).removeObserver(this);
+			}
+		}
 		
 	}
 
