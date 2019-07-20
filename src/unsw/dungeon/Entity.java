@@ -50,8 +50,14 @@ public abstract class Entity {
 	public ImageView getIv() {
 		return iv;
 	}
-    public void removeFromView(DungeonController dc) {
-		
+	
+    public void removeFromView() {
+		dungeon.removeFromView(iv);
+		dungeon.removeEntityAtCoord(getX(), getY());
+	}
+	@Override
+	public String toString() {
+		return ""+this.getClass();
 	}
 	public Dungeon getDungeon() {
 		return dungeon;

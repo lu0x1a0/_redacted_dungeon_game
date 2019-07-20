@@ -9,6 +9,8 @@ public class ExitGoal extends Entity implements GoalComponent, Observer, Observa
 		isComplete = false;
 	}
 
+	
+	
 	@Override
 	public boolean isComplete() {
 		// TODO Auto-generated method stub
@@ -40,6 +42,25 @@ public class ExitGoal extends Entity implements GoalComponent, Observer, Observa
 			}
 		}
 		
+	}
+
+
+
+	@Override
+	public void notifyObservers(Observable e, Object info) {
+		for(Observer o: observers) {
+			o.update(e, info);
+		}
+	}
+	
+	@Override
+	public void removeObserver(Observer o) {
+		observers.remove(o);
+	}
+	
+	@Override
+	public void registerObserver(Observer o) {
+		observers.add(o);
 	}
 
 }

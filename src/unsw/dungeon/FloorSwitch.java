@@ -4,6 +4,7 @@ public class FloorSwitch extends Entity implements Observable, Observer {
 
 	private boolean isPressedDown = false;
 	
+	
 	public FloorSwitch(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
@@ -50,7 +51,21 @@ public class FloorSwitch extends Entity implements Observable, Observer {
 		}
 		
 	}
-	
-	
 
+	@Override
+	public void notifyObservers(Observable e, Object info) {
+		for(Observer o: observers) {
+			o.update(e, info);
+		}
+	}
+	
+	@Override
+	public void removeObserver(Observer o) {
+		observers.remove(o);
+	}
+	
+	@Override
+	public void registerObserver(Observer o) {
+		observers.add(o);
+	}
 }

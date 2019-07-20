@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
-public class Treasure extends Entity implements Collectible, Observable {
+public class Treasure extends Collectible implements Observable {
+
 
 	private boolean collected = false;
 	
@@ -14,7 +15,7 @@ public class Treasure extends Entity implements Collectible, Observable {
 		// TODO Auto-generated method stub
 		return collected;
 	}
-
+	
 	@Override
 	public boolean ispassable() {
 		// TODO Auto-generated method stub
@@ -39,6 +40,11 @@ public class Treasure extends Entity implements Collectible, Observable {
 	@Override
 	public void use() {
 		return;
+		
+	}
+
+	public void postCollect() {
+		// TODO Auto-generated method stub
 		
 	}
 
