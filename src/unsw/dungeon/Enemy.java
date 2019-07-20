@@ -83,6 +83,14 @@ public class Enemy extends Movable {
 	@Override
 	public void react(Entity e) {
 		// TODO Auto-generated method stub
-		
+		if (e instanceof Sword) {
+			Sword s = (Sword) e;
+			s.setCount(s.getCount()-1);
+			killed();
+		}
+	}
+	private void killed() {
+		removeFromView();
+		notifyObservers(this,"die");
 	}
 }

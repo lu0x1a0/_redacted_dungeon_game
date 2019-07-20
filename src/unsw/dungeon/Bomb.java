@@ -15,7 +15,7 @@ public class Bomb extends Collectible {
 		
 	}
 	@Override
-	public void use() {
+	public void use(Object info) {
 		// TODO Auto-generated method stub
 
 	}
