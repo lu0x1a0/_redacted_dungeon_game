@@ -3,7 +3,10 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -17,7 +20,7 @@ import javafx.scene.layout.GridPane;
 public class DungeonController {
 
     @FXML
-    private GridPane squares;
+    public GridPane squares;
 
     private List<ImageView> initialEntities;
 
@@ -40,8 +43,9 @@ public class DungeonController {
     	//initialEntities.remove(v);
     	squares.getChildren().remove(v);
     }
-    public void addEntityToView(ImageView v) {
-    	squares.getChildren().add(v);
+    public void addEntityToView(ImageView v, int x, int y) {
+    	//squares.getChildren().add(v, 3, 4);
+    	squares.add(v, x, y);
     }
     @FXML
     public void initialize() {
@@ -76,10 +80,33 @@ public class DungeonController {
             break;
         case Q:
         	player.waveSword();
+        case E:
+        	player.litBomb();
         default:
             break;
         }    
 	}
+    public void trackPosition(Entity entity, Node node) {
+    	System.out.println("ahahahahahahahaha");
+    	System.out.println(entity);
+    	System.out.println(node);
+        GridPane.setColumnIndex(node, entity.getX());
+        GridPane.setRowIndex(node, entity.getY());
+        entity.x().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                GridPane.setColumnIndex(node, newValue.intValue());
+            }
+        });
+        entity.y().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                    Number oldValue, Number newValue) {
+                GridPane.setRowIndex(node, newValue.intValue());
+            }
+        });
+    }
 
 }
 

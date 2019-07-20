@@ -53,7 +53,10 @@ public class Dungeon implements Observer {
     public Coord getPlayerCoord() {
     	return new Coord(player.getX(), player.getY());
     }
-    
+    public void addToView(Entity e, ImageView v) {
+    	//dc.trackPosition(e,v);
+    	dc.addEntityToView(v,e.getX(),e.getY());
+    }
     public void removeFromView(ImageView v) {
     	dc.removeEntityFromView(v);
     }
@@ -125,9 +128,11 @@ public class Dungeon implements Observer {
 		} 
     	return null;
     }
-    public void removeEntityAtCoord(int x, int y) {
+    public void removeEntityAtCoord(Entity e,int x, int y) {
     	Coord coord = new Coord(x,y);
-    	map.remove(coord);
+    	//map.remove(coord);
+    	System.out.println(e);
+    	map.get(coord).remove(e);
     }
     
 //    public ArrayList<Entity> getEntitiesAtCoord(int x, int y) {
@@ -138,13 +143,14 @@ public class Dungeon implements Observer {
     
 	@Override
 	public void update(Observable o, Object info) {
-		System.out.println("----");
-		System.out.println(map.get(new Coord(6,1)));
-		System.out.println("----");
+		//System.out.println("----");
+		//System.out.println(map.get(new Coord(6,1)));
+		//System.out.println("----");
 		
 		if(o instanceof Movable && info instanceof Coord) {
-			System.out.println(map.get(new Coord(6,1)));
+			System.out.println(info);
 			Coord oldCoord = (Coord) info;
+			System.out.println(map.get(oldCoord));
 			Entity m = (Entity) o;
 			map.get(oldCoord).remove(m);
 			if(map.get(oldCoord).size()==0) {
@@ -154,9 +160,13 @@ public class Dungeon implements Observer {
 			System.out.printf("%d,%d:new coord outsideloop\n", m.getX(),m.getY()); 
 			System.out.println(map.get(newCoord));
 			if(map.containsKey(newCoord)) {
-				for (Entity e : map.get(newCoord)) {
-					e.react(m);
+				//for (Entity e : map.get(newCoord)) {
+				//map.get(newCoord).forEach(e-> e.react(m));
+				for(int i = 0; i<map.get(newCoord).size();i++) {
+					map.get(newCoord).get(i).react(m);
 				}
+					//e.react(m);
+				//}
 			}
 			addEntity( (Entity) o);		
 			System.out.println("finishedUPDATE\n\n");
@@ -203,6 +213,105 @@ public class Dungeon implements Observer {
 			}
 			if(s.getCount()==0) {
 				s.swordBroken(player);
+			}
+		}
+		else if(o instanceof Bomb){
+			update((Bomb) o,info);
+		}
+		
+	}
+	private void update(Bomb o, Object info) {
+		Coord centre = new Coord(((Bomb) o).getX(),((Bomb) o).getY());
+		System.out.println(centre);
+		if(map.containsKey(new Coord(centre.getX()-1,centre.getY()-1))) {
+			for(Entity e : map.get(new Coord(centre.getX()-1,centre.getY()-1))) {
+				if(	e instanceof Boulder) {
+					e.removeFromView();
+				}
+				else if(e instanceof Enemy) {
+					((Enemy) e).killed();
+				}
+			}
+		}
+		if(map.containsKey(new Coord(centre.getX(),centre.getY()-1))) {
+			for(Entity e : map.get(new Coord(centre.getX(),centre.getY()-1))) {
+				if(	e instanceof Boulder) {
+					e.removeFromView();
+				}
+				else if(e instanceof Enemy) {
+					((Enemy) e).killed();
+				}
+			}
+		}
+		if(map.containsKey(new Coord(centre.getX()+1,centre.getY()-1))) {
+			for(Entity e : map.get(new Coord(centre.getX()+1,centre.getY()-1))) {
+				if(	e instanceof Boulder) {
+					e.removeFromView();
+				}
+				else if(e instanceof Enemy) {
+					((Enemy) e).killed();
+				}
+			}
+		}
+		if(map.containsKey(new Coord(centre.getX()-1,centre.getY()))) {
+			for(Entity e : map.get(new Coord(centre.getX()-1,centre.getY()))) {
+				if(	e instanceof Boulder) {
+					e.removeFromView();
+				}
+				else if(e instanceof Enemy) {
+					((Enemy) e).killed();
+				}
+			}
+		}
+		if(map.containsKey(new Coord(centre.getX(),centre.getY()))) {
+			for(Entity e : map.get(new Coord(centre.getX(),centre.getY()))) {
+				if(	e instanceof Boulder) {
+					e.removeFromView();
+				}
+				else if(e instanceof Enemy) {
+					((Enemy) e).killed();
+				}
+			}
+		}
+		if(map.containsKey(new Coord(centre.getX()+1,centre.getY()))) {
+			for(Entity e : map.get(new Coord(centre.getX()+1,centre.getY()))) {
+				if(	e instanceof Boulder) {
+					e.removeFromView();
+				}
+				else if(e instanceof Enemy) {
+					((Enemy) e).killed();
+				}
+			}
+		}
+		if(map.containsKey(new Coord(centre.getX()-1,centre.getY()+1))) {
+			for(Entity e : map.get(new Coord(centre.getX()-1,centre.getY()+1))) {
+				if(	e instanceof Boulder) {
+					e.removeFromView();
+				}
+				else if(e instanceof Enemy) {
+					((Enemy) e).killed();
+				}
+			}
+		}
+		if(map.containsKey(new Coord(centre.getX(),centre.getY()+1))) {
+			for(Entity e : map.get(new Coord(centre.getX(),centre.getY()+1))) {
+				if(	e instanceof Boulder) {
+					e.removeFromView();
+				}
+				else if(e instanceof Enemy) {
+					System.out.print("attempt killing enemy");
+					((Enemy) e).killed();
+				}
+			}
+		}
+		if(map.containsKey(new Coord(centre.getX()+1,centre.getY()+1))) {
+			for(Entity e : map.get(new Coord(centre.getX()+1,centre.getY()+1))) {
+				if(	e instanceof Boulder) {
+					e.removeFromView();
+				}
+				else if(e instanceof Enemy) {
+					((Enemy) e).killed();
+				}
 			}
 		}
 	}

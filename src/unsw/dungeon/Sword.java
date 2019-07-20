@@ -35,7 +35,6 @@ public class Sword extends Collectible {
 		if (e instanceof Player) {
 			Player p = (Player) e;
 			if (!p.hasSword()) {
-				System.out.println(p.hasSword());
 				collect((Player) e);
 			}
 		}

@@ -96,7 +96,8 @@ public class Enemy extends Movable {
 			killed();
 		}
 	}
-	private void killed() {
+	public void killed() {
+		System.out.println("I'm removing "+this);
 		removeFromView();
 		notifyObservers(this,"dead");
 		alive = false;

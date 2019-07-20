@@ -82,7 +82,6 @@ public class Player extends Movable{
     public void moveRight() {
         if (getX() < dungeon.getWidth() - 1 && 
 			dungeon.ispassable(getX() + 1, getY()) == true) {
-        	//collectItemAt(getX() + 1, getY());
         	int oldx = getX();
         	x().set(oldx + 1);
         	notifyObservers(this,new Coord(oldx,getY()));
@@ -104,6 +103,16 @@ public class Player extends Movable{
     		}
     	}
     }
+    public void litBomb() {
+    	for(Collectible c:inventory) {
+    		if (c instanceof Bomb) {
+    			inventory.remove(c);
+    			c.use(this);
+    			break;
+    		}
+    	}
+    }
+    
     @Override
     public void react(Entity e) {
     	if(e instanceof Enemy) {

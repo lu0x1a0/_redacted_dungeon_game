@@ -3,7 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 public abstract class Collectible extends Entity implements Observable{
-	private boolean collected;
+	protected boolean collected;
     private ArrayList<Observer> observers;
 	public Collectible(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
