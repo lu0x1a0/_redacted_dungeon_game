@@ -1,39 +1,38 @@
 package unsw.dungeon;
 
-public class Sword extends Entity implements Collectible {
-
+public class Sword extends Collectible {
+	private int count;
 	public Sword(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
-		// TODO Auto-generated constructor stub
+        count = 5;
 	}
 
-	@Override
-	public boolean iscollected() {
-		// TODO Auto-generated method stub
-		return false;
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	@Override
 	public void use() {
-		// TODO Auto-generated method stub
-
+		notifyObservers(this,0);
 	}
-
-	@Override
-	public boolean ispassable() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
 	@Override
 	public void react(Entity e) {
-		if (e instanceof Player)
-			collect((Player) e);
+		if (e instanceof Player) {
+			Player p = (Player) e;
+			if (!p.hasSword()) {
+				System.out.println(p.hasSword());
+				collect((Player) e);
+			}
+		}
 	}
-
 	@Override
-	public void collect(Player player) {
-		//player.
+	public void postCollect() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

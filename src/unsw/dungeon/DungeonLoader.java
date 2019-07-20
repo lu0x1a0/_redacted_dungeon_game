@@ -46,7 +46,7 @@ public abstract class DungeonLoader {
         String type = json.getString("type");
         int x = json.getInt("x");
         int y = json.getInt("y");
-        System.out.println(type);
+        //System.out.println(type);
         Entity entity = null;
         switch (type) {
         case "player":

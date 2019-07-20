@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class DungeonApplication extends Application {
-
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Dungeon");
@@ -20,6 +19,7 @@ public class DungeonApplication extends Application {
 
         controller.giveDungeonMyself();
         
+        System.out.print(controller.getDungeon().getEntities());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
         loader.setController(controller);
         Parent root = loader.load();

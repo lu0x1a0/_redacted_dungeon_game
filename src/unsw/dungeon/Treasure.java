@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Treasure extends Entity implements Collectible {
+public class Treasure extends Collectible {
 
 	public Treasure(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
@@ -8,33 +8,14 @@ public class Treasure extends Entity implements Collectible {
 	}
 
 	@Override
-	public boolean iscollected() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public void use() {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
-	public boolean ispassable() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public void react(Entity e) {
+	public void postCollect() {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void collect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

@@ -41,4 +41,9 @@ public class Coord {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Coord [x=" + x + ", y=" + y + "]";
+	}
+	
 }

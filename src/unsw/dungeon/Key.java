@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class Key extends Entity implements Collectible {
+public class Key extends Collectible {
 
 	public Key(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
@@ -26,13 +26,7 @@ public class Key extends Entity implements Collectible {
 	}
 
 	@Override
-	public void react(Entity e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void collect(Player player) {
+	public void postCollect() {
 		// TODO Auto-generated method stub
 		
 	}

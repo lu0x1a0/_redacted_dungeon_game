@@ -13,8 +13,8 @@ import javafx.scene.image.ImageView;
  * @author Robert Clifton-Everest
  *
  */
-public class Player extends Entity implements Movable{
-	static int count = 0;
+public class Player extends Movable{
+	//static int count = 0;
     private ArrayList<Collectible> inventory;
     /**
      * Create a player positioned in square (x,y)
@@ -25,9 +25,21 @@ public class Player extends Entity implements Movable{
         super(x, y, dungeon);
         this.inventory = new ArrayList<Collectible>();
     }
-    @Override
+    public boolean hasSword() {
+    	for( Collectible e: inventory) {
+    		if(e instanceof Sword) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
+    public ArrayList<Collectible> getInventory() {
+		return inventory;
+	}
+	@Override
     public void moveUp() {
-
+    	/*
         final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
         ScheduledFuture<?> result = executorService.scheduleAtFixedRate(new Runnable() {
             @Override
@@ -39,7 +51,7 @@ public class Player extends Entity implements Movable{
         if(count >= 10) {
         	executorService.shutdownNow();
         }
-        
+        */
         
         if (getY() > 0 && 
 			dungeon.ispassable(getX(), getY() - 1) == true) {
@@ -70,17 +82,18 @@ public class Player extends Entity implements Movable{
     public void moveRight() {
         if (getX() < dungeon.getWidth() - 1 && 
 			dungeon.ispassable(getX() + 1, getY()) == true) {
-        	collectItemAt(getX() + 1, getY());
+        	//collectItemAt(getX() + 1, getY());
         	int oldx = getX();
         	x().set(oldx + 1);
         	notifyObservers(this,new Coord(oldx,getY()));
         }
     }
-    private void collectItemAt(int x, int y) {
-    	Collectible c = dungeon.hasCollectibleAt(x,y);
-    	if (c != null) {
-    		dungeon.removeEntityAtCoord(x, y);
-    		inventory.add(c);
+    public void waveSword() {
+    	for(Collectible c:inventory) {
+    		if (c instanceof Sword) {
+    			c.use();
+    			break;
+    		}
     	}
     }
     @Override
@@ -94,7 +107,7 @@ public class Player extends Entity implements Movable{
     	
     }
     public void addToInventory(Collectible c) {
-    	
+    	inventory.add(c);
     }
 	@Override
 	public boolean checkPositionAvail() {
