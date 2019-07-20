@@ -2,15 +2,23 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-public class TreasureCollectedGoal extends GoalLeafNode implements Observable, Observer {
+public class GoalLeafTreasureCollected extends GoalLeafNode implements Observable, Observer {
 
 	ArrayList<Treasure> Treasures = new ArrayList<Treasure>();
 	
-	public TreasureCollectedGoal(ArrayList<Treasure> treasure) {
+	public GoalLeafTreasureCollected(ArrayList<Treasure> treasure) {
 		for(Treasure t: treasure) {
 			t.registerObserver(this);
 			Treasures.add(t);
 		}
+	}
+	
+	public GoalLeafTreasureCollected() {
+	}
+	
+	public void addTreasure(Treasure t) {
+		t.registerObserver(this);
+		Treasures.add(t);
 	}
 
 	@Override
@@ -27,6 +35,12 @@ public class TreasureCollectedGoal extends GoalLeafNode implements Observable, O
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public String printGoal(String message) {
+		// TODO Auto-generated method stub
+		return message + " Treasure goal";
 	}
 
 }

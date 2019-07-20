@@ -9,6 +9,7 @@ public abstract class GoalLeafNode implements GoalComponent {
 	@Override
 	abstract public boolean isComplete();
 	
+	
 	@Override
 	public void notifyObservers(Observable e, Object info) {
 		for(Observer o: observers) {

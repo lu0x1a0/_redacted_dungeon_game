@@ -5,8 +5,10 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javafx.scene.image.ImageView;
 
@@ -26,6 +28,7 @@ public class Dungeon implements Observer {
     private Player player;
     private HashMap<Coord, ArrayList<Entity> > map;
 	private DungeonController dc;
+	private ArrayList<GoalComponent> goals = new ArrayList<GoalComponent>();
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
@@ -61,7 +64,12 @@ public class Dungeon implements Observer {
     	dc.removeEntityFromView(v);
     }
     
-    public void addEntity(Entity entity) {
+    public void addGoal(GoalComponent goal) {
+    	goal.registerObserver(this);
+    	goals.add(goal);
+    }
+
+	public void addEntity(Entity entity) {
         //entities.add(entity);
         //map.put(new Coord(entity.getX(),entity.getY()), entity);
         Coord newCoord = new Coord(entity.getX(), entity.getY());
@@ -139,6 +147,23 @@ public class Dungeon implements Observer {
 //    	
 //    }
     
+    public <T extends Entity> ArrayList<Entity> getEntitiesByType(Class<T> fType){
+    	ArrayList<Entity> allEntities = new ArrayList<Entity>();
+    	for (ArrayList<Entity> value : map.values()) {
+    	    for (Entity e: value) {
+    	    	System.out.println(e.getClass());
+    	    	if(e.getClass().equals(fType)) {
+    	    		allEntities.add((Entity) e);
+    	    	}
+    	    	
+    	    }
+    		
+    	}
+    	return allEntities;
+    }
+    
+    
+    
 	@Override
 	public void update(Observable o, Object info) {
 		if(o instanceof Movable && info instanceof Coord) {
@@ -161,6 +186,10 @@ public class Dungeon implements Observer {
 		else if(o instanceof Player) {
 			update((Player) o, (Direction) info);
 		}
+		else if(o instanceof GoalComponent) {
+			System.out.print("You win!!!!");
+		}
+		//TODO add more cases
 		else if(o instanceof Sword) {
 			update((Sword) o,info);
 		}

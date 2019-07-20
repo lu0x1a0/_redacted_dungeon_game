@@ -2,17 +2,31 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-public class EnemiesKilledGoal extends GoalLeafNode implements Observable, Observer {
+public class GoalLeafEnemiesKilled extends GoalLeafNode implements Observable, Observer {
 
 	ArrayList<Enemy> Enemies = new ArrayList<Enemy>();
 	
-	public EnemiesKilledGoal(ArrayList<Enemy> enemies) {
+	public GoalLeafEnemiesKilled(ArrayList<Enemy> enemies) {
 		for(Enemy e: enemies) {
 			e.registerObserver(this);
 			Enemies.add(e);
 		}
 	}
+	
+	public GoalLeafEnemiesKilled() {
+	}
 
+	public void addEnemy(Enemy e) {
+		Enemies.add(e);
+	}
+	
+	@Override
+	public String printGoal(String message) {
+		// TODO Auto-generated method stub
+		return message + " enemies goal";
+	}
+	
+	
 	@Override
 	public void update(Observable o, Object info) {
 		if(isComplete() == true) {
