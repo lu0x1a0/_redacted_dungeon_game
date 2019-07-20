@@ -102,6 +102,9 @@ public class Enemy extends Movable {
 				((Player) e).removeFromView();
 			}
 		}
+		if (e instanceof Boulder) {
+			killed();
+		}
 	}
 	public void killed() {
 		removeFromView();

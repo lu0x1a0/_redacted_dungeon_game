@@ -53,39 +53,55 @@ public class Player extends Movable{
         }
         */
         
-        if (getY() > 0 && 
-			dungeon.ispassable(getX(), getY() - 1) == true) {
-    		int oldY = getY();
-        	y().set(oldY - 1);
-        	notifyObservers(this,new Coord(getX(),oldY));
+        if (getY() > 0 ) { 
+			if(dungeon.ispassable(getX(), getY() - 1) == true) {
+	    		int oldY = getY();
+	        	y().set(oldY - 1);
+	        	notifyObservers(this,new Coord(getX(),oldY));
+			}
+        	else {
+	        	notifyObservers(this,Direction.UP);
+	        }
         }
     }
     @Override
     public void moveDown() {
-        if (getY() < dungeon.getHeight() - 1 && 
-			dungeon.ispassable(getX(), getY() + 1) == true) {
-    		int oldY = getY();
-        	y().set(oldY + 1);
-        	notifyObservers(this,new Coord(getX(),oldY));
+        if (getY() < dungeon.getHeight() - 1) {
+	        if(dungeon.ispassable(getX(), getY() + 1) == true) {
+        		int oldY = getY();
+	        	y().set(oldY + 1);
+	        	notifyObservers(this,new Coord(getX(),oldY));
+	        }else {
+	        	notifyObservers(this,Direction.DOWN);
+	        }
         }
     }
     @Override
     public void moveLeft() {
-    	if (getX() > 0 && 
-			dungeon.ispassable(getX() - 1, getY()) == true) {
-    		int oldx = getX();
-	    	x().set(oldx - 1);
-	    	notifyObservers(this,new Coord(oldx,getY()));
+    	if (getX() > 0) { 
+			if(dungeon.ispassable(getX() - 1, getY()) == true) {
+	    		int oldx = getX();
+		    	x().set(oldx - 1);
+		    	notifyObservers(this,new Coord(oldx,getY()));
+			}
+	    	else {
+	        	notifyObservers(this,Direction.LEFT);
+	        }
     	}
     }
     @Override
     public void moveRight() {
-        if (getX() < dungeon.getWidth() - 1 && 
-			dungeon.ispassable(getX() + 1, getY()) == true) {
-        	int oldx = getX();
-        	x().set(oldx + 1);
-        	notifyObservers(this,new Coord(oldx,getY()));
+        if (getX() < dungeon.getWidth() - 1) { 
+			if(dungeon.ispassable(getX() + 1, getY()) == true) {
+	        	int oldx = getX();
+	        	x().set(oldx + 1);
+	        	notifyObservers(this,new Coord(oldx,getY()));
+			}
+        	else {
+	        	notifyObservers(this,Direction.RIGHT);
+	        }
         }
+        
     }
     public void waveSword() {
     	for(Collectible c:inventory) {

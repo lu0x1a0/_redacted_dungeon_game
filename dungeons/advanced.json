@@ -389,8 +389,13 @@
     },
     {
       "x": 11,
-      "y": 10,
+      "y": 8,
       "type": "invincibility"
+    },
+    {
+      "x": 11,
+      "y": 10,
+      "type": "boulder"
     },
     {
       "x": 11,

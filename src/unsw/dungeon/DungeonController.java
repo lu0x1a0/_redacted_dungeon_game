@@ -80,8 +80,10 @@ public class DungeonController {
             break;
         case Q:
         	player.waveSword();
+        	break;
         case E:
         	player.litBomb();
+        	break;
         default:
             break;
         }    

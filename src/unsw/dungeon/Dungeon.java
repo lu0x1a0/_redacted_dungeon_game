@@ -157,14 +157,57 @@ public class Dungeon implements Observer {
 			addEntity( (Entity) o);		
 			System.out.println("finishedUPDATE\n\n");
 		}
-		//TODO add more cases
+		else if(o instanceof Player) {
+			update((Player) o, (Direction) info);
+		}
 		else if(o instanceof Sword) {
 			update((Sword) o,info);
 		}
 		else if(o instanceof Bomb){
 			update((Bomb) o,info);
 		}
+		else if(o instanceof Boulder) {
+			Coord oldCoord = (Coord) info;
+			Entity m = (Entity) o;
+			map.get(oldCoord).remove(m);
+			if(map.get(oldCoord).size()==0) {
+				map.remove(oldCoord);
+			}
+			Coord newCoord = new Coord(m.getX(), m.getY());
+			if(map.containsKey(newCoord)) {
+				for(int i = 0; i<map.get(newCoord).size();i++) {
+					map.get(newCoord).get(i).react(m);
+				}
+			}
+			addEntity( (Entity) o);	
+		}
 		
+	}
+	private void update(Player p, Direction d) {
+		switch (d) {
+		case UP:
+			pushBoulder(p, new Coord(p.getX(),p.getY()-1));
+			break;
+		case DOWN:
+			pushBoulder(p, new Coord(p.getX(),p.getY()+1));
+			break;
+		case LEFT:
+			pushBoulder(p, new Coord(p.getX()-1,p.getY()));
+			break;
+		case RIGHT:
+			pushBoulder(p, new Coord(p.getX()+1,p.getY()));
+			break;
+		default:
+			break;
+		}
+	}
+	private void pushBoulder(Player p, Coord c) {
+		ArrayList<Entity> stuff = map.get(c);
+		for(int i=0; i<stuff.size();i++) {
+			//if (stuff.get(i) instanceof Boulder) {
+			stuff.get(i).react(p);
+			//}
+		}
 	}
 	private void update(Sword s, Object info) {
 		Coord pCoord = (Coord) info;
