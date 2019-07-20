@@ -6,19 +6,11 @@ public class Potion extends Collectible {
         super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
 	}
-
 	@Override
-	public boolean isCollected() {
-		// TODO Auto-generated method stub
-		return false;
+	public void use(Object info) {
+	
 	}
-
-	@Override
-	public void use() {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	@Override
 	public void postCollect() {
 		// TODO Auto-generated method stub

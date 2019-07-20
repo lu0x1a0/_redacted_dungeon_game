@@ -14,7 +14,7 @@ public abstract class Collectible extends Entity implements Observable{
 	public boolean isCollected() {
 		return collected;
 	}
-	public abstract void use();
+	public abstract void use(Object info);
 	
 	@Override
 	public void notifyObservers(Observable e, Object info) {

@@ -10,18 +10,12 @@ public class Bomb extends Collectible {
 	}
 
 	@Override
-	public boolean isCollected() {
-		return false;
-		
-	}
-
-	@Override
 	public void postCollect() {
 		// TODO Auto-generated method stub
 		return;
 	}
 	@Override
-	public void use() {
+	public void use(Object info) {
 		// TODO Auto-generated method stub
 
 	}

@@ -174,7 +174,7 @@ public class Dungeon implements Observer {
 		System.out.println(map.get(new Coord(6,1)));
 		System.out.println("----");
 		
-		if(o instanceof Movable) {
+		if(o instanceof Movable && info instanceof Coord) {
 			System.out.println(map.get(new Coord(6,1)));
 			Coord oldCoord = (Coord) info;
 			Entity m = (Entity) o;
@@ -187,8 +187,6 @@ public class Dungeon implements Observer {
 			System.out.println(map.get(newCoord));
 			if(map.containsKey(newCoord)) {
 				for (Entity e : map.get(newCoord)) {
-					System.out.println("In LOOP");
-					System.out.println(e.getClass());
 					e.react(m);
 				}
 			}
@@ -200,7 +198,47 @@ public class Dungeon implements Observer {
 		}
 		//TODO add more cases
 		else if(o instanceof Sword) {
-			
+			Sword s = (Sword) o;
+			Coord pCoord = (Coord) info;
+			if(s.getCount()>0) {
+				//s.setCount(s.getCount()-1);
+				Coord newCoord = new Coord(pCoord.getX()-1,pCoord.getY());
+				if(map.containsKey(newCoord)) {
+					for (Entity e : map.get(newCoord)) {
+						e.react(s);
+					}
+				}
+			}
+			if(s.getCount()>0) {
+				//s.setCount(s.getCount()-1);
+				Coord newCoord = new Coord(pCoord.getX(),pCoord.getY()-1);
+				if(map.containsKey(newCoord)) {
+					for (Entity e : map.get(newCoord)) {
+						e.react(s);
+					}
+				}
+			}
+			if(s.getCount()>0) {
+				//s.setCount(s.getCount()-1);
+				Coord newCoord = new Coord(pCoord.getX()+1,pCoord.getY());
+				if(map.containsKey(newCoord)) {
+					for (Entity e : map.get(newCoord)) {
+						e.react(s);
+					}
+				}
+			}
+			if(s.getCount()>0) {
+				//s.setCount(s.getCount()-1);
+				Coord newCoord = new Coord(pCoord.getX(),pCoord.getY()+1);
+				if(map.containsKey(newCoord)) {
+					for (Entity e : map.get(newCoord)) {
+						e.react(s);
+					}
+				}
+			}
+			if(s.getCount()==0) {
+				s.swordBroken(player);
+			}
 		}
 		
 	}

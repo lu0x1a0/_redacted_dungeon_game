@@ -20,9 +20,15 @@ public class Sword extends Collectible {
 		this.count = count;
 	}
 
+	public void swordBroken(Player p) {
+		p.removeSword();
+	}
 	@Override
-	public void use() {
-		notifyObservers(this,0);
+	public void use(Object info) {
+		if(info instanceof Player) {
+			Player p = (Player) info;
+			notifyObservers(this, new Coord(p.getX(),p.getY()));
+		}
 	}
 	@Override
 	public void react(Entity e) {

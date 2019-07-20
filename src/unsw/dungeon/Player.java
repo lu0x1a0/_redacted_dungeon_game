@@ -91,7 +91,15 @@ public class Player extends Movable{
     public void waveSword() {
     	for(Collectible c:inventory) {
     		if (c instanceof Sword) {
-    			c.use();
+    			c.use(this);
+    			break;
+    		}
+    	}
+    }
+    public void removeSword() {
+    	for(Collectible c:inventory) {
+    		if (c instanceof Sword) {
+    			inventory.remove(c);
     			break;
     		}
     	}

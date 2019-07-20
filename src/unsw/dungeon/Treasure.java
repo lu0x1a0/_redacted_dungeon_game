@@ -2,18 +2,9 @@ package unsw.dungeon;
 
 public class Treasure extends Collectible implements Observable {
 
-
-	private boolean collected = false;
-	
 	public Treasure(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public boolean isCollected() {
-		// TODO Auto-generated method stub
-		return collected;
 	}
 	
 	@Override
@@ -30,15 +21,8 @@ public class Treasure extends Collectible implements Observable {
 		}
 		
 	}
-
 	@Override
-	public void collect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void use() {
+	public void use(Object info) {
 		return;
 		
 	}
