@@ -112,7 +112,17 @@ public class Player extends Movable{
     		}
     	}
     }
-    
+    public boolean hasPotion() {
+    	for(Collectible c:inventory) {
+    		if (c instanceof Potion) {
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    public void potionEffectOff(Potion p) {
+    	inventory.remove(p);
+    }
     @Override
     public void react(Entity e) {
     	if(e instanceof Enemy) {

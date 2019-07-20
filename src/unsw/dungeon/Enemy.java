@@ -95,9 +95,15 @@ public class Enemy extends Movable {
 			s.setCount(s.getCount()-1);
 			killed();
 		}
+		if (e instanceof Player) {
+			if( ((Player) e).hasPotion() ) {
+				killed();	
+			}else {
+				((Player) e).removeFromView();
+			}
+		}
 	}
 	public void killed() {
-		System.out.println("I'm removing "+this);
 		removeFromView();
 		notifyObservers(this,"dead");
 		alive = false;

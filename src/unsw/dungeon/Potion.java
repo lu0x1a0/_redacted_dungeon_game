@@ -8,13 +8,22 @@ public class Potion extends Collectible {
 	}
 	@Override
 	public void use(Object info) {
-		
+		Potion p = this;
+		new java.util.Timer().schedule( 
+	        new java.util.TimerTask() {
+	            @Override
+	            public void run() {
+	    			//notifyObservers(p,"invince");
+	            	p.getDungeon().getPlayer().potionEffectOff(p);
+	            }
+	        }, 
+	        2000 
+		);
 	}
 	
 	@Override
 	public void postCollect() {
-		// TODO Auto-generated method stub
-		
+		use(dungeon.getPlayer());
 	}
 
 }

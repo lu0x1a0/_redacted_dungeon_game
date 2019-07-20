@@ -107,7 +107,6 @@ public class Dungeon implements Observer {
     			}
     		}
     	}
-		//System.out.println("Not");
     	return true;
     }
     private void hasEntity(int x, int y) {
@@ -130,8 +129,6 @@ public class Dungeon implements Observer {
     }
     public void removeEntityAtCoord(Entity e,int x, int y) {
     	Coord coord = new Coord(x,y);
-    	//map.remove(coord);
-    	System.out.println(e);
     	map.get(coord).remove(e);
     }
     
@@ -143,14 +140,8 @@ public class Dungeon implements Observer {
     
 	@Override
 	public void update(Observable o, Object info) {
-		//System.out.println("----");
-		//System.out.println(map.get(new Coord(6,1)));
-		//System.out.println("----");
-		
 		if(o instanceof Movable && info instanceof Coord) {
-			System.out.println(info);
 			Coord oldCoord = (Coord) info;
-			System.out.println(map.get(oldCoord));
 			Entity m = (Entity) o;
 			map.get(oldCoord).remove(m);
 			if(map.get(oldCoord).size()==0) {
@@ -158,15 +149,10 @@ public class Dungeon implements Observer {
 			}
 			Coord newCoord = new Coord(m.getX(), m.getY());
 			System.out.printf("%d,%d:new coord outsideloop\n", m.getX(),m.getY()); 
-			System.out.println(map.get(newCoord));
 			if(map.containsKey(newCoord)) {
-				//for (Entity e : map.get(newCoord)) {
-				//map.get(newCoord).forEach(e-> e.react(m));
 				for(int i = 0; i<map.get(newCoord).size();i++) {
 					map.get(newCoord).get(i).react(m);
 				}
-					//e.react(m);
-				//}
 			}
 			addEntity( (Entity) o);		
 			System.out.println("finishedUPDATE\n\n");
@@ -203,7 +189,7 @@ public class Dungeon implements Observer {
 	}
 	private void update(Bomb o, Object info) {
 		Coord centre = new Coord(((Bomb) o).getX(),((Bomb) o).getY());
-		System.out.println(centre);
+
 		bombCell(new Coord(centre.getX()-1,centre.getY()-1));
 		bombCell(new Coord(centre.getX()  ,centre.getY()-1));
 		bombCell(new Coord(centre.getX()+1,centre.getY()-1));
