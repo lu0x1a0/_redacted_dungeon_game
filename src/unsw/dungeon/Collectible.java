@@ -48,5 +48,7 @@ public abstract class Collectible extends Entity implements Observable{
 		collected  = true;
 		this.postCollect();
 	}
-	public abstract void postCollect();
+	public void postCollect() {
+		return;
+	};
 }

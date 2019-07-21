@@ -1,8 +1,5 @@
 package unsw.dungeon;
 
-import java.util.ArrayList;
-
-import javafx.scene.image.ImageView;
 
 public class Boulder extends Movable {
 
@@ -11,11 +8,6 @@ public class Boulder extends Movable {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public boolean checkPositionAvail() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
     public void moveUp() {

@@ -7,11 +7,7 @@ public class Sword extends Collectible {
         count = 5;
 	}
 
-	@Override
-	public boolean isCollected() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 	public int getCount() {
 		return count;
 	}
@@ -39,11 +35,6 @@ public class Sword extends Collectible {
 				collect((Player) e);
 			}
 		}
-	}
-	@Override
-	public void postCollect() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -33,10 +33,4 @@ public class Key extends Collectible {
 		return true;
 	}
 
-	@Override
-	public void postCollect() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

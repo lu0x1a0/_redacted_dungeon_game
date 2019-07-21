@@ -7,7 +7,6 @@ import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javafx.scene.image.ImageView;
 
 import javafx.application.Platform;
 
@@ -46,11 +45,6 @@ public class Enemy extends Movable {
 		//System.out.println(e.pathSearch());
 
 		
-	}
-	@Override
-	public boolean checkPositionAvail() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

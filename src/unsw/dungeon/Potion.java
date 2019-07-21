@@ -21,7 +21,7 @@ public class Potion extends Collectible {
 		);
 	}
 	
-	@Override
+
 	public void postCollect() {
 		use(dungeon.getPlayer());
 	}

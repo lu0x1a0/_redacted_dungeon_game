@@ -26,7 +26,6 @@ public abstract class Movable extends Entity implements Observable {
 	public void registerObserver(Observer o) {
 		observers.add(o);
 	}
-	public abstract boolean checkPositionAvail();
 	public abstract void moveUp();
     public abstract void moveDown();
     public abstract void moveLeft();

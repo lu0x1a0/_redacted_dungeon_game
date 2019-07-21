@@ -26,9 +26,4 @@ public class Treasure extends Collectible implements Observable {
 		return;
 	}
 
-	public void postCollect() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
