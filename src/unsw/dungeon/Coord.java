@@ -2,6 +2,11 @@ package unsw.dungeon;
 
 public class Coord {
 	private int x, y;
+	/**
+	 * this is a class used as a key for objects location in the map
+	 * @param x
+	 * @param y
+	 */
 	public Coord(int x, int y) {
 		this.x = x;
 		this.y = y;

@@ -1,12 +1,16 @@
 package unsw.dungeon;
 
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 
+/**
+ * collectible that can be used to kill movables on the map
+ * @author Luoxi
+ *
+ */
 public class Bomb extends Collectible {
 	
 	@SuppressWarnings("unused") //Will be used in Milestone3
@@ -15,8 +19,12 @@ public class Bomb extends Collectible {
 	private Timer timer;
 	public Bomb(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-		// TODO Auto-generated constructor stub
 	}
+	/**
+	 * setter for different iamge state of the entity
+	 * @param unlit
+	 * @param blast
+	 */
 	public void setImages(ImageView unlit, ImageView blast) {
 		this.unlit = unlit;
 		this.blast = blast;

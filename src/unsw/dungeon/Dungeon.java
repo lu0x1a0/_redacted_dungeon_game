@@ -34,27 +34,47 @@ public class Dungeon implements Observer {
         this.player = null;
         this.map = new HashMap<Coord, ArrayList<Entity> >();
     }
-    
+    /**
+     * getter for mapping of the dungeon's entity
+     * @return the hashmap
+     */
     public HashMap<Coord, ArrayList<Entity>> getMap() {
 		return map;
 	}
-
+    /**
+     * getter for width of dungeon
+     * @return
+     */
 	public int getWidth() {
         return width;
     }
-    
+    /**
+     * getter for height of dungeon
+     * @return
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * getter for player in the dungeon
+     * @return
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * setter for player in the dungeon
+     * @param player
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }
-
+    /**
+     * gets the player's Coord in the dungeon
+     * @return Coord
+     */
     public Coord getPlayerCoord() {
     	return new Coord(player.getX(), player.getY());
     }
@@ -64,15 +84,25 @@ public class Dungeon implements Observer {
     		dc.addEntityToView(v,e.getX(),e.getY());
     	}
     }
+    /**
+     * removes a image from the JavaFX scene
+     * @param v
+     */
 	public void removeFromView(ImageView v) {
     	dc.removeEntityFromView(v);
     }
-    
+    /**
+     * add objective to the dungeon
+     * @param goal
+     */
     public void addGoal(GoalComponent goal) {
     	goal.registerObserver(this);
     	goals.add(goal);
     }
-
+    /**
+     * add entity to the dungeon mapped to its coordinate
+     * @param entity
+     */
 	public void addEntity(Entity entity) {
         //entities.add(entity);
         //map.put(new Coord(entity.getX(),entity.getY()), entity);
@@ -85,6 +115,11 @@ public class Dungeon implements Observer {
 			map.put( newCoord, arr);
 		}
     }
+	/**
+	 * get all accessible passable tile coords surrounding a specific coord
+	 * @param c: the centre of checkings
+	 * @return
+	 */
 	public LinkedList<Coord> getSurroundPassable(Coord c) {
 		LinkedList<Coord> ret = new LinkedList<Coord>();
 		if(c.getX()!=0) {
@@ -109,6 +144,12 @@ public class Dungeon implements Observer {
 		}
 		return ret;
 	}
+	/**
+	 * check whether a given tile is passable
+	 * @param x coord
+	 * @param y coord
+	 * @return  true/false
+	 */
     public boolean ispassable(int x, int y) {
     	Coord coord = new Coord(x,y);
     	if (map.containsKey(coord)) {
@@ -121,11 +162,22 @@ public class Dungeon implements Observer {
     	}
     	return true;
     }
+    /**
+     * remove the given entity at the specific coordinate in the dungeon
+     * @param e entity to be removed
+     * @param x coord
+     * @param y coord
+     */
     public void removeEntityAtCoord(Entity e,int x, int y) {
     	Coord coord = new Coord(x,y);
     	map.get(coord).remove(e);
     }
-    
+    /**
+     * get all entities of given type in the dungeon
+     * @param <T> variable type
+     * @param fType: the type to be retrieved
+     * @return
+     */
     public <T extends Entity> ArrayList<Entity> getEntitiesByType(Class<T> fType){
     	ArrayList<Entity> allEntities = new ArrayList<Entity>();
     	for (ArrayList<Entity> value : map.values()) {
@@ -189,6 +241,11 @@ public class Dungeon implements Observer {
 		}
 		
 	}
+	/**
+	 * case where player heads to an impassable tile before it and whether it is reactive
+	 * @param p
+	 * @param d
+	 */
 	private void update(Player p, Direction d) {
 		switch (d) {
 		case UP:
@@ -207,9 +264,19 @@ public class Dungeon implements Observer {
 			break;
 		}
 	}
+	/**
+	 * change the appearance of an entity on the JavaFX Scene
+	 * @param e entity
+	 * @param oldv previous appearance
+	 */
 	public void changeEntityImage(Entity e, ImageView oldv) {
 		dc.changeEntityImage(e, oldv);
 	}
+	/**
+	 * this is what happens when player tries to walk into an impassable tile in front of it
+	 * @param p player
+	 * @param c coord of the tile tried to move into
+	 */
 	private void changeImpassable(Player p, Coord c) {
 		ArrayList<Entity> stuff = map.get(c);
 		for(int i=0; i<stuff.size();i++) {
@@ -218,6 +285,12 @@ public class Dungeon implements Observer {
 			//}
 		}
 	}
+	/**
+	 * this is what happens when a sword is used by the player
+	 * all tiles surrounding the player are tried to hit by the sword
+	 * @param s
+	 * @param info
+	 */
 	private void update(Sword s, Object info) {
 		Coord pCoord = (Coord) info;
 		stab(s, new Coord(pCoord.getX()-1,pCoord.getY()));
@@ -229,6 +302,11 @@ public class Dungeon implements Observer {
 			s.swordBroken(player);
 		}
 	}
+	/**
+	 * object on the coord c will react to the sword
+	 * @param s sword
+	 * @param c coord to react
+	 */
 	private void stab(Sword s,Coord c) {
 		if(s.getCount()>0) {
 			if(map.containsKey(c)) {
@@ -239,6 +317,12 @@ public class Dungeon implements Observer {
 			}
 		}
 	}
+	/**
+	 * This is what happens when the player use the bomb
+	 * all movable in surround tiles will be affected by the bomb
+	 * @param o bomb, 
+	 * @param info info about the bomb
+	 */
 	private void update(Bomb o, Object info) {
 		Coord centre = new Coord(((Bomb) o).getX(),((Bomb) o).getY());
 
@@ -252,6 +336,10 @@ public class Dungeon implements Observer {
 		bombCell(new Coord(centre.getX()  ,centre.getY()+1));
 		bombCell(new Coord(centre.getX()+1,centre.getY()+1));
 	}
+	/**
+	 * if there are movable at the Coord c, destroy it
+	 * @param c coord
+	 */
 	private void bombCell(Coord c) {
 		if(map.containsKey(c)) {
 			for(int i = 0; i<map.get(c).size() ;i++) {
@@ -266,13 +354,16 @@ public class Dungeon implements Observer {
 			}
 		}
 	}
-	public HashMap<Coord, ArrayList<Entity> > getEntities() {
-		return map;
-	}
-	
+	/**
+	 * attach the controller of the dungeon to the dungeon, so it can call useful methods
+	 * @param dc
+	 */
 	public void setController(DungeonController dc) {
 		this.dc = dc;
 	}
+	/**
+	 * tells the enemy in the dungeon to start moving and hunt the player
+	 */
 	public void startEnemies() {
 		for(ArrayList<Entity> arr :map.values()) {
 			for(Entity e: arr) {

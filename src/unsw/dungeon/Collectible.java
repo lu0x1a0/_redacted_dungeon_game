@@ -2,6 +2,11 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+/**
+ * common properties abstracted away for all entities that can be collected in the map
+ * @author Sean
+ *
+ */
 public abstract class Collectible extends Entity implements Observable{
 	protected boolean collected;
     private ArrayList<Observer> observers;
@@ -40,12 +45,20 @@ public abstract class Collectible extends Entity implements Observable{
 			collect((Player) e);
 		}
 	}
+	/**
+	 * give this collectible to the player's inventory and remove from game view
+	 * @param player
+	 */
 	public void collect(Player player) {
 		player.addToInventory(this);
 		this.removeFromView();
 		collected  = true;
 		this.postCollect();
 	}
+	/**
+	 * what to do after the collect stage
+	 * i.e. is there any effect
+	 */
 	public void postCollect() {
 		return;
 	};
