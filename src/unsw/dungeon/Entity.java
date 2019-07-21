@@ -52,8 +52,9 @@ public abstract class Entity {
 	}
 	
     public void removeFromView() {
-		dungeon.removeFromView(iv);
-		dungeon.removeEntityAtCoord(this,getX(), getY());
+    	dungeon.removeEntityAtCoord(this,getX(), getY());
+    	return;
+//		dungeon.removeFromView(iv);
 	}
 	@Override
 	public String toString() {

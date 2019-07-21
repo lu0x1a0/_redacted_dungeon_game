@@ -12,7 +12,7 @@ public class GoalLeafExit extends GoalLeafNode implements Observable, Observer {
 
 	@Override
 	public boolean isComplete() {
-		return finalExit.isPlayerIsTouching();
+		return finalExit.getPlayerIsTouching();
 	}
 	
 	@Override
