@@ -21,7 +21,7 @@ public class Key extends Collectible {
 
 	/**
 	 * returns the assocaited ID of key
-	 * @return - int
+	 * @return - intb
 	 */
 	public int getId() {
 		return id;
