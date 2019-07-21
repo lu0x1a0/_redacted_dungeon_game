@@ -22,6 +22,7 @@ public class Exit extends Entity implements Observer, Observable {
 		if(e instanceof Player) {
 			((Player) e).registerObserver(this);
 			setPlayerIsTouching(true);
+			notifyObservers(this, true);
 		}
 		
 	}

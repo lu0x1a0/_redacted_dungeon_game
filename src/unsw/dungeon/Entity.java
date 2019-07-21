@@ -53,8 +53,8 @@ public abstract class Entity {
 	
     public void removeFromView() {
     	dungeon.removeEntityAtCoord(this,getX(), getY());
+    	dungeon.removeFromView(iv);
     	return;
-//		dungeon.removeFromView(iv);
 	}
 	@Override
 	public String toString() {

@@ -3,7 +3,7 @@ package unsw.dungeon;
 import javafx.scene.image.ImageView;
 
 public class Door extends Entity {
-	@SuppressWarnings("unused")
+	@SuppressWarnings("unused") //Will be used in milestone3
 	private ImageView lock;
 	@SuppressWarnings("unused")
 	private ImageView unlock;

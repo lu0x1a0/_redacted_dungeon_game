@@ -7,6 +7,7 @@ public class GoalLeafExit extends GoalLeafNode implements Observable, Observer {
 	public GoalLeafExit(Exit theExit) {
 		// TODO Auto-generated constructor stub
 		finalExit = theExit;
+		theExit.registerObserver(this);
 		
 	}
 

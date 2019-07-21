@@ -144,6 +144,7 @@ public class Dungeon implements Observer {
     
 	@Override
 	public void update(Observable o, Object info) {
+		System.out.println("Observable object is: "+o);
 		if(o instanceof Movable && info instanceof Coord) {
 			Coord oldCoord = (Coord) info;
 			Entity m = (Entity) o;
