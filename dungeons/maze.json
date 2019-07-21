@@ -1043,6 +1043,30 @@
       "y": 3,
       "key":0,
       "type": "door"
+    },
+    {
+      "x": 4,
+      "y": 4,
+      "key":1,
+      "type": "key"
+    },
+    {
+      "x": 4,
+      "y": 7,
+      "key":1,
+      "type": "door"
+    },
+    {
+      "x": 5,
+      "y": 3,
+      "key":2,
+      "type": "key"
+    },
+    {
+      "x": 6,
+      "y": 4,
+      "key":2,
+      "type": "door"
     }
   ],
   "goal-condition": {
