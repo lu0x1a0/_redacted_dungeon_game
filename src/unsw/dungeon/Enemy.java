@@ -7,7 +7,6 @@ import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javafx.scene.image.ImageView;
 
 import javafx.application.Platform;
 
@@ -41,11 +40,6 @@ public class Enemy extends Movable {
 		};
 		timer.scheduleAtFixedRate(task, 0, 1000);
 		
-	}
-	@Override
-	public boolean checkPositionAvail() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

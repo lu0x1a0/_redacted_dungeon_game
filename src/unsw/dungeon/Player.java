@@ -1,12 +1,7 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
-import javafx.scene.image.ImageView;
 
 /**
  * The player entity
@@ -157,7 +152,6 @@ public class Player extends Movable{
     	if(e instanceof Enemy) {
     		react( (Enemy) e);
     	}
-    	// TODO more cases
     }
     public void react(Enemy e) {
     	e.react(this);
@@ -165,14 +159,9 @@ public class Player extends Movable{
     public void addToInventory(Collectible c) {
     	inventory.add(c);
     }
-	@Override
-	public boolean checkPositionAvail() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 	@Override
 	public boolean ispassable() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	

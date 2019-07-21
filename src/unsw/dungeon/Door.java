@@ -1,10 +1,11 @@
 package unsw.dungeon;
 
-import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 
 public class Door extends Entity {
+	@SuppressWarnings("unused")
 	private ImageView lock;
+	@SuppressWarnings("unused")
 	private ImageView unlock;
 	private boolean isopen = false;
 	private int id;
@@ -23,14 +24,6 @@ public class Door extends Entity {
 
 	public void setIsopen(boolean isopen) {
 		this.isopen = isopen;
-		Door d = this;
-//		Platform.runLater(new Runnable() {
-//            @Override 
-//            public void run() {
-//				//notifyObservers(e,old);
-//            	dungeon.changeEntityImage(d, d.lock);
-//            }
-//        });
 		this.removeFromView();
 
 	}

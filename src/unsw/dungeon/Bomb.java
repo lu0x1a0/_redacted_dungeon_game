@@ -1,9 +1,5 @@
 package unsw.dungeon;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import java.util.concurrent.TimeUnit;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,6 +8,8 @@ import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 
 public class Bomb extends Collectible {
+	
+	@SuppressWarnings("unused") //Will be used in Milestone3
 	private ImageView unlit;
 	private ImageView blast;
 	private Timer timer;
@@ -29,11 +27,6 @@ public class Bomb extends Collectible {
 		this.removeFromView();
 		collected  = true;
 		this.postCollect();
-	}
-	@Override
-	public void postCollect() {
-		// TODO Auto-generated method stub
-		return;
 	}
 	@Override
 	public void use(Object info) {
