@@ -52,7 +52,8 @@ public abstract class Entity {
 	}
 	
     public void removeFromView() {
-		dungeon.removeFromView(iv);
+    	//FIXME UNCOMMENT ON MILESTONE3
+//		dungeon.removeFromView(iv);
 		dungeon.removeEntityAtCoord(this,getX(), getY());
 	}
 	@Override

@@ -127,7 +127,7 @@ public class Enemy extends Movable {
 	
 	@Override
 	public void react(Entity e) {
-		timer.cancel();
+		//timer.cancel();
 		if (e instanceof Sword) {
 			Sword s = (Sword) e;
 			s.setCount(s.getCount()-1);
