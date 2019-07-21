@@ -41,6 +41,9 @@ public class Player extends Movable{
     	}
     	return null;
     }
+    public int getKeyId(Key k) {
+    	return k.getId();
+    }
     public void removeKey() {
     	for(Collectible c:inventory) {
     		if (c instanceof Key) {

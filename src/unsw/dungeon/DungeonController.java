@@ -47,6 +47,10 @@ public class DungeonController {
     	//squares.getChildren().add(v, 3, 4);
     	squares.add(v, x, y);
     }
+    public void changeEntityImage(Entity e, ImageView oldv) {
+    	removeEntityFromView(oldv);
+    	addEntityToView(e.getIv(),e.getX(),e.getY());
+    }
     @FXML
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");

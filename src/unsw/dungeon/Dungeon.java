@@ -216,22 +216,25 @@ public class Dungeon implements Observer {
 	private void update(Player p, Direction d) {
 		switch (d) {
 		case UP:
-			pushBoulder(p, new Coord(p.getX(),p.getY()-1));
+			changeImpassable(p, new Coord(p.getX(),p.getY()-1));
 			break;
 		case DOWN:
-			pushBoulder(p, new Coord(p.getX(),p.getY()+1));
+			changeImpassable(p, new Coord(p.getX(),p.getY()+1));
 			break;
 		case LEFT:
-			pushBoulder(p, new Coord(p.getX()-1,p.getY()));
+			changeImpassable(p, new Coord(p.getX()-1,p.getY()));
 			break;
 		case RIGHT:
-			pushBoulder(p, new Coord(p.getX()+1,p.getY()));
+			changeImpassable(p, new Coord(p.getX()+1,p.getY()));
 			break;
 		default:
 			break;
 		}
 	}
-	private void pushBoulder(Player p, Coord c) {
+	public void changeEntityImage(Entity e, ImageView oldv) {
+		dc.changeEntityImage(e, oldv);
+	}
+	private void changeImpassable(Player p, Coord c) {
 		ArrayList<Entity> stuff = map.get(c);
 		for(int i=0; i<stuff.size();i++) {
 			//if (stuff.get(i) instanceof Boulder) {

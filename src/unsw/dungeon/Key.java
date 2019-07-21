@@ -17,7 +17,15 @@ public class Key extends Collectible {
 			((Player) info).removeKey();
 		}
 	}
-
+	@Override
+	public void react(Entity e) {
+		if (e instanceof Player) {
+			Player p = (Player) e;
+			if (p.getKey() == null) {
+				collect((Player) e);
+			}
+		}
+	}
 	@Override
 	public boolean ispassable() {
 		// TODO Auto-generated method stub
