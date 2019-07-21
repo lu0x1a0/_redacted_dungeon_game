@@ -160,7 +160,7 @@ public class Dungeon implements Observer {
 				}
 			}
 			addEntity( (Entity) o);		
-		}
+			}
 		else if(o instanceof Player) {
 			update((Player) o, (Direction) info);
 		}

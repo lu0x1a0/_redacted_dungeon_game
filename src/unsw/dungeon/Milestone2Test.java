@@ -187,7 +187,6 @@ class Milestone2Test {
 		testD.addEntity(w7);
 		testD.addEntity(player);
         player.moveRight();
-        //System.out.println(player.getX());
         assertEquals(player.getX(),1);
 		player.moveUp();
         assertEquals(player.getY(),1);
@@ -279,8 +278,6 @@ class Milestone2Test {
 		player.litBomb();
 		player.moveRight();
 		player.moveRight();
-		System.out.println("Testing blow-------------");
-		System.out.println(testD.getMap().get(new Coord(1,1)));
 		
 		Timer timer= new Timer(true);
 		TimerTask task = new TimerTask() {
@@ -296,7 +293,6 @@ class Milestone2Test {
 		        });
 			}
 		};
-		System.out.println("dude");
 		timer.scheduleAtFixedRate(task, 1000, 1000);
 	}
 	@Test
@@ -314,8 +310,6 @@ class Milestone2Test {
 		testD.addEntity(player);
 		player.moveLeft();
 		player.litBomb();
-		System.out.println("Testing blow-------------");
-		System.out.println(testD.getMap().get(new Coord(1,1)));
 		
 		Timer timer= new Timer(true);
 		TimerTask task = new TimerTask() {
@@ -330,7 +324,6 @@ class Milestone2Test {
 		        });
 			}
 		};
-		System.out.println("dude");
 		timer.scheduleAtFixedRate(task, 1000, 1000);
 	}
 	@Test
