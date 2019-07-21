@@ -35,8 +35,6 @@ public abstract class DungeonLoader {
 
         Dungeon dungeon = new Dungeon(width, height);
 
-        System.out.println(json);
-        
         JSONArray jsonEntities = json.getJSONArray("entities");
 
         for (int i = 0; i < jsonEntities.length(); i++) {
@@ -44,16 +42,7 @@ public abstract class DungeonLoader {
         }
         
         JSONObject jsonGoals = json.getJSONObject("goal-condition");
-        
-        System.out.println(jsonGoals);
-        
-        System.out.println(dungeon.getEntitiesByType(Enemy.class));
-        
-        
-        System.out.println(dungeon.getEntitiesByType(Wall.class));
-        
-        
-        
+                
         if(jsonGoals.getString("goal").equals("AND")) {
         	// This is an AND goal type. All the subgoals must be combined with AND
         	//Loop through JSON array
@@ -107,8 +96,6 @@ public abstract class DungeonLoader {
     	}
     	else if(json.getString("goal").equals("boulders")) {
     		ArrayList<Entity> floorSwitches = dungeon.getEntitiesByType(FloorSwitch.class);
-    		System.out.println("Checking for floor switches");
-    		System.out.println(floorSwitches);
     		GoalLeafFloorSwitch floorSwitchGoal = new GoalLeafFloorSwitch();
     		for (Entity f: floorSwitches) {
     			((FloorSwitch) f).registerObserver(floorSwitchGoal);

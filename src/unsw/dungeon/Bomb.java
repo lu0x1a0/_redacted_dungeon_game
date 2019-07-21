@@ -25,9 +25,7 @@ public class Bomb extends Collectible {
 	}
 	@Override
 	public void collect(Player player) {
-		System.out.println("Collect Reached");
 		player.addToInventory(this);
-		System.out.println(player.getInventory());		
 		this.removeFromView();
 		collected  = true;
 		this.postCollect();
@@ -53,15 +51,13 @@ public class Bomb extends Collectible {
 			    public void run() {
 					Platform.runLater(new Runnable() {
 			            @Override public void run() {
-			            	System.out.println("waited/not");
-							notifyObservers(bomb,"explode");
+			            	notifyObservers(bomb,"explode");
 							bomb.removeFromView();
 							timer.cancel();
 			            }
 			        });
 				}
 			};
-			System.out.println("dude");
 			timer.scheduleAtFixedRate(task, 1000, 1000);
 		}
 	}

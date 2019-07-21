@@ -24,7 +24,6 @@ public class Key extends Collectible {
 			if (p.getKey() == null) {
 				collect((Player) e);
 			}
-			System.out.println("picking key---");
 		}
 	}
 	@Override

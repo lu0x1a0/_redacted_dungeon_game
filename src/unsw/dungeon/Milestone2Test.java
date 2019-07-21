@@ -159,8 +159,6 @@ class Milestone2Test {
 		assertEquals(true, orGoal.isComplete());
 		//Treasure is collected but final goal is still incomplete
 		
-    	System.out.println(orGoal.printGoal("Parent OR goal: "));
-		
 		player.moveRight(); 
 		assertEquals(true, singleSwitch.isPressed());
 		assertEquals(true, goal2.isComplete());

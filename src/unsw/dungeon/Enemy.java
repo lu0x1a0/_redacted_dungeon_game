@@ -28,13 +28,10 @@ public class Enemy extends Movable {
 		TimerTask task = new TimerTask() {
 			@Override
 		    public void run() {
-		    	//System.out.println(e.pathSearch());
-				Coord c = e.pathSearch();
-				//count ++;
+		    	Coord c = e.pathSearch();
 				Coord old = new Coord(e.getX(),e.getY());
 				e.x().set(c.getX());
 				e.y().set(c.getY());
-				//notifyObservers(e,old);
 				Platform.runLater(new Runnable() {
 		            @Override public void run() {
 						notifyObservers(e,old);
@@ -43,8 +40,6 @@ public class Enemy extends Movable {
 			}
 		};
 		timer.scheduleAtFixedRate(task, 0, 1000);
-		//System.out.println(e.pathSearch());
-
 		
 	}
 	@Override
@@ -89,13 +84,8 @@ public class Enemy extends Movable {
 		Coord ori =  new Coord(getX(),getY());
 		Coord player = dungeon.getPlayerCoord();
 		visited.put(ori, ori);
-		System.out.println("-----------START-----------");
-		System.out.println(player);
-		System.out.println("---------------------------");	
 		Queue<Coord> queue = new LinkedList<Coord>();
 		while ( ptr!=null && !ptr.equals(player)) {
-			System.out.println("--iter--");	
-			System.out.println(ptr);
 			LinkedList<Coord> potential = dungeon.getSurroundPassable(ptr);
 			//queue.addAll(potential);
 			for(Coord c:potential) {
@@ -104,7 +94,6 @@ public class Enemy extends Movable {
 					queue.add(c);
 				}
 			}
-			System.out.println(queue);
 			ptr = queue.poll();
 		}
 		if (ptr.equals(player)) {
