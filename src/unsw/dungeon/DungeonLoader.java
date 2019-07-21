@@ -172,7 +172,8 @@ public abstract class DungeonLoader {
         	entity = sword;
         	break;      	
 	    case "key":
-	    	int id = json.getInt("key");
+	        int id = json.getInt("key");
+
 	    	Key key = new Key(x,y,dungeon,id);
         	onLoad(key);
         	entity = key;
@@ -193,8 +194,8 @@ public abstract class DungeonLoader {
 	    	entity = s;
 			break;      	
 		case "door":
-	    	int dId = json.getInt("key");
-			Door d = new Door(x,y,dungeon,dId);
+	        int did = json.getInt("key");
+			Door d = new Door(x,y,dungeon,did);
 			onLoad(d);
 			entity = d;
 			break;     	

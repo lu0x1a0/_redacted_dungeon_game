@@ -37,7 +37,11 @@ public class Dungeon implements Observer {
         this.map = new HashMap<Coord, ArrayList<Entity> >();
     }
     
-    public int getWidth() {
+    public HashMap<Coord, ArrayList<Entity>> getMap() {
+		return map;
+	}
+
+	public int getWidth() {
         return width;
     }
     
@@ -118,34 +122,10 @@ public class Dungeon implements Observer {
     	}
     	return true;
     }
-    private void hasEntity(int x, int y) {
-    	Coord coord = new Coord(x,y);
-    	if (map.containsKey(coord)) {
-    		System.out.printf("%d,%d hasEntity: ",x,y);
-    		System.out.println(map.get(coord).getClass());
-    	}
-		
-    }
-    public Collectible hasCollectibleAt(int x, int y) {
-    	Coord coord = new Coord(x,y);
-    	if (map.containsKey(coord)) {
-    		for(Entity e : map.get(coord)) {
-    			if ( e instanceof Collectible)
-    				return (Collectible) e;
-    		}
-		} 
-    	return null;
-    }
     public void removeEntityAtCoord(Entity e,int x, int y) {
     	Coord coord = new Coord(x,y);
     	map.get(coord).remove(e);
     }
-    
-//    public ArrayList<Entity> getEntitiesAtCoord(int x, int y) {
-//    	Coord coord = new Coord(x,y);
-//    	return map.get(coord);
-//    	
-//    }
     
     public <T extends Entity> ArrayList<Entity> getEntitiesByType(Class<T> fType){
     	ArrayList<Entity> allEntities = new ArrayList<Entity>();
@@ -218,22 +198,25 @@ public class Dungeon implements Observer {
 	private void update(Player p, Direction d) {
 		switch (d) {
 		case UP:
-			pushBoulder(p, new Coord(p.getX(),p.getY()-1));
+			changeImpassable(p, new Coord(p.getX(),p.getY()-1));
 			break;
 		case DOWN:
-			pushBoulder(p, new Coord(p.getX(),p.getY()+1));
+			changeImpassable(p, new Coord(p.getX(),p.getY()+1));
 			break;
 		case LEFT:
-			pushBoulder(p, new Coord(p.getX()-1,p.getY()));
+			changeImpassable(p, new Coord(p.getX()-1,p.getY()));
 			break;
 		case RIGHT:
-			pushBoulder(p, new Coord(p.getX()+1,p.getY()));
+			changeImpassable(p, new Coord(p.getX()+1,p.getY()));
 			break;
 		default:
 			break;
 		}
 	}
-	private void pushBoulder(Player p, Coord c) {
+	public void changeEntityImage(Entity e, ImageView oldv) {
+		dc.changeEntityImage(e, oldv);
+	}
+	private void changeImpassable(Player p, Coord c) {
 		ArrayList<Entity> stuff = map.get(c);
 		for(int i=0; i<stuff.size();i++) {
 			//if (stuff.get(i) instanceof Boulder) {

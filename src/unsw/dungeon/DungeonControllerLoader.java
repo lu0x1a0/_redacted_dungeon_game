@@ -130,6 +130,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 	@Override
 	public void onLoad(Door door) {
         ImageView view = new ImageView(closedDoorImg);
+        ImageView unlock = new ImageView(openedDoorImg); 
+        door.setViews(view, unlock);
         addEntity(door, view);
 	}
 	

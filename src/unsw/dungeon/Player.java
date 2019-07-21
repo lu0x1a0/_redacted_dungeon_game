@@ -41,6 +41,9 @@ public class Player extends Movable{
     	}
     	return null;
     }
+    public int getKeyId(Key k) {
+    	return k.getId();
+    }
     public void removeKey() {
     	for(Collectible c:inventory) {
     		if (c instanceof Key) {
@@ -134,6 +137,15 @@ public class Player extends Movable{
     		}
     	}
     }
+    public int countBombs() {
+    	int count = 0;
+    	for(Collectible c:inventory) {
+    		if (c instanceof Bomb) {
+    			count++;
+    		}
+    	}
+    	return count;
+    }
     public void litBomb() {
     	for(Collectible c:inventory) {
     		if (c instanceof Bomb) {
@@ -177,5 +189,6 @@ public class Player extends Movable{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	
 
 }

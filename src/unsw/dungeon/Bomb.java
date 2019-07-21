@@ -2,16 +2,19 @@ package unsw.dungeon;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.Timer;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import javafx.application.Platform;
 import javafx.scene.image.ImageView;
 
 public class Bomb extends Collectible {
 	private ImageView unlit;
 	private ImageView blast;
-	
+	private Timer timer;
 	public Bomb(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
@@ -43,40 +46,25 @@ public class Bomb extends Collectible {
 			dungeon.addEntity(this);
 			dungeon.addToView(this,getIv());
 			Bomb bomb = this;
-//			Timer timer = new Timer(3000, new ActionListener() {
-//				@Override
-//				public void actionPerformed(ActionEvent arg0) {
-//				    // Code to be executed
-//					//System.out.printf();
-//					 		
-//					/*try {
-//						TimeUnit.SECONDS.sleep(1);
-//					} catch (InterruptedException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					} */
-//					
-//					//bomb.removeFromView();
-//				}
-//			});
-//			timer.setRepeats(false); // Only execute once
-//			timer.start(); 
-//			while(timer.isRunning()) {
-//				
-//			}
 
-//			new java.util.Timer().schedule( 
-//			        new java.util.TimerTask() {
-//			            @Override
-//			            public void run() {
-//			    			notifyObservers(bomb,"explode");			            
-//						}
-//			        }, 
-//			        3000 
-//			);
-//			System.out.print("asasasas");
+			timer= new Timer(true);
+			TimerTask task = new TimerTask() {
+				@Override
+			    public void run() {
+					Platform.runLater(new Runnable() {
+			            @Override public void run() {
+							notifyObservers(bomb,"explode");
+							bomb.removeFromView();
+							timer.cancel();
+			            }
+			        });
+				}
+			};
+			timer.scheduleAtFixedRate(task, 0, 1000);
+			
+			
+			
 			notifyObservers(bomb,"explode");
-			bomb.removeFromView();
 		}
 	}
 }

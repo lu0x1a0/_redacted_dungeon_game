@@ -15,6 +15,7 @@ public class DungeonApplication extends Application {
 
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
 
+
         DungeonController controller = dungeonLoader.loadController();
 
         controller.giveDungeonMyself();
