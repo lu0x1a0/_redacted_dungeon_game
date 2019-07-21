@@ -1,11 +1,13 @@
 package unsw.dungeon;
-
-
+/**
+ * Something that can be pushed around by the player but not passable
+ * @author Luoxi
+ *
+ */
 public class Boulder extends Movable {
 
 	public Boulder(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -53,7 +55,6 @@ public class Boulder extends Movable {
 
 	@Override
 	public boolean ispassable() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
