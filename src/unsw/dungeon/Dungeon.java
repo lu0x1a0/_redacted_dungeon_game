@@ -62,9 +62,11 @@ public class Dungeon implements Observer {
     }
     public void addToView(Entity e, ImageView v) {
     	//dc.trackPosition(e,v);
-    	dc.addEntityToView(v,e.getX(),e.getY());
+    	if(v!=null) {
+    		dc.addEntityToView(v,e.getX(),e.getY());
+    	}
     }
-    public void removeFromView(ImageView v) {
+	public void removeFromView(ImageView v) {
     	dc.removeEntityFromView(v);
     }
     
@@ -266,6 +268,8 @@ public class Dungeon implements Observer {
 				}
 				else if(map.get(c).get(i) instanceof Enemy) {
 					((Enemy) map.get(c).get(i)).killed();
+				}else if(map.get(c).get(i) instanceof Player) {
+					((Player) map.get(c).get(i)).removeFromView();
 				}
 			}
 		}

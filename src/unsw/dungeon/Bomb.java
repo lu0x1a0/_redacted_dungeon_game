@@ -53,6 +53,7 @@ public class Bomb extends Collectible {
 			    public void run() {
 					Platform.runLater(new Runnable() {
 			            @Override public void run() {
+			            	System.out.println("waited/not");
 							notifyObservers(bomb,"explode");
 							bomb.removeFromView();
 							timer.cancel();
@@ -60,11 +61,8 @@ public class Bomb extends Collectible {
 			        });
 				}
 			};
-			timer.scheduleAtFixedRate(task, 0, 1000);
-			
-			
-			
-			notifyObservers(bomb,"explode");
+			System.out.println("dude");
+			timer.scheduleAtFixedRate(task, 1000, 1000);
 		}
 	}
 }

@@ -5,9 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.junit.jupiter.api.Test;
+
+import javafx.application.Platform;
 
 class Milestone2Test {
 
@@ -194,7 +197,7 @@ class Milestone2Test {
 		Player player = new Player(2,2, testD);
 		Boulder b1 = new Boulder(1,1,testD);
 		Boulder b2 = new Boulder(1,3,testD);
-		
+		testD.setPlayer(player);
 		Bomb bo1 = new Bomb(1,2,testD);
 		testD.addEntity(b1);
 		testD.addEntity(b2);
@@ -203,11 +206,61 @@ class Milestone2Test {
 		testD.addEntity(player);
 		player.moveLeft();
 		player.litBomb();
-		player.moveLeft();
-		player.moveLeft();
+		player.moveRight();
+		player.moveRight();
+		System.out.println("Testing blow-------------");
+		System.out.println(testD.getMap().get(new Coord(1,1)));
 		
-		assertEquals(testD.getMap().get(new Coord(2,3)).contains(b1),false);
-		assertEquals(testD.getMap().get(new Coord(2,3)).contains(b2),false);
+		Timer timer= new Timer(true);
+		TimerTask task = new TimerTask() {
+			@Override
+		    public void run() {
+				Platform.runLater(new Runnable() {
+		            @Override public void run() {
+		        		assertEquals(testD.getMap().containsKey(new Coord(1,1)),false);
+		        		assertEquals(testD.getMap().containsKey(new Coord(1,3)),false);
+		        		assertEquals(testD.getMap().containsKey(new Coord(3,3)),true);
+						timer.cancel();
+		            }
+		        });
+			}
+		};
+		System.out.println("dude");
+		timer.scheduleAtFixedRate(task, 1000, 1000);
+	}
+	@Test
+	void testbombsuicide(){
+		Dungeon testD = new Dungeon(4, 4);
+		Player player = new Player(2,2, testD);
+		Boulder b1 = new Boulder(1,1,testD);
+		Boulder b2 = new Boulder(1,3,testD);
+		testD.setPlayer(player);
+		Bomb bo1 = new Bomb(1,2,testD);
+		testD.addEntity(b1);
+		testD.addEntity(b2);
+		testD.addEntity(bo1);
+		
+		testD.addEntity(player);
+		player.moveLeft();
+		player.litBomb();
+		System.out.println("Testing blow-------------");
+		System.out.println(testD.getMap().get(new Coord(1,1)));
+		
+		Timer timer= new Timer(true);
+		TimerTask task = new TimerTask() {
+			@Override
+		    public void run() {
+				Platform.runLater(new Runnable() {
+		            @Override public void run() {
+		        		assertEquals(testD.getMap().containsKey(new Coord(1,1)),false);
+		        		assertEquals(testD.getMap().containsKey(new Coord(1,3)),false);
+						timer.cancel();
+		            }
+		        });
+			}
+		};
+		System.out.println("dude");
+		timer.scheduleAtFixedRate(task, 1000, 1000);
 	}
 	@Test
 	void testunlockDoor(){
