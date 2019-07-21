@@ -2,6 +2,8 @@ package unsw.dungeon;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 
 import org.junit.jupiter.api.Test;
@@ -79,7 +81,43 @@ class Milestone2Test {
 		assertEquals(true, goal2.isComplete());
 		assertEquals(true, andGoal.isComplete());
 	}
+	@Test
+	void testWall() throws FileNotFoundException {
+		Dungeon testD = new Dungeon(3, 3);
+		Player player = new Player(1, 2, testD);
+		Wall w1 = new Wall(0,0,testD);
+		Wall w2 = new Wall(0,1,testD);
+		Wall w3 = new Wall(0,2,testD);
+		Wall w4 = new Wall(1,0,testD);
+		Wall w5 = new Wall(2,0,testD);
+		Wall w6 = new Wall(2,1,testD);
+		Wall w7 = new Wall(2,2,testD);
+		testD.addEntity(w1);
+		testD.addEntity(w2);
+		testD.addEntity(w3);
+		testD.addEntity(w4);
+		testD.addEntity(w5);
+		testD.addEntity(w6);
+		testD.addEntity(w7);
+        player.moveLeft();
+        assertEquals(player.getX(),1);
+        player.moveLeft();
+        assertEquals(player.getX(),1);
 	
+	}
+	@Test
+	void testCollectNotGoalstuff() throws FileNotFoundException {
+//        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("testCollect.json");
+//        DungeonController controller = dungeonLoader.loadController();
+//        controller.giveDungeonMyself();
+		DungeonApplication da = new DungeonApplication();
+		try {
+			da.start(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 
 }
