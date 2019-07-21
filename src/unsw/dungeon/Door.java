@@ -39,7 +39,6 @@ public class Door extends Entity {
 				((Player) e).getKey().getId() == getId()) {
 				((Player) e).removeKey();
 				setIsopen(true);
-				System.out.println("Entered");
 			}
 		}
 	}

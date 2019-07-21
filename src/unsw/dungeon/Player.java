@@ -52,7 +52,6 @@ public class Player extends Movable{
 	}
 	@Override
     public void moveUp() {
-        
         if (getY() > 0 ) { 
 			if(dungeon.ispassable(getX(), getY() - 1) == true) {
 	    		int oldY = getY();

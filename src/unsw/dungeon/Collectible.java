@@ -41,9 +41,7 @@ public abstract class Collectible extends Entity implements Observable{
 		}
 	}
 	public void collect(Player player) {
-		System.out.println("Collect Reached");
 		player.addToInventory(this);
-		System.out.println(player.getInventory());		
 		this.removeFromView();
 		collected  = true;
 		this.postCollect();

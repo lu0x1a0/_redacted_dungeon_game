@@ -23,7 +23,9 @@ public class GoalLeafTreasureCollected extends GoalLeafNode implements Observabl
 
 	@Override
 	public void update(Observable o, Object info) {
-		// TODO Auto-generated method stub
+		if(isComplete() == true) {
+			notifyObservers(this, true);
+		}
 
 	}
 

@@ -60,9 +60,11 @@ public class Dungeon implements Observer {
     }
     public void addToView(Entity e, ImageView v) {
     	//dc.trackPosition(e,v);
-    	dc.addEntityToView(v,e.getX(),e.getY());
+    	if(v!=null) {
+    		dc.addEntityToView(v,e.getX(),e.getY());
+    	}
     }
-    public void removeFromView(ImageView v) {
+	public void removeFromView(ImageView v) {
     	dc.removeEntityFromView(v);
     }
     
@@ -84,7 +86,6 @@ public class Dungeon implements Observer {
 		}
     }
 	public LinkedList<Coord> getSurroundPassable(Coord c) {
-		//System.out.println(c);
 		LinkedList<Coord> ret = new LinkedList<Coord>();
 		if(c.getX()!=0) {
 			if( ispassable(c.getX()-1,c.getY()) ) {
@@ -129,7 +130,6 @@ public class Dungeon implements Observer {
     	ArrayList<Entity> allEntities = new ArrayList<Entity>();
     	for (ArrayList<Entity> value : map.values()) {
     	    for (Entity e: value) {
-    	    	System.out.println(e.getClass());
     	    	if(e.getClass().equals(fType)) {
     	    		allEntities.add((Entity) e);
     	    	}
@@ -144,26 +144,21 @@ public class Dungeon implements Observer {
     
 	@Override
 	public void update(Observable o, Object info) {
-		System.out.println("Observable object is: "+o);
 		if(o instanceof Movable && info instanceof Coord) {
 			Coord oldCoord = (Coord) info;
 			Entity m = (Entity) o;
-			System.out.println("Inside dungeon update class");
-			System.out.println(map.get(oldCoord));
 			map.get(oldCoord).remove(m);
 			if(map.get(oldCoord).size()==0) {
 				map.remove(oldCoord);
 			}
 			Coord newCoord = new Coord(m.getX(), m.getY());
-			System.out.printf("%d,%d:new coord outsideloop\n", m.getX(),m.getY()); 
 			if(map.containsKey(newCoord)) {
 				for(int i = 0; i<map.get(newCoord).size();i++) {
 					map.get(newCoord).get(i).react(m);
 				}
 			}
 			addEntity( (Entity) o);		
-			System.out.println("finishedUPDATE\n\n");
-		}
+			}
 		else if(o instanceof Player) {
 			update((Player) o, (Direction) info);
 		}
@@ -265,6 +260,8 @@ public class Dungeon implements Observer {
 				}
 				else if(map.get(c).get(i) instanceof Enemy) {
 					((Enemy) map.get(c).get(i)).killed();
+				}else if(map.get(c).get(i) instanceof Player) {
+					((Player) map.get(c).get(i)).removeFromView();
 				}
 			}
 		}

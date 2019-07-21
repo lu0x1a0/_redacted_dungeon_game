@@ -40,12 +40,9 @@ public class GoalCompositeComponent implements GoalComponent{
 	@Override
 	public String printGoal(String message) {
 		String addedMessage = message;
-		System.out.println(goals);
 		for(GoalComponent g: goals) {
-			System.out.println(g);
 			addedMessage += " + " + g.printGoal("");
 		}
-		System.out.println(observers);
 		return addedMessage;
 	}
 
@@ -64,7 +61,6 @@ public class GoalCompositeComponent implements GoalComponent{
 
 	@Override
 	public void notifyObservers(Observable e, Object info) {
-		System.out.println(observers);
 		for(Observer o: observers) {
 			o.update(e, info);
 		}

@@ -603,6 +603,11 @@
       "type": "wall"
     },
     {
+      "x": 5,
+      "y": 5,
+      "type": "enemy"
+    },
+    {
       "x": 17,
       "y": 15,
       "type": "wall"
