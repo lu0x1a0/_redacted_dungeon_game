@@ -25,6 +25,7 @@ public class Sword extends Collectible {
 	}
 	@Override
 	public void use(Object info) {
+		System.out.println(count);
 		if(info instanceof Player) {
 			Player p = (Player) info;
 			notifyObservers(this, new Coord(p.getX(),p.getY()));

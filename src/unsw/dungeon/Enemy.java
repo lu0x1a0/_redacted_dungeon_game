@@ -149,6 +149,8 @@ public class Enemy extends Movable {
 		removeFromView();
 		notifyObservers(this,"dead");
 		alive = false;
-		timer.cancel();
+		if (timer != null) {
+			timer.cancel();
+		}
 	}
 }

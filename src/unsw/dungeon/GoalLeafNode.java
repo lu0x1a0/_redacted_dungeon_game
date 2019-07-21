@@ -1,7 +1,12 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 public abstract class GoalLeafNode implements GoalComponent {
 
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
+
+	
 	public GoalLeafNode() {
 		// TODO Auto-generated constructor stub
 	}

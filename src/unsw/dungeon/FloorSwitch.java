@@ -1,8 +1,12 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 public class FloorSwitch extends Entity implements Observable, Observer {
 
 	private boolean isPressedDown = false;
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
+
 	
 	
 	public FloorSwitch(int x, int y, Dungeon dungeon ) {

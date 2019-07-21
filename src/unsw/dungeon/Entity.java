@@ -52,7 +52,7 @@ public abstract class Entity {
 	}
 	
     public void removeFromView() {
-    	//FIXME UNCOMMENT ON MILESTONE3
+
     	if (iv!=null) {
     		dungeon.removeFromView(iv);
     	}

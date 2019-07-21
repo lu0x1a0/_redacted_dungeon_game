@@ -21,7 +21,7 @@ public class GoalLeafFloorSwitch extends GoalLeafNode implements Observer, Obser
 	
 	@Override
 	public boolean isComplete() {
-		System.out.println("Testing if goal is complete");
+//		System.out.println("Testing if goal is complete");
 		for(FloorSwitch s: switches) {
 			if(s.isPressed() == false) {
 				return false;
@@ -41,6 +41,7 @@ public class GoalLeafFloorSwitch extends GoalLeafNode implements Observer, Obser
 	@Override
 	public String printGoal(String message) {
 		// TODO Auto-generated method stub
+		
 		return message + " floor switch bitch";
 	}
 

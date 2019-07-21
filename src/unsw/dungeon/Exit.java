@@ -1,7 +1,10 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+
 public class Exit extends Entity implements Observer, Observable {
 	private boolean playerIsTouching = false;
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
 
 	public Exit(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
@@ -11,7 +14,7 @@ public class Exit extends Entity implements Observer, Observable {
 	@Override
 	public boolean ispassable() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -32,7 +35,7 @@ public class Exit extends Entity implements Observer, Observable {
 	}
 
 
-	public boolean isPlayerIsTouching() {
+	public boolean getPlayerIsTouching() {
 		return playerIsTouching;
 	}
 
