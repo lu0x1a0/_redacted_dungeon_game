@@ -32,9 +32,7 @@ public class Door extends Entity {
 //            }
 //        });
 		this.removeFromView();
-		//this.setIv(unlock);
-		//dungeon.addEntity(this);
-		//dungeon.addToView(this,getIv());
+
 	}
 
 	@Override

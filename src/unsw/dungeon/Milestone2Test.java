@@ -337,85 +337,86 @@ class Milestone2Test {
 	}
 	@Test
 	void testunlockDoor(){
-		Dungeon testD = new Dungeon(3, 4);
-		Player player = new Player(1, 2, testD);
-		Sword s1 = new Sword(0,0,testD);
-		Sword s2 = new Sword(0,1,testD);
-		Bomb b1 = new Bomb(0,2,testD);
-		Bomb b2 = new Bomb(1,0,testD);
-		Key k1 = new Key(2,0,testD,0);
-		Key k2 = new Key(2,1,testD,1);
-		Treasure t1 = new Treasure(2,2,testD);
-		testD.addEntity(s1);
-		testD.addEntity(s2);
-		testD.addEntity(b1);
-		testD.addEntity(b2);
+		Dungeon testD = new Dungeon(4, 4);
+		Player player = new Player(2,2, testD);
+		Key k1 = new Key(2,1,testD,1);
+		Key k2 = new Key(2,3,testD,2);
+		Door d1 = new Door(1,1,testD,1);
+		Door d2 = new Door(1,3,testD,2);
+		testD.setPlayer(player);
 		testD.addEntity(k1);
 		testD.addEntity(k2);
-		testD.addEntity(t1);
+		testD.addEntity(d1);
+		testD.addEntity(d2);
 		testD.addEntity(player);
+		player.moveDown();
+		player.moveUp();
+		player.moveLeft();
+		player.moveUp();
+		assertEquals(d1.ispassable(),false);
+		player.moveUp();
+		assertEquals(player.getY(),2);
+		assertEquals(d1.ispassable(),false);
+		player.moveDown();
+		assertEquals(player.getY(),2);
+		assertEquals(d2.ispassable(),true);
+		player.moveDown();
+		assertEquals(player.getY(),3);
 	}
 	@Test
-	void testEnemyKill(){
-		Dungeon testD = new Dungeon(3, 3);
-		Player player = new Player(1, 2, testD);
-		Sword s1 = new Sword(0,0,testD);
-		Sword s2 = new Sword(0,1,testD);
-		Bomb b1 = new Bomb(0,2,testD);
-		Bomb b2 = new Bomb(1,0,testD);
-		Key k1 = new Key(2,0,testD,0);
-		Key k2 = new Key(2,1,testD,1);
-		Treasure t1 = new Treasure(2,2,testD);
-		testD.addEntity(s1);
-		testD.addEntity(s2);
-		testD.addEntity(b1);
-		testD.addEntity(b2);
-		testD.addEntity(k1);
-		testD.addEntity(k2);
-		testD.addEntity(t1);
+	void testEnemyKillPlayer(){
+		Dungeon testD = new Dungeon(4, 4);
+		Player player = new Player(2,2, testD);
+		Enemy e = new Enemy(2,3,testD);
+		testD.setPlayer(player);
 		testD.addEntity(player);
-	}
-	@Test
-	void testKillEnemy(){
-		Dungeon testD = new Dungeon(3, 3);
-		Player player = new Player(1, 2, testD);
-		Sword s1 = new Sword(0,0,testD);
-		Sword s2 = new Sword(0,1,testD);
-		Bomb b1 = new Bomb(0,2,testD);
-		Bomb b2 = new Bomb(1,0,testD);
-		Key k1 = new Key(2,0,testD,0);
-		Key k2 = new Key(2,1,testD,1);
-		Treasure t1 = new Treasure(2,2,testD);
-		testD.addEntity(s1);
-		testD.addEntity(s2);
-		testD.addEntity(b1);
-		testD.addEntity(b2);
-		testD.addEntity(k1);
-		testD.addEntity(k2);
-		testD.addEntity(t1);
-		testD.addEntity(player);
-	}
-	@Test
-	void testfloorSwitch(){
-		Dungeon testD = new Dungeon(3, 3);
-		Player player = new Player(1, 2, testD);
-		Sword s1 = new Sword(0,0,testD);
-		Sword s2 = new Sword(0,1,testD);
-		Bomb b1 = new Bomb(0,2,testD);
-		Bomb b2 = new Bomb(1,0,testD);
-		Key k1 = new Key(2,0,testD,0);
-		Key k2 = new Key(2,1,testD,1);
-		Treasure t1 = new Treasure(2,2,testD);
-		testD.addEntity(s1);
-		testD.addEntity(s2);
-		testD.addEntity(b1);
-		testD.addEntity(b2);
-		testD.addEntity(k1);
-		testD.addEntity(k2);
-		testD.addEntity(t1);
-		testD.addEntity(player);
+		testD.addEntity(e);
+		
+		com.sun.javafx.application.PlatformImpl.startup(()->{});
+		e.start();
+		Timer timer= new Timer(true);
+		TimerTask task = new TimerTask() {
+			@Override
+		    public void run() {
+				Platform.runLater(new Runnable() {
+		            @Override public void run() {
+		        		assertEquals(testD.getMap().get(new Coord(2,2)).contains(player),false);
+						timer.cancel();
+		            }
+		        });
+			}
+		};
+		timer.scheduleAtFixedRate(task, 1000, 1000);
+		com.sun.javafx.application.PlatformImpl.exit();
 	}
 	
+	@Test
+	void bombKillEnemy(){
+		Dungeon testD = new Dungeon(3, 3);
+		Player player = new Player(1, 2, testD);
+		Bomb b1 = new Bomb(0,2,testD);
+		Enemy e = new Enemy(0,1,testD);
+		testD.addEntity(b1);
+		testD.addEntity(player);
+		testD.addEntity(e);
+		player.moveLeft();
+		player.litBomb();
+		player.moveRight();
+		player.moveRight();
+		Timer timer= new Timer(true);
+		TimerTask task = new TimerTask() {
+			@Override
+		    public void run() {
+				Platform.runLater(new Runnable() {
+		            @Override public void run() {
+		        		assertEquals(testD.getMap().containsKey(new Coord(0,1)),false);
+						timer.cancel();
+		            }
+		        });
+			}
+		};
+		timer.scheduleAtFixedRate(task, 1000, 1000);
+	}
 	
 	@Test
 	void compositeANDtestReverse() {
