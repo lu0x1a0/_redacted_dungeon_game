@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.Test;
 
 class Milestone2Test {
@@ -10,10 +11,14 @@ class Milestone2Test {
 	void test() {
 		Dungeon testD = new Dungeon(10, 10);
 		Player player = new Player(0, 1, testD);
+		testD.addEntity(player);
+		testD.setPlayer(player);
+		System.out.println(testD.getPlayer());
 		FloorSwitch singleSwitch = new FloorSwitch(1,1, testD);
 		GoalLeafFloorSwitch goal1 = new GoalLeafFloorSwitch();
 		goal1.addFloorSwitch(singleSwitch);
 		testD.addGoal(goal1);
+		testD.addEntity(singleSwitch);
 		
 		assertEquals(false, singleSwitch.isPressed());
 		assertEquals(false, goal1.isComplete());
@@ -31,9 +36,13 @@ class Milestone2Test {
 		GoalLeafTreasureCollected goal1 = new GoalLeafTreasureCollected();
 		goal1.addTreasure(singleTreasure);
 		testD.addGoal(goal1);
+		testD.addEntity(player);
+		testD.setPlayer(player);
+		testD.addEntity(singleTreasure);
 		
 		assertEquals(false, singleTreasure.isCollected());
 		assertEquals(false, goal1.isComplete());
+		System.out.println("Seg fault here?");
 		player.moveRight(); //Null pointer exception here
 		System.out.println(testD.getPlayerCoord());
 		assertEquals(true, singleTreasure.isCollected());
@@ -59,6 +68,9 @@ class Milestone2Test {
 		andGoal.addChild(goal1);
 		andGoal.addChild(goal2);
 		testD.addGoal(andGoal);
+		testD.addEntity(player);
+		testD.setPlayer(player);
+		testD.addEntity(singleSwitch);
 		
 		assertEquals(false, singleTreasure.isCollected());
 		assertEquals(false, goal1.isComplete());

@@ -169,6 +169,8 @@ public class Dungeon implements Observer {
 		if(o instanceof Movable && info instanceof Coord) {
 			Coord oldCoord = (Coord) info;
 			Entity m = (Entity) o;
+			System.out.println("Inside dungeon update class");
+			System.out.println(map.get(oldCoord));
 			map.get(oldCoord).remove(m);
 			if(map.get(oldCoord).size()==0) {
 				map.remove(oldCoord);
