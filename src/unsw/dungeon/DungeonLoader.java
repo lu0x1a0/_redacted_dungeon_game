@@ -106,7 +106,9 @@ public abstract class DungeonLoader {
     		return treasureGoal;
     	}
     	else if(json.getString("goal").equals("boulders")) {
-    		ArrayList<Entity> floorSwitches = dungeon.getEntitiesByType(Treasure.class);
+    		ArrayList<Entity> floorSwitches = dungeon.getEntitiesByType(FloorSwitch.class);
+    		System.out.println("Checking for floor switches");
+    		System.out.println(floorSwitches);
     		GoalLeafFloorSwitch floorSwitchGoal = new GoalLeafFloorSwitch();
     		for (Entity f: floorSwitches) {
     			((FloorSwitch) f).registerObserver(floorSwitchGoal);
@@ -171,6 +173,7 @@ public abstract class DungeonLoader {
         	break;      	
 	    case "key":
 	        int id = json.getInt("key");
+
 	    	Key key = new Key(x,y,dungeon,id);
         	onLoad(key);
         	entity = key;
