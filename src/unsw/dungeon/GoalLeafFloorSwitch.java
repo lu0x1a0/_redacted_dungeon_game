@@ -31,7 +31,7 @@ public class GoalLeafFloorSwitch extends GoalLeafNode implements Observer, Obser
 	
 	/**
 	 * Add a single floor switch to this goal
-	 * @param fSwitch
+	 * @param fSwitch - switch that needs to be activated for goal to complete
 	 */
 	public void addFloorSwitch(FloorSwitch fSwitch) {
 		switches.add(fSwitch);

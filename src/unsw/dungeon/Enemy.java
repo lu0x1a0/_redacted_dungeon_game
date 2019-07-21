@@ -10,6 +10,12 @@ import java.util.TimerTask;
 
 import javafx.application.Platform;
 
+
+/**
+ * Enemy entity that aims to kill the player
+ * @author Brendan
+ *
+ */
 public class Enemy extends Movable {
 // being observed by the dungeon, observing the player
 	private Timer timer;
@@ -67,12 +73,15 @@ public class Enemy extends Movable {
 	}
 
 	@Override
-	public boolean ispassable() {
+	public boolean isPassable() {
 		// TODO Auto-generated method stub
 		return true;
 	}
+	/**
+	 * BFS to find shortest path to player
+	 * @return - cooridinate to move to
+	 */
 	public Coord pathSearch() {
-		// THIS_coord, coord came from		
 		HashMap<Coord,Coord> visited = new HashMap<Coord,Coord>();
 		Coord ptr =  new Coord(getX(),getY());
 		Coord ori =  new Coord(getX(),getY());
@@ -103,7 +112,10 @@ public class Enemy extends Movable {
 	}
 	
 	
-	
+	/**
+	 * returns boolean of whether or not the enemy is alive or has been killed
+	 * @return - boolean
+	 */
 	public boolean isAlive() {
 		return alive;
 	}
@@ -128,6 +140,10 @@ public class Enemy extends Movable {
 			killed();
 		}
 	}
+	
+	/**
+	 * method called to kill enemy
+	 */
 	public void killed() {
 		removeFromView();
 		notifyObservers(this,"dead");

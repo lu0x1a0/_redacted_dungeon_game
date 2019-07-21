@@ -10,15 +10,31 @@ import java.util.ArrayList;
 public abstract class Collectible extends Entity implements Observable{
 	protected boolean collected;
     private ArrayList<Observer> observers;
+    /**
+     * Constructor for abstract class
+     * @param x - x coordinate
+     * @param y - y coordinate
+     * @param dungeon - dungeon to add it to
+     */
 	public Collectible(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		observers = new ArrayList<Observer>();
 		registerObserver(dungeon);
 		collected = false;
 	}
+	
+	/**
+	 * returns whether or not the item is collected by player
+	 * @return boolean
+	 */
 	public boolean isCollected() {
 		return collected;
 	}
+	
+	/**
+	 * Action of the object, defined in object type itself
+	 * @param info - additional info in notification
+	 */
 	public abstract void use(Object info);
 	
 	@Override
@@ -36,7 +52,7 @@ public abstract class Collectible extends Entity implements Observable{
 		observers.add(o);
 	}
 	@Override
-	public boolean ispassable() {
+	public boolean isPassable() {
 		return true;
 	}
 	@Override
@@ -47,7 +63,7 @@ public abstract class Collectible extends Entity implements Observable{
 	}
 	/**
 	 * give this collectible to the player's inventory and remove from game view
-	 * @param player
+	 * @param player - player
 	 */
 	public void collect(Player player) {
 		player.addToInventory(this);

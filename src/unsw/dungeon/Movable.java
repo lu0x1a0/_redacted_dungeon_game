@@ -35,11 +35,21 @@ public abstract class Movable extends Entity implements Observable {
 		observers.add(o);
 	}
 
+	
 	/**
-	 * move in specified direction in the map
+	 * move object on map up
 	 */
 	public abstract void moveUp();
+	/**
+	 * move object on map down
+	 */
     public abstract void moveDown();
+    /**
+	 * move object on map left
+	 */
     public abstract void moveLeft();
+    /**
+	 * move object on map right
+	 */
     public abstract void moveRight();
 }

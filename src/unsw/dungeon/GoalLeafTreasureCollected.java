@@ -32,7 +32,7 @@ public class GoalLeafTreasureCollected extends GoalLeafNode implements Observabl
 	
 	/**
 	 * Add a single treasure obj to this goal
-	 * @param t
+	 * @param t - treasure that needs to be collected for goal to be comeplete
 	 */
 	public void addTreasure(Treasure t) {
 		t.registerObserver(this);

@@ -22,11 +22,16 @@ import javafx.scene.image.ImageView;
 public class Dungeon implements Observer {
 
     private int width, height;
-    //private List<Entity> entities;
     private Player player;
     private HashMap<Coord, ArrayList<Entity> > map;
 	private DungeonController dc;
 	private ArrayList<GoalComponent> goals = new ArrayList<GoalComponent>();
+	
+	/**
+	 * Constructor for dungeon
+	 * @param width - width of the map
+	 * @param height - height of the map
+	 */
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
@@ -43,14 +48,14 @@ public class Dungeon implements Observer {
 	}
     /**
      * getter for width of dungeon
-     * @return
+     * @return - int
      */
 	public int getWidth() {
         return width;
     }
     /**
      * getter for height of dungeon
-     * @return
+     * @return - int
      */
     public int getHeight() {
         return height;
@@ -58,7 +63,7 @@ public class Dungeon implements Observer {
 
     /**
      * getter for player in the dungeon
-     * @return
+     * @return - Player
      */
     public Player getPlayer() {
         return player;
@@ -66,7 +71,7 @@ public class Dungeon implements Observer {
 
     /**
      * setter for player in the dungeon
-     * @param player
+     * @param player - player to set
      */
     public void setPlayer(Player player) {
         this.player = player;
@@ -78,6 +83,11 @@ public class Dungeon implements Observer {
     public Coord getPlayerCoord() {
     	return new Coord(player.getX(), player.getY());
     }
+    /**
+     * Add an object to the view for the player
+     * @param e - entity to add to view
+     * @param v - view to add it to
+     */
     public void addToView(Entity e, ImageView v) {
     	//dc.trackPosition(e,v);
     	if(v!=null) {
@@ -86,14 +96,14 @@ public class Dungeon implements Observer {
     }
     /**
      * removes a image from the JavaFX scene
-     * @param v
+     * @param v - image view
      */
 	public void removeFromView(ImageView v) {
     	dc.removeEntityFromView(v);
     }
     /**
      * add objective to the dungeon
-     * @param goal
+     * @param goal - GoalComponenet to add
      */
     public void addGoal(GoalComponent goal) {
     	goal.registerObserver(this);
@@ -101,7 +111,7 @@ public class Dungeon implements Observer {
     }
     /**
      * add entity to the dungeon mapped to its coordinate
-     * @param entity
+     * @param entity - Entity
      */
 	public void addEntity(Entity entity) {
         //entities.add(entity);
@@ -117,8 +127,8 @@ public class Dungeon implements Observer {
     }
 	/**
 	 * get all accessible passable tile coords surrounding a specific coord
-	 * @param c: the centre of checkings
-	 * @return
+	 * @param c: the centre of all tiles being checked
+	 * @return - LinkedList of possible locations
 	 */
 	public LinkedList<Coord> getSurroundPassable(Coord c) {
 		LinkedList<Coord> ret = new LinkedList<Coord>();
@@ -155,7 +165,7 @@ public class Dungeon implements Observer {
     	if (map.containsKey(coord)) {
     		//return map.get(coord).ispassable();
     		for(Entity e : map.get(coord)) {
-    			if (!e.ispassable()) {
+    			if (!e.isPassable()) {
     				return false;
     			}
     		}
@@ -176,7 +186,7 @@ public class Dungeon implements Observer {
      * get all entities of given type in the dungeon
      * @param <T> variable type
      * @param fType: the type to be retrieved
-     * @return
+     * @return - ArrayList<Entity>
      */
     public <T extends Entity> ArrayList<Entity> getEntitiesByType(Class<T> fType){
     	ArrayList<Entity> allEntities = new ArrayList<Entity>();
@@ -243,8 +253,8 @@ public class Dungeon implements Observer {
 	}
 	/**
 	 * case where player heads to an impassable tile before it and whether it is reactive
-	 * @param p
-	 * @param d
+	 * @param p - Player
+	 * @param d - Direction
 	 */
 	private void update(Player p, Direction d) {
 		switch (d) {
@@ -288,8 +298,8 @@ public class Dungeon implements Observer {
 	/**
 	 * this is what happens when a sword is used by the player
 	 * all tiles surrounding the player are tried to hit by the sword
-	 * @param s
-	 * @param info
+	 * @param s - Sword
+	 * @param info - additional info passed in by notify
 	 */
 	private void update(Sword s, Object info) {
 		Coord pCoord = (Coord) info;
@@ -356,7 +366,7 @@ public class Dungeon implements Observer {
 	}
 	/**
 	 * attach the controller of the dungeon to the dungeon, so it can call useful methods
-	 * @param dc
+	 * @param dc - DungeonController
 	 */
 	public void setController(DungeonController dc) {
 		this.dc = dc;

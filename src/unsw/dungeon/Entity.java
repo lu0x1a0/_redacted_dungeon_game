@@ -18,8 +18,8 @@ public abstract class Entity {
 
     /**
      * Create an entity positioned in square (x,y)
-     * @param x
-     * @param y
+     * @param x - int
+     * @param y - int
      * @param dungeon the dungeon object which the entity is placed at
      */
     public Entity(int x, int y, Dungeon dungeon) {
@@ -29,53 +29,53 @@ public abstract class Entity {
     }
     /**
      * how it will react to other objects
-     * @param e
+     * @param e - Entity 
      */
     public abstract void react(Entity e);
     /**
      * get javafx property x of Entity
-     * @return
+     * @return - IntegerProperty
      */
     public IntegerProperty x() {
         return x;
     }
     /**
      * get javafx property y of Entity
-     * @return
+     * @return - IntegerProperty
      */
     public IntegerProperty y() {
         return y;
     }
     /**
      * get y coord of Entity
-     * @return
+     * @return  - IntegerProperty
      */
     public int getY() {
         return y().get();
     }
 	/**
 	 * get x coord of Entity
-	 * @return
+	 * @return - IntegerProperty
 	 */
     public int getX() {
         return x().get();
     }
     /**
      * check whether this object is a passable
-     * @return true/false
+     * @return boolean
      */
-    public abstract boolean ispassable();
+    public abstract boolean isPassable();
     
     /**
      * set the active JavaFX image of this Entity
-     * @param iv
+     * @param iv - ImageView
      */
     public void setIv(ImageView iv) {
 		this.iv = iv;
 	}
     /**
      * return the current active JavaFX image of this Entity
-     * @return
+     * @return ImageView
      */
 	public ImageView getIv() {
 		return iv;
@@ -99,7 +99,7 @@ public abstract class Entity {
 	}
 	/**
 	 * getter for Dungeon
-	 * @return
+	 * @return - Dungeon
 	 */
 	public Dungeon getDungeon() {
 		return dungeon;

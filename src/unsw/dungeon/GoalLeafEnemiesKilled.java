@@ -15,7 +15,7 @@ public class GoalLeafEnemiesKilled extends GoalLeafNode implements Observable, O
 	
 	/**
 	 * Can take in a list of enemies in constructor to initialise itself
-	 * @param enemies
+	 * @param enemies - Enemies that need to be killed for goal to complete
 	 */
 	public GoalLeafEnemiesKilled(ArrayList<Enemy> enemies) {
 		for(Enemy e: enemies) {

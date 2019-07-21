@@ -1,7 +1,18 @@
 package unsw.dungeon;
 
+/**
+ * Invinciblity potion collectible for the player
+ * @author Brendan
+ *
+ */
 public class Potion extends Collectible {
 
+	/**
+	 * Constructor for the potion class
+	 * @param x - int
+	 * @param y - int
+	 * @param dungeon - dungeon to add to
+	 */
 	public Potion(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
 		// TODO Auto-generated constructor stub
@@ -21,7 +32,7 @@ public class Potion extends Collectible {
 		);
 	}
 	
-
+	@Override
 	public void postCollect() {
 		use(dungeon.getPlayer());
 	}

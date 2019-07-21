@@ -1,15 +1,24 @@
 package unsw.dungeon;
 
+/**
+ * Treasure collectible, used for goals or points
+ * @author Brendan
+ *
+ */
 public class Treasure extends Collectible implements Observable {
 
+	/**
+	 * Constructor for Treasure collectible, takes x,y coordinates and dungeon it is being added to
+	 * @param x - int
+	 * @param y - int 
+	 * @param dungeon - Dungeon
+	 */
 	public Treasure(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
-	public boolean ispassable() {
-		// TODO Auto-generated method stub
+	public boolean isPassable() {
 		return true;
 	}
 

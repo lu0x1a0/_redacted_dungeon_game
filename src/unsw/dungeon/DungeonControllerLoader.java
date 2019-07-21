@@ -160,8 +160,8 @@ public class DungeonControllerLoader extends DungeonLoader {
      * By connecting the model with the view in this way, the model requires no
      * knowledge of the view and changes to the position of entities in the
      * model will automatically be reflected in the view.
-     * @param entity
-     * @param node
+     * @param entity - Entity to track
+     * @param node - Node
      */
     private void trackPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
@@ -185,8 +185,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.
-     * @return
-     * @throws FileNotFoundException
+     * @return DungeonController
+     * @throws FileNotFoundException - if file is not JSON available for reading
      */
     public DungeonController loadController() throws FileNotFoundException {
     	this.dungeonController = new DungeonController(load(), entities);

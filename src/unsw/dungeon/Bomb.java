@@ -21,9 +21,9 @@ public class Bomb extends Collectible {
         super(x, y, dungeon);
 	}
 	/**
-	 * setter for different iamge state of the entity
-	 * @param unlit
-	 * @param blast
+	 * setter for different image state of the entity
+	 * @param unlit - image
+	 * @param blast - image
 	 */
 	public void setImages(ImageView unlit, ImageView blast) {
 		this.unlit = unlit;
@@ -36,6 +36,10 @@ public class Bomb extends Collectible {
 		collected  = true;
 		this.postCollect();
 	}
+	
+	/**
+	 * Action to light bomb
+	 */
 	@Override
 	public void use(Object info) {
 		if (info instanceof Player) {

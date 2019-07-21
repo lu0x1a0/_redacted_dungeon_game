@@ -4,22 +4,40 @@ public class Coord {
 	private int x, y;
 	/**
 	 * this is a class used as a key for objects location in the map
-	 * @param x
-	 * @param y
+	 * @param x - int
+	 * @param y - int
 	 */
 	public Coord(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
+	/**
+	 * getter for X coordinate
+	 * @return int
+	 */
 	public int getX() {
 		return x;
 	}
+	/**
+	 * setter for X coordinate
+	 * @param - int
+	 * @return
+	 */
 	public void setX(int x) {
 		this.x = x;
 	}
+	/**
+	 * getter for Y coordinate
+	 * @return int
+	 */
 	public int getY() {
 		return y;
 	}
+	/**
+	 * setter for Y coordinate
+	 * @param - int
+	 * @return
+	 */
 	public void setY(int y) {
 		this.y = y;
 	}

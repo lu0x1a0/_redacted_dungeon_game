@@ -15,7 +15,7 @@ public class GoalLeafExit extends GoalLeafNode implements Observable, Observer {
 	/**
 	 * Initialised with the single exit object as there
 	 * can only be one exit per map, as per spec
-	 * @param theExit
+	 * @param theExit - exit that needs to be entered for goal to complete
 	 */
 	public GoalLeafExit(Exit theExit) {
 		// TODO Auto-generated constructor stub

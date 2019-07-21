@@ -10,7 +10,7 @@ public class Boulder extends Movable {
         super(x, y, dungeon);
 	}
 
-
+	
 	@Override
     public void moveUp() {
         if (getY() > 0 ) { 
@@ -21,6 +21,7 @@ public class Boulder extends Movable {
 			}
         }
     }
+	
     @Override
     public void moveDown() {
         if (getY() < dungeon.getHeight() - 1) {
@@ -31,6 +32,7 @@ public class Boulder extends Movable {
 	        }
         }
     }
+    
     @Override
     public void moveLeft() {
     	if (getX() > 0) { 
@@ -41,6 +43,7 @@ public class Boulder extends Movable {
 			}
     	}
     }
+    
     @Override
     public void moveRight() {
         if (getX() < dungeon.getWidth() - 1) { 
@@ -52,9 +55,9 @@ public class Boulder extends Movable {
         }
         
     }
-
+    
 	@Override
-	public boolean ispassable() {
+	public boolean isPassable() {
 		return false;
 	}
 

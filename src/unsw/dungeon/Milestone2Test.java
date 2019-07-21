@@ -10,8 +10,16 @@ import org.junit.jupiter.api.Test;
 
 import javafx.application.Platform;
 
+/**
+ * Test cases for application
+ * @author Brendan
+ *
+ */
 class Milestone2Test {
 
+	/**
+	 * Tests if goal is completed after floor switch is pressed
+	 */
 	@Test
 	void floorSwitchGoalTest() {
 		Dungeon testD = new Dungeon(10, 10);
@@ -34,6 +42,9 @@ class Milestone2Test {
 		assertEquals(true, goal1.isComplete());
 	}
 	
+	/**
+	 * Checks whether goal is completed after treasure is collected
+	 */
 	@Test
 	void treasureCollectGoalTest() {
 		Dungeon testD = new Dungeon(10, 10);
@@ -55,6 +66,9 @@ class Milestone2Test {
 		assertEquals(true, goal1.isComplete());
 	}
 	
+	/**
+	 * tests whether goal is completed when player reaches exit
+	 */
 	@Test
 	void exitGoalTest() {
 		Dungeon testD = new Dungeon(10, 10);
@@ -76,6 +90,9 @@ class Milestone2Test {
 		assertEquals(true, goal1.isComplete());
 	}
 	
+	/**
+	 * tests whether goal is completed when player kills all enemies
+	 */
 	@Test
 	void monsterGoalTest() {
 		Dungeon testD = new Dungeon(10, 10);
@@ -112,6 +129,9 @@ class Milestone2Test {
 		
 	}
 	
+	/**
+	 * Tests a combination of goals with and AND composite constructor
+	 */
 	@Test
 	void compositeANDtest() {
 		Dungeon testD = new Dungeon(10, 10);
@@ -155,7 +175,9 @@ class Milestone2Test {
 		assertEquals(true, andGoal.isComplete());
 	}
 	
-
+	/**
+	 * Tests a combination of goals with and OR composite constructor
+	 */
 	@Test
 	void compositeORtest() {
 		Dungeon testD = new Dungeon(10, 10);
@@ -197,6 +219,10 @@ class Milestone2Test {
 		assertEquals(true, orGoal.isComplete());
 	}
 
+	/**
+	 * Tests a combination where an AND goal is completed but then the floor switched
+	 * is deactivated to see if the goal is then changed to incomplete
+	 */
 	@Test
 	void compositeANDtestReverse() {
 		Dungeon testD = new Dungeon(10, 10);
@@ -251,7 +277,9 @@ class Milestone2Test {
 	}
 	
 	
-	
+	/**
+	 * Tests whether player can collect sword
+	 */
 	@Test
 	void collectSword() {
 		Dungeon testD = new Dungeon(3, 3);
@@ -270,6 +298,9 @@ class Milestone2Test {
 		
 	}
 	
+	/**
+	 * Tests whether player can collected multiple swords
+	 */
 	@Test
 	void multipleCollectSword() {
 		Dungeon testD = new Dungeon(3, 3);
@@ -298,6 +329,9 @@ class Milestone2Test {
 		
 	}
 	
+	/**
+	 * Tests whether player can collect key
+	 */
 	@Test
 	void collectKey() {
 		Dungeon testD = new Dungeon(3, 3);
@@ -316,7 +350,9 @@ class Milestone2Test {
 		
 	}
 	
-	
+	/**
+	 * tests whether player can collect multiple keys
+	 */
 	@Test
 	void multipleCollectKey() {
 		Dungeon testD = new Dungeon(3, 3);
@@ -347,6 +383,9 @@ class Milestone2Test {
 		
 	}
 
+	/**
+	 * tests whether player can collect bomb
+	 */
 	@Test
 	void collectBomb() {
 		Dungeon testD = new Dungeon(3, 3);
@@ -366,7 +405,9 @@ class Milestone2Test {
 		
 	}
 	
-	
+	/**
+	 * tests whether player can collect multiple bombs
+	 */
 	@Test
 	void multipleCollectBomb() {
 		Dungeon testD = new Dungeon(3, 3);
@@ -397,6 +438,9 @@ class Milestone2Test {
 		
 	}
 	
+	/**
+	 * tests whether player can collect treasure
+	 */
 	@Test
 	void collectTreasure() {
 		Dungeon testD = new Dungeon(3, 3);
@@ -415,7 +459,9 @@ class Milestone2Test {
 		
 	}
 	
-	
+	/**
+	 * tests whether player can collect multiple treasure collectibles
+	 */
 	@Test
 	void multipleCollectTreasure() {
 		Dungeon testD = new Dungeon(3, 3);
@@ -445,6 +491,9 @@ class Milestone2Test {
 		
 	}
 	
+	/**
+	 * tests moving of boulder by player
+	 */
 	@Test
 	void testBoulder(){
 		Dungeon testD = new Dungeon(4, 4);
@@ -474,6 +523,9 @@ class Milestone2Test {
 		assertEquals(player.getY(),3);
 	}
 	
+	/**
+	 * tests player cannot move through walls
+	 */
 	@Test
 	void testWall(){
 		Dungeon testD = new Dungeon(3, 3);
@@ -502,6 +554,9 @@ class Milestone2Test {
         
 	}
 	
+	/**
+	 * tests whether bomb blows up boulders
+	 */
 	@Test
 	void testBombBlow(){
 		Dungeon testD = new Dungeon(4, 4);
@@ -537,8 +592,11 @@ class Milestone2Test {
 		timer.scheduleAtFixedRate(task, 1000, 1000);
 	}
 	
+	/**
+	 * tests whether bomb kills player
+	 */
 	@Test
-	void testbombsuicide(){
+	void testBombSuicide(){
 		Dungeon testD = new Dungeon(4, 4);
 		Player player = new Player(2,2, testD);
 		Boulder b1 = new Boulder(1,1,testD);
@@ -570,8 +628,11 @@ class Milestone2Test {
 		timer.scheduleAtFixedRate(task, 1000, 1000);
 	}
 	
+	/**
+	 * Checks whether player can unlock door with key
+	 */
 	@Test
-	void testunlockDoor(){
+	void testUnlockDoor(){
 		Dungeon testD = new Dungeon(4, 4);
 		Player player = new Player(2,2, testD);
 		Key k1 = new Key(2,1,testD,1);
@@ -588,17 +649,20 @@ class Milestone2Test {
 		player.moveUp();
 		player.moveLeft();
 		player.moveUp();
-		assertEquals(d1.ispassable(),false);
+		assertEquals(d1.isPassable(),false);
 		player.moveUp();
 		assertEquals(player.getY(),2);
-		assertEquals(d1.ispassable(),false);
+		assertEquals(d1.isPassable(),false);
 		player.moveDown();
 		assertEquals(player.getY(),2);
-		assertEquals(d2.ispassable(),true);
+		assertEquals(d2.isPassable(),true);
 		player.moveDown();
 		assertEquals(player.getY(),3);
 	}
 
+	/**
+	 * Tests whether enemy kills player
+	 */
 	@Test
 	void testEnemyKillPlayer(){
 		Dungeon testD = new Dungeon(4, 4);
@@ -626,6 +690,9 @@ class Milestone2Test {
 		com.sun.javafx.application.PlatformImpl.exit();
 	}
 	
+	/**
+	 * Tests whether bomb kills enemy
+	 */
 	@Test
 	void bombKillEnemy(){
 		Dungeon testD = new Dungeon(3, 3);
@@ -654,7 +721,9 @@ class Milestone2Test {
 		timer.scheduleAtFixedRate(task, 1000, 1000);
 	}
 
-	
+	/**
+	 * tests whether player dies with invincibility  
+	 */
 	@Test
 	void invincibilityTest() {
 		Dungeon testD = new Dungeon(10, 10);
@@ -682,6 +751,9 @@ class Milestone2Test {
 		
 	}
 	
+	/**
+	 * tests whether sword kills enemy
+	 */
 	@Test
 	void swordKillEnemy() {
 		Dungeon testD = new Dungeon(10, 10);
@@ -709,6 +781,9 @@ class Milestone2Test {
 		
 	}
 	
+	/**
+	 * tests whether sword expiries after 5 hits
+	 */
 	@Test
 	void swordExpirationTest() {
 		Dungeon testD = new Dungeon(10, 10);

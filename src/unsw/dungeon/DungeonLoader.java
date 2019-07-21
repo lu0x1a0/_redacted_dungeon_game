@@ -27,7 +27,7 @@ public abstract class DungeonLoader {
 
     /**
      * Parses the JSON to create a dungeon.
-     * @return
+     * @return - Dungeon
      */
     public Dungeon load() {
         int width = json.getInt("width");

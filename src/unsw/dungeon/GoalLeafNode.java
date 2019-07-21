@@ -2,11 +2,18 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+/**
+ * Abstract class which others inherit from
+ * @author Brendan
+ *
+ */
 public abstract class GoalLeafNode implements GoalComponent {
 
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 
-	
+	/**
+	 * Initialisation of abstract class, never called
+	 */
 	public GoalLeafNode() {
 		// TODO Auto-generated constructor stub
 	}

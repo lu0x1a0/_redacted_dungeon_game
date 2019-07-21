@@ -2,17 +2,23 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+/**
+ * Exit entity where a player goes to after completing other goals
+ * @author Brendan
+ *
+ */
 public class Exit extends Entity implements Observer, Observable {
 	private boolean playerIsTouching = false;
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 
+	
 	public Exit(int x, int y, Dungeon dungeon ) {
         super(x, y, dungeon);
 	}
 
 
 	@Override
-	public boolean ispassable() {
+	public boolean isPassable() {
 		// TODO Auto-generated method stub
 		return true;
 	}
@@ -29,13 +35,20 @@ public class Exit extends Entity implements Observer, Observable {
 	
 	
 	
-
+	/**
+	 * changes state to determine player is touching the exit,
+	 * also notifies observers of such
+	 * @param playerIsTouching - player
+	 */
 	public void setPlayerIsTouching(boolean playerIsTouching) {
 		notifyObservers(this, playerIsTouching);
 		this.playerIsTouching = playerIsTouching;
 	}
 
-
+	/**
+	 * returns boolean of whether or not the player is touching the exit
+	 * @return - boolean
+	 */
 	public boolean getPlayerIsTouching() {
 		return playerIsTouching;
 	}
