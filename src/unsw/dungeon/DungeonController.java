@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -64,10 +65,16 @@ public class DungeonController {
 
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
-
+        
+        
+        Inventory playInv = new Inventory(squares, dungeon);
+        player.setPlayerInventory(playInv);
     }
 
-    @FXML
+    public GridPane getSquares() {
+		return squares;
+	}
+	@FXML
     public void handleKeyPress(KeyEvent event) {
     	switch (event.getCode()) {
         case UP:
@@ -113,5 +120,6 @@ public class DungeonController {
     public void start() {
     	dungeon.startEnemies();
     }
+    
 }
 

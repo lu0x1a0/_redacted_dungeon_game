@@ -10,8 +10,13 @@ import java.util.ArrayList;
  */
 public class Player extends Movable{
 	//static int count = 0;
-    private ArrayList<Collectible> inventory;
-    /**
+    ArrayList<Collectible> inventory;
+    Inventory playerInventory = null;
+
+
+
+
+	/**
      * Create a player positioned in square (x,y)
      * @param x - int
      * @param y - int
@@ -19,33 +24,23 @@ public class Player extends Movable{
      */
     public Player(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-        this.inventory = new ArrayList<Collectible>();
     }
     
-    /**
-     * returns whether or not the player is holding a sword
-     * @return - boolean
-     */
-    public boolean hasSword() {
-    	for( Collectible e: inventory) {
-    		if(e instanceof Sword) {
-    			return true;
-    		}
-    	}
-    	return false;
+    
+    public void setPlayerInventory(Inventory playerInvenvtory) {
+    	this.playerInventory = playerInvenvtory;
     }
+    
+    public boolean hasSword() {
+    	return playerInventory.hasSword();
+    } 
     
     /**
      * returns the key the player is holding
      * @return Key
      */
     public Key getKey() {
-    	for( Collectible e: inventory) {
-    		if(e instanceof Key) {
-    			return (Key) e;    		
-			}
-    	}
-    	return null;
+    	return playerInventory.getKey();
     }
     
     /**
@@ -58,24 +53,20 @@ public class Player extends Movable{
     }
     
     /**
-     * remove key from player's inventory
-     */
-    public void removeKey() {
-    	for(Collectible c:inventory) {
-    		if (c instanceof Key) {
-    			inventory.remove(c);
-    			break;
-    		}
-    	}
-    }
+	 * remove key from player's inventory
+	 * 
+	 */
+	public void removeKey() {
+		playerInventory.removeKey();
+	}
     
     /**
      * returns the inventory held by the player
      * @return ArrayList<Collectible> - Inventory of player
      */
-    public ArrayList<Collectible> getInventory() {
-		return inventory;
-	}
+//    public ArrayList<Collectible> getInventory() {
+//		return inventory;
+//	}
 	@Override
     public void moveUp() {
         if (getY() > 0 ) { 
@@ -133,73 +124,49 @@ public class Player extends Movable{
      * use sword to kill enemy
      */
     public void waveSword() {
-    	for(Collectible c:inventory) {
-    		if (c instanceof Sword) {
-    			c.use(this);
-    			break;
-    		}
-    	}
+    	playerInventory.waveSword();
     }
     
     /**
-     * remove sword when it has been used 5 times
-     */
-    public void removeSword() {
-    	for(Collectible c:inventory) {
-    		if (c instanceof Sword) {
-    			inventory.remove(c);
-    			break;
-    		}
-    	}
-    }
+	 * remove sword when it has been used 5 times
+	 * 
+	 */
+	public void removeSword() {
+		playerInventory.removeSword();
+	}
     
     /**
-     * count number bombs held by the player
-     * @return - int
-     */
-    public int countBombs() {
-    	int count = 0;
-    	for(Collectible c:inventory) {
-    		if (c instanceof Bomb) {
-    			count++;
-    		}
-    	}
-    	return count;
-    }
+	 * count number bombs held by the player
+	 * @return - int
+	 * 
+	 */
+	public int countBombs() {
+		return playerInventory.countBombs();
+	}
     
     /**
      * light bomb in inventory and place it on map
      */
     public void litBomb() {
-    	for(Collectible c:inventory) {
-    		if (c instanceof Bomb) {
-    			inventory.remove(c);
-    			c.use(this);
-    			break;
-    		}
-    	}
+    	Bomb bomb = playerInventory.getBomb();
+    	if (bomb != null) bomb.use(this);
     }
     
     /**
-     * returns whether or not the player has a potion
-     * @return - boolean
-     */
-    public boolean hasPotion() {
-    	for(Collectible c:inventory) {
-    		if (c instanceof Potion) {
-    			return true;
-    		}
-    	}
-    	return false;
-    }
+	 * returns whether or not the player has a potion
+	 * @return - boolean
+	 */
+	public boolean hasPotion() {
+		return playerInventory.hasPotion();
+	}
     
     /**
-     * after the potion effect has expired
-     * @param p - potion to deactivate
-     */
-    public void potionEffectOff(Potion p) {
-    	inventory.remove(p);
-    }
+	 * after the potion effect has expired
+	 * @param p - potion to deactivate
+	 */
+	public void potionEffectOff(Potion p) {
+		playerInventory.potionEffectOff(p);
+	}
     @Override
     public void react(Entity e) {
     	if(e instanceof Enemy) {
@@ -220,7 +187,7 @@ public class Player extends Movable{
      * @param c - collectible to add to inventory
      */
     public void addToInventory(Collectible c) {
-    	inventory.add(c);
+    	playerInventory.addToInventory(c);
     }
 
 	@Override

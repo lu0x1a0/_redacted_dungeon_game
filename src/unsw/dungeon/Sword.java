@@ -54,7 +54,7 @@ public class Sword extends Collectible {
 	public void react(Entity e) {
 		if (e instanceof Player) {
 			Player p = (Player) e;
-			if (!p.hasSword()) {
+			if (!p.playerInventory.hasSword()) {
 				collect((Player) e);
 			}
 		}
