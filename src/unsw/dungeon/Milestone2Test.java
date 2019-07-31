@@ -112,19 +112,19 @@ class Milestone2Test {
 		testD.addGoal(goal1);
 		
 		assertEquals(false, goal1.isComplete());
-		assertEquals(false, player.playerInventory.hasSword(player));
+		assertEquals(false, player.hasSword());
 		assertEquals(true, monster.isAlive());
 		
 		player.moveRight();
 		
 		assertEquals(false, goal1.isComplete());
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		assertEquals(true, monster.isAlive());
 		
 		player.waveSword();
 		
 		assertEquals(true, goal1.isComplete());
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		assertEquals(false, monster.isAlive());
 		
 	}
@@ -293,7 +293,7 @@ class Milestone2Test {
 		player.moveRight();
         assertEquals(player.getX(),1);
         
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		assertEquals(true, s1.isCollected());
 		
 	}
@@ -312,18 +312,18 @@ class Milestone2Test {
 		testD.addEntity(s2);
 		testD.addEntity(player);
 		testD.setPlayer(player);
-		assertEquals(false, player.playerInventory.hasSword(player));
+		assertEquals(false, player.hasSword());
 		
 		player.moveRight();
 		
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		assertEquals(true, s1.isCollected());
 		assertEquals(false, s2.isCollected());
 		
 		
 		player.moveRight();
 		
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		assertEquals(true, s1.isCollected());
 		assertEquals(false, s2.isCollected());
 		
@@ -341,7 +341,7 @@ class Milestone2Test {
 		testD.addEntity(k1);
 		testD.addEntity(player);
 		testD.setPlayer(player);
-		assertEquals(false, player.playerInventory.hasSword(player));
+		assertEquals(false, player.hasSword());
 		
 		player.moveRight();
 		
@@ -767,16 +767,16 @@ class Milestone2Test {
 		testD.addEntity(player);
 		testD.setPlayer(player);
 		
-		assertEquals(false,player.playerInventory.hasSword(player));
+		assertEquals(false,player.hasSword());
 		
 		player.moveRight();
 
-		assertEquals(true,player.playerInventory.hasSword(player));
+		assertEquals(true,player.hasSword());
 		assertEquals(true, monster.isAlive());
 		
 		player.waveSword();
 		
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		assertEquals(false, monster.isAlive());
 		
 	}
@@ -797,47 +797,47 @@ class Milestone2Test {
 		testD.addEntity(player);
 		testD.setPlayer(player);
 		
-		assertEquals(false,player.playerInventory.hasSword(player));
+		assertEquals(false,player.hasSword());
 		
 		player.moveRight();
 
-		assertEquals(true,player.playerInventory.hasSword(player));
+		assertEquals(true,player.hasSword());
 		assertEquals(true, monster.isAlive());
 		
 		player.waveSword();
 		
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		assertEquals(false, monster.isAlive());
 		
 		Enemy monster2 = new Enemy(2,1, testD);
 		testD.addEntity(monster2);
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		player.waveSword();
 
 		assertEquals(false, monster2.isAlive());
 		
 		Enemy monster3 = new Enemy(2,1, testD);
 		testD.addEntity(monster3);
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		player.waveSword();
 
 		assertEquals(false, monster3.isAlive());
 		
 		Enemy monster4 = new Enemy(2,1, testD);
 		testD.addEntity(monster4);
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		player.waveSword();
 
 		assertEquals(false, monster4.isAlive());
 		
 		Enemy monster5 = new Enemy(2,1, testD);
 		testD.addEntity(monster5);
-		assertEquals(true, player.playerInventory.hasSword(player));
+		assertEquals(true, player.hasSword());
 		player.waveSword();
 
 		assertEquals(false, monster5.isAlive());
 		
-		assertEquals(false, player.playerInventory.hasSword(player));
+		assertEquals(false, player.hasSword());
 		
 	}
 	

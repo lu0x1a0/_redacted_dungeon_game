@@ -371,9 +371,6 @@ public class Dungeon implements Observer {
 	public void setController(DungeonController dc) {
 		this.dc = dc;
 	}
-	public DungeonController getDc() {
-		return dc;
-	}
 	/**
 	 * tells the enemy in the dungeon to start moving and hunt the player
 	 */

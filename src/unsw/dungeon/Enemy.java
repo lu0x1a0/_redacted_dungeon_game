@@ -39,8 +39,6 @@ public class Enemy extends Movable {
 				e.y().set(c.getY());
 				Platform.runLater(new Runnable() {
 		            @Override public void run() {
-		            	System.out.println(e);
-		            	System.out.println(old);
 						notifyObservers(e,old);
 		            }
 		        });
