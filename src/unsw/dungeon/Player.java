@@ -24,10 +24,20 @@ public class Player extends Movable{
      */
     public Player(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
+        playerInventory = new Inventory(this);
     }
     
     
-    public void setPlayerInventory(Inventory playerInvenvtory) {
+    
+    
+    public Inventory getPlayerInventory() {
+		return playerInventory;
+	}
+
+
+
+
+	public void setPlayerInventory(Inventory playerInvenvtory) {
     	this.playerInventory = playerInvenvtory;
     }
     

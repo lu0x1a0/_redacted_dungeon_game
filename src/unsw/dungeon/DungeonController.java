@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
@@ -24,14 +25,16 @@ public class DungeonController {
     public GridPane squares;
 
     private List<ImageView> initialEntities;
+    private HashMap<String, Node> UIitems;
 
     private Player player;
 
     private Dungeon dungeon;
 
-    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
+    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, HashMap<String, Node> UIitems) {
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
+        this.UIitems = UIitems;
         this.initialEntities = new ArrayList<>(initialEntities);
     }
     public Dungeon getDungeon() {
@@ -44,6 +47,9 @@ public class DungeonController {
     	//initialEntities.remove(v);
     	squares.getChildren().remove(v);
     }
+    public void removeNodeFromView(Node v) {
+    	squares.getChildren().remove(v);
+    }
     public void addEntityToView(ImageView v, int x, int y) {
     	//squares.getChildren().add(v, 3, 4);
     	squares.add(v, x, y);
@@ -52,6 +58,12 @@ public class DungeonController {
     	removeEntityFromView(oldv);
     	addEntityToView(e.getIv(),e.getX(),e.getY());
     }
+    
+    public void addNodeToView(Node v, int x, int y) {
+    	//squares.getChildren().add(v, 3, 4);
+    	squares.add(v, x, y);
+    }
+    
     @FXML
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");
@@ -66,9 +78,9 @@ public class DungeonController {
         for (ImageView entity : initialEntities)
             squares.getChildren().add(entity);
         
+        for (Node item : UIitems.values())
+            squares.getChildren().add(item);
         
-        Inventory playInv = new Inventory(squares, dungeon);
-        player.setPlayerInventory(playInv);
     }
 
     public GridPane getSquares() {
@@ -116,6 +128,7 @@ public class DungeonController {
                 GridPane.setRowIndex(node, newValue.intValue());
             }
         });
+        
     }
     public void start() {
     	dungeon.startEnemies();

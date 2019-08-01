@@ -41,6 +41,8 @@ public abstract class DungeonLoader {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         
+        //Function here to initialise inventory
+        
         JSONObject jsonGoals = json.getJSONObject("goal-condition");
                 
         if(jsonGoals.getString("goal").equals("AND")) {
@@ -72,6 +74,10 @@ public abstract class DungeonLoader {
         return dungeon;
     }
 
+    private void intialiseInventory() {
+    	
+    }
+    
     private GoalLeafNode loadGoal(Dungeon dungeon, JSONObject json) {
     	if(json.getString("goal").equals("enemies")) {
     		ArrayList<Entity> enemies = dungeon.getEntitiesByType(Enemy.class);

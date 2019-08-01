@@ -374,6 +374,11 @@ public class Dungeon implements Observer {
 	public DungeonController getDc() {
 		return dc;
 	}
+	
+	public Inventory getInventory() {
+		return this.getPlayer().getPlayerInventory();
+	}
+	
 	/**
 	 * tells the enemy in the dungeon to start moving and hunt the player
 	 */

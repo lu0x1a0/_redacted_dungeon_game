@@ -3,6 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,56 +15,56 @@ import javafx.util.converter.NumberStringConverter;
 public class Inventory {
 
 	private ArrayList<Collectible> inventory;
-	private GridPane squares;
-	private Dungeon dungeon;
-	private Image key_missing = new Image("/key_inventory_missing.png");
-	private Image key_present = new Image("/key.png");
-	private Image sword_missing = new Image("/greatsword_1_inventory_missing.png");
-	private Image sword_present = new Image("/greatsword_1_new.png");
-	private Image bomb_missing = new Image("/bomb_unlit_missing.png");
-	private Image bomb_present = new Image("/bomb_unlit.png");
-	private ImageView key_missingIV = new ImageView(key_missing);
-	private ImageView key_presentIV = new ImageView(key_present);
-	private ImageView sword_missingIV = new ImageView(sword_missing);
-	private ImageView sword_presentIV = new ImageView(sword_present);
-	private ImageView bomb_missingIV = new ImageView(bomb_missing);
-	private ImageView bomb_presentIV = new ImageView(bomb_present);
-	private SimpleIntegerProperty bombs = new SimpleIntegerProperty();
-	private SimpleIntegerProperty swordHealth = new SimpleIntegerProperty();
+	private Player player;
 	
-	public Inventory(GridPane squares, Dungeon dungeon) {
+	
+	private SimpleIntegerProperty bombsCount = new SimpleIntegerProperty();
+	private SimpleIntegerProperty swordHealth = new SimpleIntegerProperty();
+	private SimpleBooleanProperty hasSword = new SimpleBooleanProperty();
+	private SimpleBooleanProperty hasBomb = new SimpleBooleanProperty();
+	private SimpleBooleanProperty hasKey = new SimpleBooleanProperty();
+	private SimpleBooleanProperty hasPotion = new SimpleBooleanProperty();
+
+	
+	
+	
+	
+	
+
+
+	public Inventory(Player player) {
 		// TODO Auto-generated constructor stub
 		this.inventory = new ArrayList<Collectible>();
-		this.squares = squares;
-		this.dungeon = dungeon;
-		squares.add(key_missingIV, 0, dungeon.getHeight());
-		squares.add(sword_missingIV, 1, dungeon.getHeight());
-		Label swordCountUI = new Label();
-		squares.add(swordCountUI,2, dungeon.getHeight());
-		swordCountUI.textProperty().bind(swordHealth.asString());
-		squares.add(bomb_missingIV, 3, dungeon.getHeight());
-		Label bombCountUI = new Label();
-		squares.add(bombCountUI,4, dungeon.getHeight());
-		bombCountUI.textProperty().bind(bombs.asString());
+		this.player = player;
+		
 	}
 
+	public SimpleIntegerProperty getBombsCount() {
+		return bombsCount;
+	}
+
+
+	public SimpleIntegerProperty getSwordHealth() {
+		return swordHealth;
+	}
+	
 	
 	public void addToInventory(Collectible c) {
     	inventory.add(c);
     	if(c instanceof Sword) {
-    		System.out.println("Collected a sword!");
-    		squares.getChildren().remove(sword_missingIV);
-    		squares.add(sword_presentIV, 1, dungeon.getHeight());
+			//TODO need to add a method to display the sword
+    		hasSword.setValue(true);
     		swordHealth.setValue(5);
     	}
     	else if(c instanceof Key) {
-    		squares.getChildren().remove(key_missingIV);
-    		squares.add(key_presentIV, 0, dungeon.getHeight());
+    		//TODO need to add a method to display the key (possibly rely on binding)
+    		hasKey.setValue(true);
+
     	}
     	else if(c instanceof Bomb) {
-    		squares.getChildren().remove(bomb_missingIV);
-    		squares.add(bomb_presentIV, 3, dungeon.getHeight());
-    		bombs.setValue(bombs.getValue()+1);
+    		//TODO need to add a method to display the key (possibly rely on binding)
+    		hasBomb.setValue(true);
+    		bombsCount.setValue(bombsCount.getValue()+1);
     	}
     }
 
@@ -96,7 +97,7 @@ public class Inventory {
     public void waveSword() {
     	for( Collectible e: inventory) {
     		if(e instanceof Sword) {
-    			((Sword) e).use(dungeon.getPlayer());
+    			((Sword) e).use(player);
     			swordHealth.set(((Sword) e).getCount());
     			return;    		
 			}
@@ -110,12 +111,7 @@ public class Inventory {
 	 * @return - boolean
 	 */
 	public boolean hasSword() {
-		for( Collectible e: inventory) {
-			if(e instanceof Sword) {
-				return true;
-			}
-		}
-		return false;
+		return hasSword.getValue();
 	}
 
 
@@ -127,8 +123,8 @@ public class Inventory {
 		for(Collectible c: inventory) {
 			if (c instanceof Key) {
 				inventory.remove(c);
-				squares.getChildren().remove(key_presentIV);
-	    		squares.add(key_missingIV, 1, dungeon.getHeight());
+				hasKey.setValue(false);
+				//TODO need to add mechanism to change the display
 				break;
 			}
 		}
@@ -143,8 +139,8 @@ public class Inventory {
 		for(Collectible c:inventory) {
 			if (c instanceof Sword) {
 				inventory.remove(c);
-				squares.getChildren().remove(sword_presentIV);
-	    		squares.add(sword_missingIV, 1, dungeon.getHeight());
+				hasSword.setValue(false);
+				//TODO need to add a method to change the display
 				break;
 			}
 		}
@@ -157,7 +153,7 @@ public class Inventory {
 	 * @return - int
 	 */
 	public int countBombs() {
-		return bombs.getValue();
+		return bombsCount.getValue();
 	}
 
 	/**
@@ -168,13 +164,13 @@ public class Inventory {
 	
 	public Bomb getBomb() {
 		if(countBombs() == 1) { //Set to 1 as you're about to use a bomb so it will decrement and end on 0
-			squares.getChildren().remove(bomb_presentIV);
-    		squares.add(bomb_missingIV, 2, dungeon.getHeight());
+			//Need to add a mechanism to hid the bomb image
+			hasBomb.setValue(false);
 		}
 		for(Collectible c:inventory) {
 			if (c instanceof Bomb) {
 				inventory.remove(c);
-				bombs.setValue(bombs.getValue()-1);
+				bombsCount.setValue(bombsCount.getValue()-1);
 				return (Bomb) c;
 			}
 		}
@@ -188,12 +184,7 @@ public class Inventory {
 	 * @return - boolean
 	 */
 	public boolean hasPotion() {
-		for(Collectible c:inventory) {
-			if (c instanceof Potion) {
-				return true;
-			}
-		}
-		return false;
+		return hasPotion.getValue();
 	}
 
 
@@ -204,7 +195,26 @@ public class Inventory {
 	 */
 	public void potionEffectOff(Potion p) {
 		inventory.remove(p);
+		hasPotion.setValue(false);
 	}
+
+	public SimpleBooleanProperty getHasSword() {
+		return hasSword;
+	}
+
+	public SimpleBooleanProperty getHasBomb() {
+		return hasBomb;
+	}
+
+	public SimpleBooleanProperty getHasKey() {
+		return hasKey;
+	}
+
+	public SimpleBooleanProperty getHasPotion() {
+		return hasPotion;
+	}
+	
+	
 }
 
 
