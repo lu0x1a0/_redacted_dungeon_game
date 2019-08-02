@@ -19,12 +19,20 @@ import javafx.application.Platform;
 public class Enemy extends Movable {
 // being observed by the dungeon, observing the player
 	private Timer timer;
-	//static int count = 0;
+	private long speed;
 	Dungeon dungeon;
 	boolean alive = true;
-	public Enemy(int x, int y, Dungeon dungeon) {
+	
+	private EnemyPath evade;
+	private EnemyPath pursuit;
+	private EnemyPath activeMethod;
+	public Enemy(int x, int y, Dungeon dungeon, long speed) {
 		super(x, y, dungeon);
 		this.dungeon = dungeon;
+		evade = new EnemyEvade(dungeon);
+		pursuit = new EnemyPursuit(dungeon);
+		activeMethod = pursuit;
+		this.speed = speed;
 		//start();
 	}
 	public void start() {
@@ -35,6 +43,7 @@ public class Enemy extends Movable {
 		    public void run() {
 		    	Coord c = e.pathSearch();
 				Coord old = new Coord(e.getX(),e.getY());
+				//sets new coord
 				e.x().set(c.getX());
 				e.y().set(c.getY());
 				Platform.runLater(new Runnable() {
@@ -44,8 +53,7 @@ public class Enemy extends Movable {
 		        });
 			}
 		};
-		timer.scheduleAtFixedRate(task, 0, 1000);
-		
+		timer.scheduleAtFixedRate(task, 0, speed);
 	}
 
 	@Override
@@ -82,33 +90,7 @@ public class Enemy extends Movable {
 	 * @return - cooridinate to move to
 	 */
 	public Coord pathSearch() {
-		HashMap<Coord,Coord> visited = new HashMap<Coord,Coord>();
-		Coord ptr =  new Coord(getX(),getY());
-		Coord ori =  new Coord(getX(),getY());
-		Coord player = dungeon.getPlayerCoord();
-		visited.put(ori, ori);
-		Queue<Coord> queue = new LinkedList<Coord>();
-		while ( ptr!=null && !ptr.equals(player)) {
-			LinkedList<Coord> potential = dungeon.getSurroundPassable(ptr);
-			//queue.addAll(potential);
-			for(Coord c:potential) {
-				if(!visited.containsKey(c)) {
-					visited.put(c, ptr);
-					queue.add(c);
-				}
-			}
-			ptr = queue.poll();
-		}
-		if (ptr.equals(player)) {
-			Coord key = ptr;
-			while(!visited.get(key).equals(ori)) {
-				key = visited.get(key);
-			}
-			return key;
-
-		}else {
-			return null;
-		}
+		return activeMethod.pathSearch(getX(), getY());
 	}
 	
 	
@@ -150,6 +132,13 @@ public class Enemy extends Movable {
 		alive = false;
 		if (timer != null) {
 			timer.cancel();
+		}
+	}
+	public void setPathMethod(boolean on) {
+		if(on) {
+			activeMethod = evade;
+		}else {
+			activeMethod = pursuit;
 		}
 	}
 }

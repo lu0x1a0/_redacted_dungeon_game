@@ -234,6 +234,9 @@ public class Dungeon implements Observer {
 		else if(o instanceof Bomb){
 			update((Bomb) o,info);
 		}
+		else if(o instanceof Potion) {
+			update((Potion) o, info);
+		}
 		else if(o instanceof Boulder) {
 			Coord oldCoord = (Coord) info;
 			Entity m = (Entity) o;
@@ -346,6 +349,29 @@ public class Dungeon implements Observer {
 		bombCell(new Coord(centre.getX()  ,centre.getY()+1));
 		bombCell(new Coord(centre.getX()+1,centre.getY()+1));
 	}
+	
+	private void update(Potion p, Object info) {
+		if (info instanceof String) {
+			if((String) info == "on") {
+				for (ArrayList<Entity> arr: map.values()) {
+					for(Entity e: arr) {
+						if(e instanceof Enemy) {
+							((Enemy) e).setPathMethod(true);
+						}
+					}
+				}
+			}
+			if((String) info == "off") {
+				for (ArrayList<Entity> arr: map.values()) {
+					for(Entity e: arr) {
+						if(e instanceof Enemy) {
+							((Enemy) e).setPathMethod(false);
+						}
+					}
+				}
+			}
+		}
+	}
 	/**
 	 * if there are movable at the Coord c, destroy it
 	 * @param c coord
@@ -382,5 +408,21 @@ public class Dungeon implements Observer {
 				}
 			}
 		}
+	}
+	public LinkedList<Coord> getSurroundTiles(Coord centre){
+		LinkedList<Coord> ret = new LinkedList<Coord>();
+		if(centre.getX()+1<this.width) {
+			ret.add(new Coord(centre.getX()+1,centre.getY()));
+		}
+		if(centre.getX()-1>=0) {
+			ret.add(new Coord(centre.getX()-1,centre.getY()));
+		}
+		if(centre.getY()+1<this.height) {
+			ret.add(new Coord(centre.getX(),centre.getY()+1));
+		}
+		if(centre.getY()-1>=0) {
+			ret.add(new Coord(centre.getX(),centre.getY()-1));
+		}
+		return ret;
 	}
 }

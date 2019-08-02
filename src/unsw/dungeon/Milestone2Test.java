@@ -100,7 +100,7 @@ class Milestone2Test {
 		
 		
 		Sword sword = new Sword(1,1,testD);
-		Enemy monster = new Enemy(2,1, testD);
+		Enemy monster = new Enemy(2,1, testD,1000);
 		
 		GoalLeafEnemiesKilled goal1 = new GoalLeafEnemiesKilled();
 		goal1.addEnemy(monster);
@@ -667,7 +667,7 @@ class Milestone2Test {
 	void testEnemyKillPlayer(){
 		Dungeon testD = new Dungeon(4, 4);
 		Player player = new Player(2,2, testD);
-		Enemy e = new Enemy(2,3,testD);
+		Enemy e = new Enemy(2,3,testD,1000);
 		testD.setPlayer(player);
 		testD.addEntity(player);
 		testD.addEntity(e);
@@ -698,7 +698,7 @@ class Milestone2Test {
 		Dungeon testD = new Dungeon(3, 3);
 		Player player = new Player(1, 2, testD);
 		Bomb b1 = new Bomb(0,2,testD);
-		Enemy e = new Enemy(0,1,testD);
+		Enemy e = new Enemy(0,1,testD,1000);
 		testD.addEntity(b1);
 		testD.addEntity(player);
 		testD.addEntity(e);
@@ -730,7 +730,7 @@ class Milestone2Test {
 		Player player = new Player(0, 1, testD);
 		
 		Potion invincibilityPotion = new Potion(1,1,testD);
-		Enemy monster = new Enemy(2,1, testD);
+		Enemy monster = new Enemy(2,1, testD,1000);
 		
 		testD.addEntity(monster);
 		testD.addEntity(invincibilityPotion);
@@ -760,7 +760,7 @@ class Milestone2Test {
 		Player player = new Player(0, 1, testD);
 		
 		Sword sword = new Sword(1,1,testD);
-		Enemy monster = new Enemy(2,1, testD);
+		Enemy monster = new Enemy(2,1, testD,1000);
 		
 		testD.addEntity(monster);
 		testD.addEntity(sword);
@@ -790,7 +790,7 @@ class Milestone2Test {
 		Player player = new Player(0, 1, testD);
 		
 		Sword sword = new Sword(1,1,testD);
-		Enemy monster = new Enemy(2,1, testD);
+		Enemy monster = new Enemy(2,1, testD,1000);
 		
 		testD.addEntity(monster);
 		testD.addEntity(sword);
@@ -809,28 +809,28 @@ class Milestone2Test {
 		assertEquals(true, player.hasSword());
 		assertEquals(false, monster.isAlive());
 		
-		Enemy monster2 = new Enemy(2,1, testD);
+		Enemy monster2 = new Enemy(2,1, testD,1000);
 		testD.addEntity(monster2);
 		assertEquals(true, player.hasSword());
 		player.waveSword();
 
 		assertEquals(false, monster2.isAlive());
 		
-		Enemy monster3 = new Enemy(2,1, testD);
+		Enemy monster3 = new Enemy(2,1, testD,1000);
 		testD.addEntity(monster3);
 		assertEquals(true, player.hasSword());
 		player.waveSword();
 
 		assertEquals(false, monster3.isAlive());
 		
-		Enemy monster4 = new Enemy(2,1, testD);
+		Enemy monster4 = new Enemy(2,1, testD,1000);
 		testD.addEntity(monster4);
 		assertEquals(true, player.hasSword());
 		player.waveSword();
 
 		assertEquals(false, monster4.isAlive());
 		
-		Enemy monster5 = new Enemy(2,1, testD);
+		Enemy monster5 = new Enemy(2,1, testD,1000);
 		testD.addEntity(monster5);
 		assertEquals(true, player.hasSword());
 		player.waveSword();

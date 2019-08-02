@@ -20,9 +20,10 @@ import org.json.JSONTokener;
 public abstract class DungeonLoader {
 
     private JSONObject json;
-
-    public DungeonLoader(String filename) throws FileNotFoundException {
+    private long difficulty;
+    public DungeonLoader(String filename, long difficulty) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
+        this.difficulty = difficulty;
     }
 
     /**
@@ -138,7 +139,7 @@ public abstract class DungeonLoader {
             entity = exit;
         	break;
         case "enemy":
-        	Enemy enemy = new Enemy(x,y,dungeon);
+        	Enemy enemy = new Enemy(x,y,dungeon,difficulty);
         	onLoad(enemy);
         	entity = enemy;
         	break;

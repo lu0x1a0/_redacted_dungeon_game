@@ -2,7 +2,14 @@ package unsw.dungeon;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -10,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 
 /**
  * A DungeonLoader that also creates the necessary ImageViews for the UI,
@@ -19,7 +27,7 @@ import javafx.scene.layout.GridPane;
  */
 public class DungeonControllerLoader extends DungeonLoader {
 
-    private List<ImageView> entities;
+    private List<ImageView> entities_img;
 
     //Images
     private Image playerImg;
@@ -46,11 +54,15 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	private DungeonController dungeonController;
 
+	private HashMap<Entity, Timeline> timelines;
+	
+	private ArrayList<Entity> entities;
 
-    public DungeonControllerLoader(String filename)
+    public DungeonControllerLoader(String filename, long difficulty)
             throws FileNotFoundException {
-        super(filename);
+        super(filename, difficulty);
         entities = new ArrayList<>();
+        entities_img = new ArrayList<>();
         playerImg = new Image("/human_new.png");
         wallImg = new Image("/brick_brown_0.png");
         enemyImg = new Image("/gnome.png");
@@ -68,6 +80,7 @@ public class DungeonControllerLoader extends DungeonLoader {
      	closedDoorImg = new Image("/closed_door.png");
      	openedDoorImg = new Image("/open_door.png");
      	exitImg = new Image("/exit.png");  
+     	//this.dungeonController = loadController();
     }
 
     @Override
@@ -97,7 +110,10 @@ public class DungeonControllerLoader extends DungeonLoader {
 	public void onLoad(Bomb bomb) {
         ImageView view = new ImageView(bombUnlitImg);
         ImageView blow = new ImageView(bombExplodeImg);
-        bomb.setImages(view, blow);
+        ImageView lit1 = new ImageView(bombLit1Img);
+        ImageView lit2 = new ImageView(bombLit2Img);
+        ImageView lit3 = new ImageView(bombLit3Img);
+        bomb.setImages(view, lit1, lit2, lit3, blow);
         addEntity(bomb, view);
 	}
 
@@ -123,6 +139,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 	public void onLoad(Potion potion) {
         ImageView view = new ImageView(potionImg);
         addEntity(potion, view);
+        //System.out.println(dungeonController);
+        //dungeonController.addPotionTimeLine(potion);
 	}
 
 	@Override
@@ -148,17 +166,17 @@ public class DungeonControllerLoader extends DungeonLoader {
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entity.setIv(view);
-        entities.add(view);
+        entities_img.add(view);
+        entities.add(entity);
     }
-    public void removeEntity() {
-    }
+
 
     /**
      * Set a node in a GridPane to have its position track the position of an
      * entity in the dungeon.
      *
      * By connecting the model with the view in this way, the model requires no
-     * knowledge of the view and changes to the position of entities in the
+     * knowledge of the view and changes to the position of entities_img in the
      * model will automatically be reflected in the view.
      * @param entity - Entity to track
      * @param node - Node
@@ -181,7 +199,7 @@ public class DungeonControllerLoader extends DungeonLoader {
             }
         });
     }
-
+    
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.
@@ -189,10 +207,13 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException - if file is not JSON available for reading
      */
     public DungeonController loadController() throws FileNotFoundException {
-    	this.dungeonController = new DungeonController(load(), entities);
+    	this.dungeonController = new DungeonController(load(), entities_img, entities);
         return this.dungeonController;
     }
-
+    public DungeonController getController() {
+    	return this.dungeonController;
+    }
+    
 	@Override
 	public void onLoad(GoalComponent goal) {
 		// TODO Auto-generated method stub
