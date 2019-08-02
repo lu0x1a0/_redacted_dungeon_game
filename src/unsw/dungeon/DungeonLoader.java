@@ -73,10 +73,6 @@ public abstract class DungeonLoader {
         }
         return dungeon;
     }
-
-    private void intialiseInventory() {
-    	
-    }
     
     private GoalLeafNode loadGoal(Dungeon dungeon, JSONObject json) {
     	if(json.getString("goal").equals("enemies")) {

@@ -225,7 +225,9 @@ public class Dungeon implements Observer {
 			update((Player) o, (Direction) info);
 		}
 		else if(o instanceof GoalComponent) {
-			System.out.print("You win!!!!");
+			System.out.println("Won game");
+			dc.endGame(true);
+			
 		}
 		//TODO add more cases
 		else if(o instanceof Sword) {
@@ -290,7 +292,6 @@ public class Dungeon implements Observer {
 	private void changeImpassable(Player p, Coord c) {
 		ArrayList<Entity> stuff = map.get(c);
 		for(int i=0; i<stuff.size();i++) {
-			//if (stuff.get(i) instanceof Boulder) {
 			stuff.get(i).react(p);
 			//}
 		}
@@ -320,7 +321,6 @@ public class Dungeon implements Observer {
 	private void stab(Sword s,Coord c) {
 		if(s.getCount()>0) {
 			if(map.containsKey(c)) {
-				//for (Entity e : map.get(c)) {
 				for(int i = 0; i<map.get(c).size() ;i++) {
 					map.get(c).get(i).react(s);
 				}
@@ -382,11 +382,11 @@ public class Dungeon implements Observer {
 	/**
 	 * tells the enemy in the dungeon to start moving and hunt the player
 	 */
-	public void startEnemies() {
+	public void startEnemies(String difficulty) {
 		for(ArrayList<Entity> arr :map.values()) {
 			for(Entity e: arr) {
 				if(e instanceof Enemy) {
-					((Enemy) e).start();
+					((Enemy) e).start(difficulty);
 				}
 			}
 		}

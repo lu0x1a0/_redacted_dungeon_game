@@ -19,6 +19,7 @@ import javafx.application.Platform;
 public class Enemy extends Movable {
 // being observed by the dungeon, observing the player
 	private Timer timer;
+	private int speed;
 	//static int count = 0;
 	Dungeon dungeon;
 	boolean alive = true;
@@ -27,9 +28,20 @@ public class Enemy extends Movable {
 		this.dungeon = dungeon;
 		//start();
 	}
-	public void start() {
+	public void start(String difficulty) {
 		Enemy e = this;
 		timer= new Timer(true);
+		switch (difficulty) {
+		case "Easy":
+			speed = 2000;
+			break;
+		case "Medium":
+			speed = 1000;
+			break;
+		case "Hard":
+			speed = 500;
+			break;
+		}
 		TimerTask task = new TimerTask() {
 			@Override
 		    public void run() {
@@ -39,14 +51,12 @@ public class Enemy extends Movable {
 				e.y().set(c.getY());
 				Platform.runLater(new Runnable() {
 		            @Override public void run() {
-//		            	System.out.println(e);
-//		            	System.out.println(old);
 						notifyObservers(e,old);
 		            }
 		        });
 			}
 		};
-		timer.scheduleAtFixedRate(task, 0, 1000);
+		timer.scheduleAtFixedRate(task, 0, speed);
 		
 	}
 

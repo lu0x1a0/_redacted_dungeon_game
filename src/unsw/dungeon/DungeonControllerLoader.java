@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.sun.javafx.collections.MappingChange.Map;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
@@ -54,12 +52,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image sword_present;
 	private Image bomb_missing;
 	private Image bomb_present;
+	private Image treasure_missing;
+	private Image treasure_present;
 	private ImageView key_missingIV;
 	private ImageView key_presentIV;
 	private ImageView sword_missingIV;
 	private ImageView sword_presentIV;
 	private ImageView bomb_missingIV;
 	private ImageView bomb_presentIV;
+	private ImageView treasure_missingIV;
+	private ImageView treasure_presentIV;
 
 	private DungeonController dungeonController;
 	private HashMap<String, Node> UIitems;
@@ -86,6 +88,8 @@ public class DungeonControllerLoader extends DungeonLoader {
      	closedDoorImg = new Image("/closed_door.png");
      	openedDoorImg = new Image("/open_door.png");
      	exitImg = new Image("/exit.png"); 
+     	treasure_present = new Image("/gold_pile.png");
+     	treasure_missing = new Image("/gold_pile_missing.png");
      	key_missing = new Image("/key_inventory_missing.png");
     	key_present = new Image("/key.png");
     	sword_missing = new Image("/greatsword_1_inventory_missing.png");
@@ -98,6 +102,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     	sword_presentIV = new ImageView(sword_present);
     	bomb_missingIV = new ImageView(bomb_missing);
     	bomb_presentIV = new ImageView(bomb_present);
+    	treasure_missingIV = new ImageView(treasure_missing);
+    	treasure_presentIV = new ImageView(treasure_present);
 //    	entities.add(key_missingIV);
 //    	entities.add(key_presentIV);
 //    	entities.add(sword_missingIV);
@@ -187,8 +193,6 @@ public class DungeonControllerLoader extends DungeonLoader {
         entity.setIv(view);
         entities.add(view);
     }
-    public void removeEntity() {
-    }
 
     public void initialiseInventoryUIscreen() {
     	GridPane.setRowIndex(key_missingIV, dungeonController.getDungeon().getHeight()+2);
@@ -215,7 +219,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     	GridPane.setColumnIndex(bombCountUI, 4);
     	UIitems.put("bomb_count", bombCountUI);
     	
+    	GridPane.setRowIndex(treasure_missingIV, dungeonController.getDungeon().getHeight()+2);
+    	GridPane.setColumnIndex(treasure_missingIV, 5);
+    	UIitems.put("treasure_missing", treasure_missingIV);
     	
+		Label treasureCountUI = new Label();
+		GridPane.setRowIndex(treasureCountUI, dungeonController.getDungeon().getHeight()+2);
+    	GridPane.setColumnIndex(treasureCountUI, 6);
+    	UIitems.put("treasure_count", treasureCountUI);
 
     }
     
@@ -248,6 +259,10 @@ public class DungeonControllerLoader extends DungeonLoader {
         });
     }
 
+    public void endGame(Boolean result) {
+    	
+    }
+    
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.
@@ -255,14 +270,14 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException - if file is not JSON available for reading
      */
     public DungeonController loadController() throws FileNotFoundException {
-//    	System.out.println("Creating dungeon controller with UIitems "+UIitems);
     	Dungeon ourDungeon = load();
     	this.dungeonController = new DungeonController(ourDungeon, entities, UIitems);
     	initialiseInventoryUIscreen();
     	Inventory playerInventory = ourDungeon.getInventory();
-//    	System.out.println(playerInventory.getSwordHealth().asString());
     	((Label)UIitems.get("sword_count")).textProperty().bind(playerInventory.getSwordHealth().asString());
     	((Label)UIitems.get("bomb_count")).textProperty().bind(playerInventory.getBombsCount().asString());
+    	((Label)UIitems.get("treasure_count")).textProperty().bind(playerInventory.getTreasureCount().asString());
+    	
     	playerInventory.getHasBomb().addListener(new ChangeListener<Boolean>() {
     		@Override
     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -278,17 +293,63 @@ public class DungeonControllerLoader extends DungeonLoader {
     		}
     	});
     	
+    	playerInventory.getHasSword().addListener(new ChangeListener<Boolean>() {
+    		@Override
+    		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+    			if(newValue == true) {
+    				dungeonController.removeNodeFromView(sword_missingIV);
+    				dungeonController.addNodeToView(sword_presentIV, 1, dungeonController.getDungeon().getHeight()+2);
+    				
+    			}
+    			else {
+    				dungeonController.removeNodeFromView(sword_presentIV);
+    				dungeonController.addNodeToView(sword_missingIV, 1, dungeonController.getDungeon().getHeight()+2);
+    			}
+    		}
+    	});
+    	
+    	
+    	
+    	
     	playerInventory.getHasKey().addListener(new ChangeListener<Boolean>() {
     		@Override
     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
     			if(newValue == true) {
     				dungeonController.removeNodeFromView(key_missingIV);
-    				dungeonController.addNodeToView(key_presentIV, 3, dungeonController.getDungeon().getHeight()+2);
+    				dungeonController.addNodeToView(key_presentIV, 0, dungeonController.getDungeon().getHeight()+2);
     				
     			}
     			else {
     				dungeonController.removeNodeFromView(key_presentIV);
-    				dungeonController.addNodeToView(key_missingIV, 3, dungeonController.getDungeon().getHeight()+2);
+    				dungeonController.addNodeToView(key_missingIV, 0, dungeonController.getDungeon().getHeight()+2);
+    			}
+    		}
+    	});
+    	
+    	playerInventory.getHasTreasure().addListener(new ChangeListener<Boolean>() {
+    		@Override
+    		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+    			if(newValue == true) {
+    				dungeonController.removeNodeFromView(treasure_missingIV);
+    				dungeonController.addNodeToView(treasure_presentIV, 5, dungeonController.getDungeon().getHeight()+2);
+    				
+    			}
+    			else {
+    				dungeonController.removeNodeFromView(treasure_presentIV);
+    				dungeonController.addNodeToView(bomb_missingIV, 5, dungeonController.getDungeon().getHeight()+2);
+    			}
+    		}
+    	});
+    	
+    	playerInventory.getHasPotion().addListener(new ChangeListener<Boolean>() {
+    		@Override
+    		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+    			if(newValue == true) {
+    				System.out.println("I will display potion animation");
+    				
+    			}
+    			else {
+    				System.out.println("I will hide potion animation");
     			}
     		}
     	});
@@ -298,7 +359,6 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	@Override
 	public void onLoad(GoalComponent goal) {
-		// TODO Auto-generated method stub
 		
 	}
 }

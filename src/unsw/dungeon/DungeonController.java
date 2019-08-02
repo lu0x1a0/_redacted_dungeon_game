@@ -8,7 +8,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -24,7 +23,11 @@ public class DungeonController {
     @FXML
     public GridPane squares;
 
-    private List<ImageView> initialEntities;
+    private StartScreen startScreen;
+    
+    private EndScreen endScreen;
+
+	private List<ImageView> initialEntities;
     private HashMap<String, Node> UIitems;
 
     private Player player;
@@ -40,9 +43,18 @@ public class DungeonController {
     public Dungeon getDungeon() {
     	return dungeon;
     }
-    public void giveDungeonMyself() {
+    
+    public void setEndScreen(EndScreen endScreen) {
+    	this.endScreen = endScreen;
+    }
+    
+    public void setStartScreen(StartScreen startScreen) {
+		this.startScreen = startScreen;
+	}
+	public void giveDungeonMyself() {
     	dungeon.setController(this);
     }
+	
     public void removeEntityFromView(ImageView v) {
     	//initialEntities.remove(v);
     	squares.getChildren().remove(v);
@@ -64,6 +76,7 @@ public class DungeonController {
     	squares.add(v, x, y);
     }
     
+    
     @FXML
     public void initialize() {
         Image ground = new Image("/dirt_0_new.png");
@@ -81,6 +94,7 @@ public class DungeonController {
         for (Node item : UIitems.values())
             squares.getChildren().add(item);
         
+
     }
 
     public GridPane getSquares() {
@@ -130,9 +144,15 @@ public class DungeonController {
         });
         
     }
-    public void start() {
-    	dungeon.startEnemies();
+    public void start(String difficulty) {
+    	
+    	dungeon.startEnemies(difficulty);
     }
+	public void endGame(boolean b) {
+		// TODO Auto-generated method stub
+		endScreen.start();
+		
+	}
     
 }
 

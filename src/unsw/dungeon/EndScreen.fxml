@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: FC2D2D;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox alignment="CENTER" prefHeight="197.0" prefWidth="429.0">
+         <children>
+            <Label fx:id="winLossMessage" alignment="TOP_LEFT" text="You Won!!!" textAlignment="CENTER">
+               <font>
+                  <Font name="OCR A Extended" size="96.0" />
+               </font>
+            </Label>
+            <Label alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="60.0" prefWidth="431.0" text="Play again?">
+               <font>
+                  <Font name="OCR A Extended" size="64.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="86.0" prefWidth="429.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button minHeight="50.0" minWidth="200.0" mnemonicParsing="false" onAction="#handlePlayAgain" style="-fx-background-color: FC2D2D; -fx-border-color: white; -fx-border-width: 10; -fx-border-radius: 5;" text="Yes!" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="OCR A Extended" size="24.0" />
+               </font>
+            </Button>
+            <Button layoutX="110.0" layoutY="22.0" minHeight="50.0" minWidth="200.0" mnemonicParsing="false" onAction="#handleMainMenu" style="-fx-background-color: FC2D2D; -fx-border-color: C79595; -fx-border-width: 10; -fx-border-radius: 5;" text="Main Menu" textFill="WHITE">
+               <font>
+                  <Font name="OCR A Extended" size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+   <effect>
+      <InnerShadow choke="0.21" height="88.36" radius="40.760000000000005" width="76.68" />
+   </effect>
+</BorderPane>

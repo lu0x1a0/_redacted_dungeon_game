@@ -2,15 +2,8 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.util.converter.IntegerStringConverter;
-import javafx.util.converter.NumberStringConverter;
 
 public class Inventory {
 
@@ -24,16 +17,24 @@ public class Inventory {
 	private SimpleBooleanProperty hasBomb = new SimpleBooleanProperty();
 	private SimpleBooleanProperty hasKey = new SimpleBooleanProperty();
 	private SimpleBooleanProperty hasPotion = new SimpleBooleanProperty();
-
+	private SimpleBooleanProperty hasTreasure = new SimpleBooleanProperty();
+	private SimpleIntegerProperty treasureCount = new SimpleIntegerProperty();
 	
 	
 	
 	
 	
 
+
+	public SimpleBooleanProperty getHasTreasure() {
+		return hasTreasure;
+	}
+
+	public SimpleIntegerProperty getTreasureCount() {
+		return treasureCount;
+	}
 
 	public Inventory(Player player) {
-		// TODO Auto-generated constructor stub
 		this.inventory = new ArrayList<Collectible>();
 		this.player = player;
 		
@@ -52,19 +53,23 @@ public class Inventory {
 	public void addToInventory(Collectible c) {
     	inventory.add(c);
     	if(c instanceof Sword) {
-			//TODO need to add a method to display the sword
     		hasSword.setValue(true);
     		swordHealth.setValue(5);
     	}
     	else if(c instanceof Key) {
-    		//TODO need to add a method to display the key (possibly rely on binding)
     		hasKey.setValue(true);
 
     	}
     	else if(c instanceof Bomb) {
-    		//TODO need to add a method to display the key (possibly rely on binding)
     		hasBomb.setValue(true);
     		bombsCount.setValue(bombsCount.getValue()+1);
+    	}
+    	else if(c instanceof Treasure) {
+    		hasTreasure.setValue(true);
+    		treasureCount.setValue(treasureCount.getValue()+1);
+    	}
+    	else if(c instanceof Potion) {
+    		hasPotion.setValue(true);
     	}
     }
 
@@ -124,7 +129,6 @@ public class Inventory {
 			if (c instanceof Key) {
 				inventory.remove(c);
 				hasKey.setValue(false);
-				//TODO need to add mechanism to change the display
 				break;
 			}
 		}
@@ -140,7 +144,6 @@ public class Inventory {
 			if (c instanceof Sword) {
 				inventory.remove(c);
 				hasSword.setValue(false);
-				//TODO need to add a method to change the display
 				break;
 			}
 		}
@@ -164,7 +167,6 @@ public class Inventory {
 	
 	public Bomb getBomb() {
 		if(countBombs() == 1) { //Set to 1 as you're about to use a bomb so it will decrement and end on 0
-			//Need to add a mechanism to hid the bomb image
 			hasBomb.setValue(false);
 		}
 		for(Collectible c:inventory) {

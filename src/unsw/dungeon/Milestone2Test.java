@@ -336,8 +336,6 @@ class Milestone2Test {
 	void collectKey() {
 		Dungeon testD = new Dungeon(3, 3);
 		Player player = new Player(0, 1, testD);
-		Inventory playInv = new Inventory(null, testD);
-		player.setPlayerInventory(playInv);
 		Key k1 = new Key(1,1,testD, 0);
 
 		testD.addEntity(k1);
@@ -675,7 +673,7 @@ class Milestone2Test {
 		testD.addEntity(e);
 		
 		com.sun.javafx.application.PlatformImpl.startup(()->{});
-		e.start();
+		e.start("Easy");
 		Timer timer= new Timer(true);
 		TimerTask task = new TimerTask() {
 			@Override
