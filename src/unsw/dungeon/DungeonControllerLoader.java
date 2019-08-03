@@ -37,11 +37,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image boulderImg;
     private Image bombUnlitImg;
     
-	@SuppressWarnings("unused")
 	private Image bombLit1Img;
-	@SuppressWarnings("unused")
 	private Image bombLit2Img;
-	@SuppressWarnings("unused")
 	private Image bombLit3Img;
     private Image bombExplodeImg;
     private Image swordImg;
@@ -119,7 +116,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     	bomb_presentIV = new ImageView(bomb_present);
     	treasure_missingIV = new ImageView(treasure_missing);
     	treasure_presentIV = new ImageView(treasure_present);
-
 
     }
 

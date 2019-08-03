@@ -80,7 +80,8 @@ public class DungeonController implements Controller {
 	
     public void removeEntityFromView(ImageView v) {
     	//initialEntities.remove(v);
-    	System.out.println("Doin it");
+//    	System.out.println("Doin it");
+//    	System.out.println("Image is: "+v.getImage());
     	squares.getChildren().remove(v);
     }
     public void removeNodeFromView(Node v) {
@@ -91,7 +92,7 @@ public class DungeonController implements Controller {
     }
     public void changeEntityImage(Entity e, ImageView oldv) {
     	removeEntityFromView(oldv);
-    	//addEntityToView(e.getIv(),e.getX(),e.getY());
+    	addEntityToView(e.getIv(),e.getX(),e.getY());
     }
     
     public void addNodeToView(Node v, int x, int y) {
@@ -161,6 +162,7 @@ public class DungeonController implements Controller {
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1),new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				System.out.println("lit2");
 				bomb.lit2();
 			}
 		
@@ -168,6 +170,7 @@ public class DungeonController implements Controller {
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2),new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				System.out.println("lit3");
 				bomb.lit3();
 			}
 		
@@ -184,9 +187,18 @@ public class DungeonController implements Controller {
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4),new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				bomb.removeFromView();
-				bomb.setIv(null);
-				System.out.println("what's on the tile-"+grid.getChildren());
+
+////				bomb.removeFromView();
+////				bomb.setIv(null);
+//				System.out.println("----------------");
+//				System.out.println(bomb.getX()+" - "+bomb.getY());
+//				for (Node node: grid.getChildren()) {
+//					if(grid.getRowIndex(node).equals(bomb.getX()) &&
+//						grid.getColumnIndex(node).equals(bomb.getY())) {
+//						System.out.println("what's on the tile-"+ ((ImageView)node).getImage().impl_getUrl() );
+//					}
+//				}
+//				System.out.println("----------------");
 			}
 		
 		}));
@@ -201,7 +213,15 @@ public class DungeonController implements Controller {
             	}
             }
         });
-		timeline.setOnFinished(e->bomb.removeFromView());
+		timeline.setOnFinished((ActionEvent event) -> {
+			bomb.removeFromView();
+			Image ground = new Image("/dirt_0_new.png");
+			squares.add(new ImageView(ground), bomb.x().intValue(), bomb.y().getValue());
+			
+			
+		});
+
+//		timeline.setOnFinished(e->bomb.removeFromView());
 		timeline.setCycleCount(1);
 		return timeline;
     }

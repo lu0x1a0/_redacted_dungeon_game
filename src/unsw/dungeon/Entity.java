@@ -85,10 +85,10 @@ public abstract class Entity {
 	 * remove this Entity from the game view(javaFX view and the Dungeon's HashMap)
 	 */
     public void removeFromView() {
+    	dungeon.removeEntityAtCoord(this,getX(), getY());
     	if (iv!=null) {
     		dungeon.removeFromView(iv);
     	}
-		dungeon.removeEntityAtCoord(this,getX(), getY());
 		return;
 
 	}

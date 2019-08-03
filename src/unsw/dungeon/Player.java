@@ -133,6 +133,7 @@ public class Player extends Movable{
      */
     public void waveSword() {
     	playerInventory.waveSword();
+
     }
     
     /**

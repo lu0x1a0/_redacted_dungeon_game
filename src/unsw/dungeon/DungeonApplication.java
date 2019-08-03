@@ -33,6 +33,7 @@ public class DungeonApplication extends Application {
         dungeonScreen.getController().setEndScreen(endScreen);
         
         startScreen.start();
+
         
     }
 
