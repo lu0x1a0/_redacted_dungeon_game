@@ -160,7 +160,6 @@ public class Dungeon implements Observer {
     public boolean ispassable(int x, int y) {
     	Coord coord = new Coord(x,y);
     	if (map.containsKey(coord)) {
-    		//return map.get(coord).ispassable();
     		for(Entity e : map.get(coord)) {
     			if (!e.isPassable()) {
     				return false;
@@ -302,7 +301,6 @@ public class Dungeon implements Observer {
 		ArrayList<Entity> stuff = map.get(c);
 		for(int i=0; i<stuff.size();i++) {
 			stuff.get(i).react(p);
-			//}
 		}
 	}
 	/**

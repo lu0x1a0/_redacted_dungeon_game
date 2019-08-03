@@ -198,19 +198,7 @@ public class DungeonController implements Controller {
         });
 		timeline.setOnFinished((ActionEvent event) -> {
 			bomb.removeFromView();
-//			for (Node node: grid.getChildren()) {
-//				if(GridPane.getRowIndex(node).equals(bomb.getY()) &&
-//					GridPane.getColumnIndex(node).equals(bomb.getX())) {
-//					System.out.println("what's on the tile-"+ ((ImageView)node).getImage().impl_getUrl() );
-////					squares.add((ImageView)node, bomb.x().intValue(), bomb.y().getValue());
-//				}
-//			}
-//			Image ground = new Image("/dirt_0_new.png");
-			
-			
 		});
-
-//		timeline.setOnFinished(e->bomb.removeFromView());
 		timeline.setCycleCount(1);
 		return timeline;
     }
@@ -246,7 +234,6 @@ public class DungeonController implements Controller {
     }
 
 	public void endGame(boolean b) {
-		// TODO Auto-generated method stub
 		squares.getChildren().clear();
 		initialEntities.clear();
 		endScreen.start();

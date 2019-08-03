@@ -184,8 +184,6 @@ public class DungeonControllerLoader extends DungeonLoader {
 	public void onLoad(Potion potion) {
         ImageView view = new ImageView(potionImg);
         addEntity(potion, view);
-        //System.out.println(dungeonController);
-        //dungeonController.addPotionTimeLine(potion);
 	}
 
 	@Override
@@ -380,7 +378,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     		@Override
     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
     			if(newValue == true) {
-    				//System.out.println("I will display potion animation");
     				dungeonController.removeNodeFromView(potion_inactiveIV);
     				dungeonController.addNodeToView(potion_activeIV, 7, dungeonController.getDungeon().getHeight()+2);
     			}
