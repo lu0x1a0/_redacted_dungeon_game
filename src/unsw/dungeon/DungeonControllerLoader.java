@@ -255,7 +255,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     	
 		Label potionTimeUI = new Label();
 		GridPane.setRowIndex(potionTimeUI, dungeonController.getDungeon().getHeight()+2);
-    	GridPane.setColumnIndex(potionTimeUI, 6);
+    	GridPane.setColumnIndex(potionTimeUI, 8);
     	UIitems.put("potion_time", potionTimeUI);
     	
     }
@@ -335,7 +335,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     			if(newValue == true) {
     				dungeonController.removeNodeFromView(sword_missingIV);
     				dungeonController.addNodeToView(sword_presentIV, 1, dungeonController.getDungeon().getHeight()+2);
-    				
     			}
     			else {
     				dungeonController.removeNodeFromView(sword_presentIV);
@@ -381,11 +380,13 @@ public class DungeonControllerLoader extends DungeonLoader {
     		@Override
     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
     			if(newValue == true) {
-    				System.out.println("I will display potion animation");
-    				
+    				//System.out.println("I will display potion animation");
+    				dungeonController.removeNodeFromView(potion_inactiveIV);
+    				dungeonController.addNodeToView(potion_activeIV, 7, dungeonController.getDungeon().getHeight()+2);
     			}
     			else {
-    				System.out.println("I will hide potion animation");
+    				dungeonController.removeNodeFromView(potion_activeIV);
+    				dungeonController.addNodeToView(potion_inactiveIV, 7, dungeonController.getDungeon().getHeight()+2);
     			}
     		}
     	});

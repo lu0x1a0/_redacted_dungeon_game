@@ -236,7 +236,9 @@ public class DungeonController implements Controller {
     }
     
     public void updateUIPotionTime() {
-    	
+    	dungeon.getInventory().getPotionTimeLeft().set(
+    			dungeon.getInventory().getPotionTimeLeft().get()-1
+		);
     }
 
 	public void start(String difficulty) {

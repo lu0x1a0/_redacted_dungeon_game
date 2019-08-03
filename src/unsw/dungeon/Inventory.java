@@ -66,6 +66,7 @@ public class Inventory {
     	}
     	else if(c instanceof Potion) {
     		hasPotion.setValue(true);
+    		potion_time.setValue( ((Potion)c).getTime());
     	}
     }
 
@@ -213,7 +214,7 @@ public class Inventory {
 	}
 	
 	public SimpleIntegerProperty getPotionTimeLeft() {
-		return null;
+		return potion_time;
 	}
 	
 }
