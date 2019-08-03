@@ -234,7 +234,6 @@ public class Dungeon implements Observer {
 			dc.endGame(true);
 			
 		}
-		//TODO add more cases
 		else if(o instanceof Sword) {
 			update((Sword) o,info);
 		}

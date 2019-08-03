@@ -19,7 +19,6 @@ public class Exit extends Entity implements Observer, Observable {
 
 	@Override
 	public boolean isPassable() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

@@ -8,16 +8,7 @@ import javafx.stage.Stage;
 public class StartScreen extends Screen {
 
 	public StartScreen(Stage stage, StartScreenController controller) throws IOException{
-		super(stage, controller, "StartScreen.fxml");
-
-//		this.stage = stage;
-//		this.controller = controller;
-//		
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("StartScreen.fxml"));
-//        loader.setController(this.controller);
-//        Parent root = loader.load();
-//        scene = new Scene(root);
-		
+		super(stage, controller, "StartScreen.fxml");		
 	}
 
 	public void start() {

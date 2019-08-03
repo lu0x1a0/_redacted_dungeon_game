@@ -20,7 +20,6 @@ public class EnemyPursuit implements EnemyPath {
 		Queue<Coord> queue = new LinkedList<Coord>();
 		while ( ptr!=null && !ptr.equals(player)) {
 			LinkedList<Coord> potential = dungeon.getSurroundPassable(ptr);
-			//queue.addAll(potential);
 			for(Coord c:potential) {
 				if(!visited.containsKey(c)) {
 					visited.put(c, ptr);

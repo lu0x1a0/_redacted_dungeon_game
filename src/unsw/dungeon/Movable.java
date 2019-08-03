@@ -21,7 +21,6 @@ public abstract class Movable extends Entity implements Observable {
 	}
     @Override
 	public void notifyObservers(Observable e, Object info) {
-		//for(Observer o: observers) {
 		for(int i = 0; i<observers.size();i++) {
     		observers.get(i).update(e, info);
 		}

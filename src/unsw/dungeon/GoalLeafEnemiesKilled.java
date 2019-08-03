@@ -45,7 +45,6 @@ public class GoalLeafEnemiesKilled extends GoalLeafNode implements Observable, O
 	 */
 	@Override
 	public String printGoal(String message) {
-		// TODO Auto-generated method stub
 		return message + " enemies goal";
 	}
 	

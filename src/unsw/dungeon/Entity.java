@@ -10,8 +10,10 @@ import javafx.scene.image.ImageView;
  */
 public abstract class Entity {
 
-    // IntegerProperty is used so that changes to the entities position can be
-    // externally observed.
+    /**
+     *  IntegerProperty is used so that changes to the entities position can be
+     *  externally observed.
+     */
     private IntegerProperty x, y;
     private ImageView iv;
 	protected Dungeon dungeon;

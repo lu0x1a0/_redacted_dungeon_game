@@ -9,7 +9,6 @@ import java.util.ArrayList;
  *
  */
 public class Player extends Movable{
-	//static int count = 0;
     private Inventory playerInventory;
     /**
      * Create a player positioned in square (x,y)

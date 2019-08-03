@@ -12,7 +12,10 @@ import java.util.ArrayList;
  */
 public class GoalCompositeComponent implements GoalComponent{
 
-	private boolean andFlag; //If true then the goal type is an AND condition
+	/**
+	 * If true then the goal type is an AND condition
+	 */
+	private boolean andFlag; 
 	
 	private ArrayList<GoalComponent> goals = new ArrayList<GoalComponent>();
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
@@ -22,7 +25,6 @@ public class GoalCompositeComponent implements GoalComponent{
 	 * @param flag - True for AND, false for OR
 	 */
 	public GoalCompositeComponent(boolean flag) {
-		// TODO Auto-generated constructor stub
 		this.andFlag = flag;
 	}
 

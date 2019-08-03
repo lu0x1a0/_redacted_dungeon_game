@@ -33,7 +33,6 @@ public class Enemy extends Movable {
 		evade = new EnemyEvade(dungeon);
 		pursuit = new EnemyPursuit(dungeon);
 		activeMethod = pursuit;
-		//start();
 	}
 	public void start(String difficulty) {
 		Enemy e = this;
@@ -69,31 +68,22 @@ public class Enemy extends Movable {
 
 	@Override
 	public void moveUp() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void moveDown() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void moveLeft() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void moveRight() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public boolean isPassable() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 	/**
@@ -115,7 +105,6 @@ public class Enemy extends Movable {
 	
 	@Override
 	public void react(Entity e) {
-		//timer.cancel();
 		if (e instanceof Sword) {
 			Sword s = (Sword) e;
 			s.setCount(s.getCount()-1);

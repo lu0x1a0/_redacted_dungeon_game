@@ -32,16 +32,6 @@ public class Potion extends Collectible {
 		Potion p = this;
 		onUse.set(true);
 		notifyObservers(p,"on");
-//		new java.util.Timer().schedule( 
-//	        new java.util.TimerTask() {
-//	            @Override
-//	            public void run() {
-//	    			//notifyObservers(p,"invince");
-//	            	p.getDungeon().getPlayer().potionEffectOff(p);
-//	            }
-//	        }, 
-//	        2000 
-//		);
 	}
 	
 	@Override

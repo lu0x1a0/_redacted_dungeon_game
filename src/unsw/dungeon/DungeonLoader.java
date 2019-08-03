@@ -132,7 +132,6 @@ public abstract class DungeonLoader {
             onLoad(wall);
             entity = wall;
             break;
-        // TODO Handle other possible entities
         case "exit":
         	Exit exit = new Exit(x,y,dungeon);
             onLoad(exit);
@@ -193,8 +192,8 @@ public abstract class DungeonLoader {
         }
     }
 
+    //Create additional abstract methods for the other entities
     public abstract void onLoad(Player player);
-    // TODO Create additional abstract methods for the other entities
     
     public abstract void onLoad(Enemy enemy);
     

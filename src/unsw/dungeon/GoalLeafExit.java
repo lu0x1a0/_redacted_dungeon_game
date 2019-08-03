@@ -18,7 +18,6 @@ public class GoalLeafExit extends GoalLeafNode implements Observable, Observer {
 	 * @param theExit - exit that needs to be entered for goal to complete
 	 */
 	public GoalLeafExit(Exit theExit) {
-		// TODO Auto-generated constructor stub
 		finalExit = theExit;
 		theExit.registerObserver(this);
 		
@@ -50,7 +49,6 @@ public class GoalLeafExit extends GoalLeafNode implements Observable, Observer {
 	 */
 	@Override
 	public String printGoal(String message) {
-		// TODO Auto-generated method stub
 		return message + " Exit goal";
 	}
 

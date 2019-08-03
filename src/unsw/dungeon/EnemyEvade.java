@@ -54,7 +54,6 @@ public class EnemyEvade implements EnemyPath {
 		Queue<Coord> queue1 = new LinkedList<Coord>();
 		while ( ptr1!=null && !ptr1.equals(target)) {
 			LinkedList<Coord> potential = dungeon.getSurroundPassable(ptr1);
-			//queue.addAll(potential);
 			for(Coord c:potential) {
 				if(!visited1.containsKey(c)) {
 					visited1.put(c, ptr1);

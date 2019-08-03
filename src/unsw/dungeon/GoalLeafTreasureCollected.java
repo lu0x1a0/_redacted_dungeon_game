@@ -69,7 +69,6 @@ public class GoalLeafTreasureCollected extends GoalLeafNode implements Observabl
 	 */
 	@Override
 	public String printGoal(String message) {
-		// TODO Auto-generated method stub
 		return message + " Treasure goal";
 	}
 
