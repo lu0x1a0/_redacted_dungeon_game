@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 /**
@@ -8,9 +9,9 @@ import javafx.scene.image.ImageView;
  *
  */
 public class Door extends Entity {
-	@SuppressWarnings("unused") //Will be used in milestone3
+	//@SuppressWarnings("unused") //Will be used in milestone3
 	private ImageView lock;
-	@SuppressWarnings("unused") //Will be used in milestone3
+	//@SuppressWarnings("unused") //Will be used in milestone3
 	private ImageView unlock;
 	private boolean isopen = false;
 	private int id;
@@ -31,7 +32,7 @@ public class Door extends Entity {
 	 * @param unlock - ImageView
 	 */
 	public void setViews(ImageView lock, ImageView unlock) {
-		this.unlock = lock;
+		this.unlock = unlock;
 		this.lock = lock;
 	}
 	/**
@@ -61,7 +62,19 @@ public class Door extends Entity {
 			if( ((Player) e).getKey()!=null &&
 				((Player) e).getKey().getId() == getId()) {
 				((Player) e).removeKey();
-				setIsopen(true);
+				//setIsopen(true);
+				isopen = true;
+				this.removeFromView();
+				this.setIv(unlock);
+				dungeon.addToView(this, getIv());
+				//dungeon.changeEntityImage(this, lock);
+				for(Node node:dungeon.getDc().squares.getChildren()) {
+					if (dungeon.getDc().squares.getColumnIndex(node).intValue() == getX() && dungeon.getDc().squares.getRowIndex(node).intValue() == getY())
+						System.out.println( ((ImageView)node).getImage().impl_getUrl() );
+				}
+				System.out.println( "++++"+getIv().getImage().impl_getUrl() );
+				
+				
 			}
 		}
 	}

@@ -260,6 +260,9 @@ public class Dungeon implements Observer {
 		}
 		
 	}
+	public void setDc(DungeonController dc) {
+		this.dc = dc;
+	}
 	/**
 	 * case where player heads to an impassable tile before it and whether it is reactive
 	 * @param p - Player
@@ -400,7 +403,7 @@ public class Dungeon implements Observer {
 	public void setController(DungeonController dc) {
 		this.dc = dc;
 	}
-	public Controller getDc() {
+	public DungeonController getDc() {
 		return dc;
 	}
 	
