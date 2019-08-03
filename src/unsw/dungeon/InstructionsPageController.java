@@ -49,14 +49,18 @@ public class InstructionsPageController implements Controller {
     void handleBack(ActionEvent event) {
     	makeFadeOut();
     }
-	
+	/**
+	 * fade in the instruction scene
+	 */
     public void resetForViewing() {
     	makeFadeIn();
     	for (Label l: labelsToLoad) {
     		l.setOpacity(0);
     	}
     }
-
+    /**
+     * actual fade in procedure
+     */
 	private void makeFadeIn() {
 		FadeTransition fadeTransition = new FadeTransition();
 		fadeTransition.setDuration(Duration.millis(2000));
@@ -70,7 +74,10 @@ public class InstructionsPageController implements Controller {
 		});
 		fadeTransition.play();			
 	}
-    
+    /**
+     * display labels into the scene
+     * @param labelsToLoad
+     */
 	private void loadInstructions(List<Label> labelsToLoad) {
 		FadeTransition fadeTransition = new FadeTransition();
 		fadeTransition.setDuration(Duration.millis(1000));
@@ -84,7 +91,9 @@ public class InstructionsPageController implements Controller {
 		});
 		fadeTransition.play();
 	}
-
+	/**
+	 * fade out the scene
+	 */
 	private void makeFadeOut() {
 		FadeTransition fadeTransition = new FadeTransition();
 		fadeTransition.setDuration(Duration.millis(1000));

@@ -34,6 +34,10 @@ public class Enemy extends Movable {
 		pursuit = new EnemyPursuit(dungeon);
 		activeMethod = pursuit;
 	}
+	/**
+	 * let the enemy to start moving in the dungeon
+	 * @param difficulty
+	 */
 	public void start(String difficulty) {
 		Enemy e = this;
 		timer= new Timer(true);

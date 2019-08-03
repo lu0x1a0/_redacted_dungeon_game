@@ -197,7 +197,10 @@ public class Dungeon implements Observer {
     	}
     	return allEntities;
     }
-    
+    /**
+     * return all the Entities in the dungeon
+     * @return
+     */
     public ArrayList<Entity> getEntities() {
     	ArrayList<Entity> list = new ArrayList<Entity>();
     	for (ArrayList<Entity> value : map.values()) {
@@ -260,6 +263,10 @@ public class Dungeon implements Observer {
 		}
 		
 	}
+	/**
+	 * return the dungeon controller of this dungeon
+	 * @param dc
+	 */
 	public void setDc(DungeonController dc) {
 		this.dc = dc;
 	}
@@ -406,11 +413,17 @@ public class Dungeon implements Observer {
 	public DungeonController getDc() {
 		return dc;
 	}
-	
+	/**
+	 * return the player's inventory
+	 * @return
+	 */
 	public Inventory getInventory() {
 		return this.getPlayer().getPlayerInventory();
 	}
-	
+	/**
+	 * quit the dungeon and go to return menu
+	 * @param value
+	 */
 	public void endGame(boolean value) {
 		dc.endGame(value);
 	}
@@ -427,6 +440,11 @@ public class Dungeon implements Observer {
 			}
 		}
 	}
+	/**
+	 * return the available surrounding tiles as a collection of coordinates
+	 * @param centre
+	 * @return
+	 */
 	public LinkedList<Coord> getSurroundTiles(Coord centre){
 		LinkedList<Coord> ret = new LinkedList<Coord>();
 		if(centre.getX()+1<this.width) {

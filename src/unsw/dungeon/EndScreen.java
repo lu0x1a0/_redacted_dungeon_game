@@ -9,18 +9,28 @@ import javafx.stage.Stage;
 
 public class EndScreen extends Screen {
 
-	
+	/**
+	 * constructor for the screen when a dungeon game finishes
+	 * @param stage
+	 * @param controller
+	 * @throws IOException
+	 */
 	public EndScreen(Stage stage, EndScreenController controller) throws IOException{
 		super(stage, controller, "EndScreen.fxml");
 	}
-
+	/**
+	 * start off all necessary operation in this screen
+	 * @param value  indication of the result of the game
+	 */
 	public void start(boolean value) {
 		controller.initialize();
 		((EndScreenController) controller).setMessage(value);
 		super.start();
     }
 		
-
+	/**
+	 * return the controller of this screen
+	 */
     public EndScreenController getController() {
         return (EndScreenController) controller;
     }

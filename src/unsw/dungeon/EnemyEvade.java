@@ -3,7 +3,11 @@ package unsw.dungeon;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
-
+/**
+ * The strategy for Enemy to evade the player
+ * @author Luoxi
+ *
+ */
 public class EnemyEvade implements EnemyPath {
 	
 	private Dungeon dungeon;

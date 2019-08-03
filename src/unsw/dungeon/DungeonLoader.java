@@ -48,7 +48,13 @@ public abstract class DungeonLoader {
         System.out.println(goals.printGoal("The goals are: "));
         return dungeon;
     }
-    
+    /**
+     * turn a group of goals into the corresponding java object that can
+     * differ by and/or conditional logic and return this goal component
+     * @param dungeon
+     * @param jsonGoals
+     * @return
+     */
     private GoalComponent goalAdder(Dungeon dungeon, JSONObject jsonGoals) {
     	if(jsonGoals.getString("goal").equals("AND")) {
         	// This is an AND goal type. All the subgoals must be combined with AND
@@ -94,7 +100,12 @@ public abstract class DungeonLoader {
         	
         }
     }
-    
+    /**
+     * interpret a specific goal from json into object.
+     * @param dungeon
+     * @param json
+     * @return
+     */
     private GoalLeafNode loadGoal(Dungeon dungeon, JSONObject json) {
     	if(json.getString("goal").equals("enemies")) {
     		ArrayList<Entity> enemies = dungeon.getEntitiesByType(Enemy.class);
@@ -130,8 +141,6 @@ public abstract class DungeonLoader {
     		ArrayList<Entity> exit = dungeon.getEntitiesByType(Exit.class);
     		GoalLeafExit exitGoal = new GoalLeafExit((Exit) exit.get(0));
     		return exitGoal;
-    		
-
 
     	}
     }

@@ -11,15 +11,23 @@ import javafx.stage.Stage;
 public class DungeonScreen extends Screen {
 
 	private DungeonControllerLoader dungeonControllerLoader;
-
+	/**
+	 * constructor of the dungeon Screen.
+	 * @param stage
+	 * @param dungeonControllerLoader
+	 * @throws IOException
+	 */
 	public DungeonScreen(Stage stage, DungeonControllerLoader dungeonControllerLoader) throws IOException{
 		this.stage = stage;
 		this.dungeonControllerLoader = dungeonControllerLoader;
         scene = initialiseScene();
-		
 	}
 	
-	
+	/**
+	 * create everything that is required for this screen
+	 * @return
+	 * @throws IOException
+	 */
 	private Scene initialiseScene() throws IOException {
 		if(this.controller != null && ((DungeonController )this.controller).getEndScreen() != null) {
 			EndScreen endScreen = ((DungeonController ) this.controller).getEndScreen(); 
@@ -42,7 +50,12 @@ public class DungeonScreen extends Screen {
 	}
 
 
-	
+	/**
+	 * tell the controller and model to start executing things 
+	 * related to this screen
+	 * @param difficulty
+	 * @throws IOException
+	 */
 	public void start(String difficulty) throws IOException {
 		
 		if(((DungeonController ) controller).getSquares().getChildren().size() == 0) {
@@ -52,7 +65,9 @@ public class DungeonScreen extends Screen {
         ((DungeonController ) controller).start(difficulty);
         
     }
-	
+	/**
+	 * return the controller of the screen 
+	 */
     public DungeonController getController() {
         return (DungeonController ) controller;
     }

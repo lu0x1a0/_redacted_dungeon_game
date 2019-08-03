@@ -3,7 +3,11 @@ package unsw.dungeon;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
-
+/**
+ * Strategy of Enemy chasing the player
+ * @author Luoxi
+ *
+ */
 public class EnemyPursuit implements EnemyPath {
 	
 	private Dungeon dungeon;
