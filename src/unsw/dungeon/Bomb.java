@@ -62,8 +62,7 @@ public class Bomb extends Collectible {
 			dungeon.addEntity(this);
 			this.lit1();
 			islit.set(true);
-//			Bomb bomb = this;
-
+			Bomb bomb = this;
 //			timer= new Timer(true);
 //			TimerTask task = new TimerTask() {
 //				@Override
@@ -85,18 +84,22 @@ public class Bomb extends Collectible {
 		dungeon.addToView(this,getIv());
 	}
 	public void lit2() {
-		this.removeFromView();
+		//this.removeFromView();
 		this.setIv(lit2);
-		dungeon.addToView(this,getIv());
+		//dungeon.addToView(this,getIv());
+		dungeon.changeEntityImage(this,lit1);
 	}
 	public void lit3() {
-		this.removeFromView();
-		//this.setIv(lit3);
-		//dungeon.addToView(this,getIv());
+		this.setIv(lit3);
+		dungeon.changeEntityImage(this,lit2);
 	}
 	public void explode() {
-		this.removeFromView();
 		this.setIv(blast);
-		dungeon.addToView(this,getIv());
+		System.out.println("blasting");
+		dungeon.changeEntityImage(this,lit3);
+	}
+	@Override
+	public String toString() {
+		return "Bomb []";
 	}
 }

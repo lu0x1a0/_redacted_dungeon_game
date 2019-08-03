@@ -16,7 +16,6 @@ public class DungeonApplication extends Application {
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json", difficulty);
 
         DungeonController controller = dungeonLoader.loadController();
-        //DungeonController controller = dungeonLoader.getController();
         controller.giveDungeonMyself();
 
         
@@ -28,7 +27,7 @@ public class DungeonApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        //controller.start();
+        controller.start();
         
     }
 

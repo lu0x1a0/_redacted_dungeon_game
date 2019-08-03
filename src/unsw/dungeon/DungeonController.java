@@ -54,6 +54,7 @@ public class DungeonController{
     }
     public void removeEntityFromView(ImageView v) {
     	//initialEntities.remove(v);
+    	System.out.println("Doin it");
     	squares.getChildren().remove(v);
     }
     public void addEntityToView(ImageView v, int x, int y) {
@@ -62,7 +63,7 @@ public class DungeonController{
     }
     public void changeEntityImage(Entity e, ImageView oldv) {
     	removeEntityFromView(oldv);
-    	addEntityToView(e.getIv(),e.getX(),e.getY());
+    	//addEntityToView(e.getIv(),e.getX(),e.getY());
     }
     @FXML
     public void initialize() {
@@ -113,7 +114,7 @@ public class DungeonController{
         }    
 	}
     private Timeline createTimeline(Bomb bomb) {
-    	//GridPane grid = this.squares;
+    	GridPane grid = this.squares;
    	 	Timeline timeline = new Timeline();
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1),new EventHandler<ActionEvent>() {
 			@Override
@@ -129,27 +130,25 @@ public class DungeonController{
 			}
 		
 		}));
-    	KeyFrame explode = new KeyFrame(Duration.seconds(3),
-			new EventHandler<ActionEvent>() {
+		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(3),new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					System.out.println("ani-blo");
-					bomb.explode();
+					//System.out.println("ani-blo");
 					bomb.notifyObservers(bomb, "explode");
+					bomb.explode();
 				}
     		
-    		}
-		);
-    	timeline.getKeyFrames().add(explode);
+		}));
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4),new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				bomb.removeFromView();
+				bomb.setIv(null);
+				System.out.println("what's on the tile-"+grid.getChildren());
 			}
 		
 		}));
-//		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4),e->bomb.removeFromView()));
-    	bomb.getIslit().addListener(new ChangeListener<Boolean>() {
+		bomb.getIslit().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable,
                     Boolean oldValue, Boolean newValue) {
@@ -160,7 +159,7 @@ public class DungeonController{
             	}
             }
         });
-		//timeline.setOnFinished(e->bomb.removeFromView());
+		timeline.setOnFinished(e->bomb.removeFromView());
 		timeline.setCycleCount(1);
 		return timeline;
     }
@@ -184,10 +183,6 @@ public class DungeonController{
 		return timeline;
     }
     
-    
-    public void addPotionTimeLine(Potion p) {
-
-    }
     public void updateUIPotionTime() {
     	
     }
