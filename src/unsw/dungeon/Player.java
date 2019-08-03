@@ -133,6 +133,7 @@ public class Player extends Movable{
      * use sword to kill enemy
      */
     public void waveSword() {
+    	System.out.println(dungeon.getMap().get(new Coord(13,4)));
     	for(Collectible c:inventory) {
     		if (c instanceof Sword) {
     			c.use(this);

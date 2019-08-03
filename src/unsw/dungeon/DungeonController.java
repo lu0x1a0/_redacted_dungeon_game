@@ -54,7 +54,8 @@ public class DungeonController{
     }
     public void removeEntityFromView(ImageView v) {
     	//initialEntities.remove(v);
-    	System.out.println("Doin it");
+//    	System.out.println("Doin it");
+//    	System.out.println("Image is: "+v.getImage());
     	squares.getChildren().remove(v);
     }
     public void addEntityToView(ImageView v, int x, int y) {
@@ -145,17 +146,17 @@ public class DungeonController{
 			@Override
 			public void handle(ActionEvent event) {
 
-				bomb.removeFromView();
-				bomb.setIv(null);
-				System.out.println("----------------");
-				System.out.println(bomb.getX()+" - "+bomb.getY());
-				for (Node node: grid.getChildren()) {
-					if(grid.getRowIndex(node).equals(bomb.getX()) &&
-						grid.getColumnIndex(node).equals(bomb.getY())) {
-						System.out.println("what's on the tile-"+ ((ImageView)node).getImage().impl_getUrl() );
-					}
-				}
-				System.out.println("----------------");
+////				bomb.removeFromView();
+////				bomb.setIv(null);
+//				System.out.println("----------------");
+//				System.out.println(bomb.getX()+" - "+bomb.getY());
+//				for (Node node: grid.getChildren()) {
+//					if(grid.getRowIndex(node).equals(bomb.getX()) &&
+//						grid.getColumnIndex(node).equals(bomb.getY())) {
+//						System.out.println("what's on the tile-"+ ((ImageView)node).getImage().impl_getUrl() );
+//					}
+//				}
+//				System.out.println("----------------");
 			}
 		
 		}));
@@ -170,7 +171,15 @@ public class DungeonController{
             	}
             }
         });
-		timeline.setOnFinished(e->bomb.removeFromView());
+		timeline.setOnFinished((ActionEvent event) -> {
+			bomb.removeFromView();
+			Image ground = new Image("/dirt_0_new.png");
+			squares.add(new ImageView(ground), bomb.x().intValue(), bomb.y().getValue());
+			
+			
+		});
+
+//		timeline.setOnFinished(e->bomb.removeFromView());
 		timeline.setCycleCount(1);
 		return timeline;
     }

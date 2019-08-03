@@ -36,11 +36,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image boulderImg;
     private Image bombUnlitImg;
     
-	@SuppressWarnings("unused")
 	private Image bombLit1Img;
-	@SuppressWarnings("unused")
 	private Image bombLit2Img;
-	@SuppressWarnings("unused")
 	private Image bombLit3Img;
     private Image bombExplodeImg;
     private Image swordImg;
@@ -79,7 +76,8 @@ public class DungeonControllerLoader extends DungeonLoader {
      	switchImg = new Image("/pressure_plate.png");
      	closedDoorImg = new Image("/closed_door.png");
      	openedDoorImg = new Image("/open_door.png");
-     	exitImg = new Image("/exit.png");  
+     	exitImg = new Image("/exit.png"); 
+     	
      	//this.dungeonController = loadController();
     }
 
