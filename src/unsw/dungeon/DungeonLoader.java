@@ -20,10 +20,8 @@ import org.json.JSONTokener;
 public abstract class DungeonLoader {
 
     private JSONObject json;
-    private long difficulty;
-    public DungeonLoader(String filename, long difficulty) throws FileNotFoundException {
+    public DungeonLoader(String filename) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
-        this.difficulty = difficulty;
     }
 
     /**
@@ -41,6 +39,8 @@ public abstract class DungeonLoader {
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+        
+        //Function here to initialise inventory
         
         JSONObject jsonGoals = json.getJSONObject("goal-condition");
                 
@@ -72,7 +72,7 @@ public abstract class DungeonLoader {
         }
         return dungeon;
     }
-
+    
     private GoalLeafNode loadGoal(Dungeon dungeon, JSONObject json) {
     	if(json.getString("goal").equals("enemies")) {
     		ArrayList<Entity> enemies = dungeon.getEntitiesByType(Enemy.class);
@@ -139,7 +139,7 @@ public abstract class DungeonLoader {
             entity = exit;
         	break;
         case "enemy":
-        	Enemy enemy = new Enemy(x,y,dungeon,difficulty);
+        	Enemy enemy = new Enemy(x,y,dungeon);
         	onLoad(enemy);
         	entity = enemy;
         	break;

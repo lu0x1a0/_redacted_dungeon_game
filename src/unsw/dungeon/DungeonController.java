@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -24,49 +25,84 @@ import javafx.util.Duration;
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController{
+public class DungeonController implements Controller {
+
 
     @FXML
     public GridPane squares;
 
-    private List<ImageView> initialEntities;
+    private StartScreen startScreen;
+    
+    private EndScreen endScreen;
+
+	private List<ImageView> initialEntities;
+    private HashMap<String, Node> UIitems;
 
     private Player player;
 
     private Dungeon dungeon;
 
+
     private HashMap<Entity,Timeline> timelines;
     
     
     private ArrayList<Entity> entities;
-    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, ArrayList<Entity> entities) {
+
+    public DungeonController(Dungeon dungeon, List<ImageView> initialEntities, HashMap<String, Node> UIitems) {
+
         this.dungeon = dungeon;
         this.player = dungeon.getPlayer();
+        this.UIitems = UIitems;
         this.initialEntities = new ArrayList<>(initialEntities);
-        this.entities = entities;
+        this.entities = dungeon.getEntities();
         this.timelines = new HashMap<Entity,Timeline>();
     }
     public Dungeon getDungeon() {
     	return dungeon;
     }
-    public void giveDungeonMyself() {
+    
+    public StartScreen getStartScreen() {
+		return startScreen;
+	}
+	public void setEndScreen(EndScreen endScreen) {
+    	this.endScreen = endScreen;
+    }
+    
+    public EndScreen getEndScreen() {
+		return endScreen;
+	}
+	public void setStartScreen(StartScreen startScreen) {
+		this.startScreen = startScreen;
+	}
+	public void giveDungeonMyself() {
     	dungeon.setController(this);
     }
+	
     public void removeEntityFromView(ImageView v) {
     	//initialEntities.remove(v);
     	System.out.println("Doin it");
     	squares.getChildren().remove(v);
     }
+    public void removeNodeFromView(Node v) {
+    	squares.getChildren().remove(v);
+    }
     public void addEntityToView(ImageView v, int x, int y) {
-    	//squares.getChildren().add(v, 3, 4);
     	squares.add(v, x, y);
     }
     public void changeEntityImage(Entity e, ImageView oldv) {
     	removeEntityFromView(oldv);
     	//addEntityToView(e.getIv(),e.getX(),e.getY());
     }
-    @FXML
+    
+    public void addNodeToView(Node v, int x, int y) {
+    	squares.add(v, x, y);
+    }
+    
+    
+    @Override
+	@FXML
     public void initialize() {
+    	System.out.println(initialEntities.size());
         Image ground = new Image("/dirt_0_new.png");
 
         // Add the ground first so it is below all other entities
@@ -86,6 +122,12 @@ public class DungeonController{
         	}
     	}
         		
+
+        
+        for (Node item : UIitems.values())
+            squares.getChildren().add(item);
+        
+
     }
 
     @FXML
@@ -180,14 +222,28 @@ public class DungeonController{
             	}
             }
         });
+
 		return timeline;
     }
     
     public void updateUIPotionTime() {
     	
     }
-    public void start() {
-    	dungeon.startEnemies();
+
+	public void start(String difficulty) {
+    	dungeon.startEnemies(difficulty);
     }
+
+	public void endGame(boolean b) {
+		// TODO Auto-generated method stub
+		squares.getChildren().clear();
+		initialEntities.clear();
+		endScreen.start();
+		
+	}
+	public GridPane getSquares() {
+		return squares;
+	}
+	
 }
 

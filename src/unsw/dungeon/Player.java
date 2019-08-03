@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class Player extends Movable{
 	//static int count = 0;
-    private ArrayList<Collectible> inventory;
+    private Inventory playerInventory;
     /**
      * Create a player positioned in square (x,y)
      * @param x - int
@@ -19,34 +19,40 @@ public class Player extends Movable{
      */
     public Player(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
-        this.inventory = new ArrayList<Collectible>();
+        playerInventory = new Inventory(this);
     }
     
-    /**
-     * returns whether or not the player is holding a sword
-     * @return - boolean
-     */
-    public boolean hasSword() {
-    	for( Collectible e: inventory) {
-    		if(e instanceof Sword) {
-    			return true;
-    		}
-    	}
-    	return false;
+    
+    
+    
+    public Inventory getPlayerInventory() {
+		return playerInventory;
+	}
+
+
+
+
+	public void setPlayerInventory(Inventory playerInvenvtory) {
+    	this.playerInventory = playerInvenvtory;
     }
+/**
+ * returns whether or not the player is holding a sword
+ * @return - boolean
+ */
+
+	public boolean hasSword() {
+		return playerInventory.hasSword();
+	} 
+
     
     /**
      * returns the key the player is holding
      * @return Key
      */
-    public Key getKey() {
-    	for( Collectible e: inventory) {
-    		if(e instanceof Key) {
-    			return (Key) e;    		
-			}
-    	}
-    	return null;
-    }
+	public Key getKey() {
+		return playerInventory.getKey();
+	}
+
     
     /**
      * get the ID of the key held by player
@@ -61,21 +67,14 @@ public class Player extends Movable{
      * remove key from player's inventory
      */
     public void removeKey() {
-    	for(Collectible c:inventory) {
-    		if (c instanceof Key) {
-    			inventory.remove(c);
-    			break;
-    		}
-    	}
+    	playerInventory.removeKey();
     }
     
     /**
      * returns the inventory held by the player
      * @return ArrayList<Collectible> - Inventory of player
      */
-    public ArrayList<Collectible> getInventory() {
-		return inventory;
-	}
+ 
 	@Override
     public void moveUp() {
         if (getY() > 0 ) { 
@@ -133,24 +132,14 @@ public class Player extends Movable{
      * use sword to kill enemy
      */
     public void waveSword() {
-    	for(Collectible c:inventory) {
-    		if (c instanceof Sword) {
-    			c.use(this);
-    			break;
-    		}
-    	}
+    	playerInventory.waveSword();
     }
     
     /**
      * remove sword when it has been used 5 times
      */
     public void removeSword() {
-    	for(Collectible c:inventory) {
-    		if (c instanceof Sword) {
-    			inventory.remove(c);
-    			break;
-    		}
-    	}
+    	playerInventory.removeSword();
     }
     
     /**
@@ -158,26 +147,15 @@ public class Player extends Movable{
      * @return - int
      */
     public int countBombs() {
-    	int count = 0;
-    	for(Collectible c:inventory) {
-    		if (c instanceof Bomb) {
-    			count++;
-    		}
-    	}
-    	return count;
+    	return playerInventory.countBombs();
     }
     
     /**
      * light bomb in inventory and place it on map
      */
     public void litBomb() {
-    	for(Collectible c:inventory) {
-    		if (c instanceof Bomb) {
-    			inventory.remove(c);
-    			c.use(this);
-    			break;
-    		}
-    	}
+    	Bomb bomb = playerInventory.getBomb();
+    	if (bomb != null) bomb.use(this);
     }
     
     /**
@@ -185,12 +163,7 @@ public class Player extends Movable{
      * @return - boolean
      */
     public boolean hasPotion() {
-    	for(Collectible c:inventory) {
-    		if (c instanceof Potion) {
-    			return true;
-    		}
-    	}
-    	return false;
+    	return playerInventory.hasPotion();
     }
     
     /**
@@ -198,7 +171,7 @@ public class Player extends Movable{
      * @param p - potion to deactivate
      */
     public void potionEffectOff(Potion p) {
-    	inventory.remove(p);
+    	playerInventory.potionEffectOff(p);
     }
     @Override
     public void react(Entity e) {
@@ -220,7 +193,7 @@ public class Player extends Movable{
      * @param c - collectible to add to inventory
      */
     public void addToInventory(Collectible c) {
-    	inventory.add(c);
+    	playerInventory.addToInventory(c);
     }
 
 	@Override

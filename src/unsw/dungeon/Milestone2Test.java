@@ -673,7 +673,7 @@ class Milestone2Test {
 		testD.addEntity(e);
 		
 		com.sun.javafx.application.PlatformImpl.startup(()->{});
-		e.start();
+		e.start("Easy");
 		Timer timer= new Timer(true);
 		TimerTask task = new TimerTask() {
 			@Override

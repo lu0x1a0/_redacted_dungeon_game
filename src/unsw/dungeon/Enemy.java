@@ -19,25 +19,37 @@ import javafx.application.Platform;
 public class Enemy extends Movable {
 // being observed by the dungeon, observing the player
 	private Timer timer;
+
 	private long speed;
+	//static int count = 0;
 	Dungeon dungeon;
 	boolean alive = true;
 	
 	private EnemyPath evade;
 	private EnemyPath pursuit;
 	private EnemyPath activeMethod;
-	public Enemy(int x, int y, Dungeon dungeon, long speed) {
+	public Enemy(int x, int y, Dungeon dungeon) {
 		super(x, y, dungeon);
 		this.dungeon = dungeon;
 		evade = new EnemyEvade(dungeon);
 		pursuit = new EnemyPursuit(dungeon);
 		activeMethod = pursuit;
-		this.speed = speed;
 		//start();
 	}
-	public void start() {
+	public void start(String difficulty) {
 		Enemy e = this;
 		timer= new Timer(true);
+		switch (difficulty) {
+		case "Easy":
+			speed = 2000;
+			break;
+		case "Medium":
+			speed = 1000;
+			break;
+		case "Hard":
+			speed = 500;
+			break;
+		}
 		TimerTask task = new TimerTask() {
 			@Override
 		    public void run() {

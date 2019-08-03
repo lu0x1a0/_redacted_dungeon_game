@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -27,7 +28,7 @@ import javafx.util.Duration;
  */
 public class DungeonControllerLoader extends DungeonLoader {
 
-    private List<ImageView> entities_img;
+    private List<ImageView> entities;
 
     //Images
     private Image playerImg;
@@ -51,18 +52,37 @@ public class DungeonControllerLoader extends DungeonLoader {
     private Image closedDoorImg;
     private Image openedDoorImg;
     private Image exitImg;
+    private Image key_missing;
+	private Image key_present;
+	private Image sword_missing;
+	private Image sword_present;
+	private Image bomb_missing;
+	private Image bomb_present;
+	private Image treasure_missing;
+	private Image treasure_present;
+	private ImageView key_missingIV;
+	private ImageView key_presentIV;
+	private ImageView sword_missingIV;
+	private ImageView sword_presentIV;
+	private ImageView bomb_missingIV;
+	private ImageView bomb_presentIV;
+	private ImageView treasure_missingIV;
+	private ImageView treasure_presentIV;
 
 	private DungeonController dungeonController;
 
+
 	private HashMap<Entity, Timeline> timelines;
 	
-	private ArrayList<Entity> entities;
+	private HashMap<String, Node> UIitems;
 
-    public DungeonControllerLoader(String filename, long difficulty)
+
+    public DungeonControllerLoader(String filename)
             throws FileNotFoundException {
-        super(filename, difficulty);
+        super(filename);
         entities = new ArrayList<>();
-        entities_img = new ArrayList<>();
+        UIitems = new HashMap<String,Node>();
+
         playerImg = new Image("/human_new.png");
         wallImg = new Image("/brick_brown_0.png");
         enemyImg = new Image("/gnome.png");
@@ -79,8 +99,28 @@ public class DungeonControllerLoader extends DungeonLoader {
      	switchImg = new Image("/pressure_plate.png");
      	closedDoorImg = new Image("/closed_door.png");
      	openedDoorImg = new Image("/open_door.png");
+
      	exitImg = new Image("/exit.png");  
-     	//this.dungeonController = loadController();
+
+     	exitImg = new Image("/exit.png"); 
+     	treasure_present = new Image("/gold_pile.png");
+     	treasure_missing = new Image("/gold_pile_missing.png");
+     	key_missing = new Image("/key_inventory_missing.png");
+    	key_present = new Image("/key.png");
+    	sword_missing = new Image("/greatsword_1_inventory_missing.png");
+    	sword_present = new Image("/greatsword_1_new.png");
+    	bomb_missing = new Image("/bomb_unlit_missing.png");
+    	bomb_present = new Image("/bomb_unlit.png");
+    	key_missingIV = new ImageView(key_missing);
+    	key_presentIV = new ImageView(key_present);
+    	sword_missingIV = new ImageView(sword_missing);
+    	sword_presentIV = new ImageView(sword_present);
+    	bomb_missingIV = new ImageView(bomb_missing);
+    	bomb_presentIV = new ImageView(bomb_present);
+    	treasure_missingIV = new ImageView(treasure_missing);
+    	treasure_presentIV = new ImageView(treasure_present);
+
+
     }
 
     @Override
@@ -166,10 +206,46 @@ public class DungeonControllerLoader extends DungeonLoader {
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entity.setIv(view);
-        entities_img.add(view);
-        entities.add(entity);
+
+        entities.add(view);
     }
 
+    public void initialiseInventoryUIscreen() {
+    	GridPane.setRowIndex(key_missingIV, dungeonController.getDungeon().getHeight()+2);
+    	
+    	GridPane.setColumnIndex(key_missingIV, 0);
+    	UIitems.put("key_missing", key_missingIV);
+    	
+    	GridPane.setRowIndex(sword_missingIV, dungeonController.getDungeon().getHeight()+2);
+    	GridPane.setColumnIndex(sword_missingIV, 1);
+    	UIitems.put("sword_missing", sword_missingIV);
+
+		Label swordCountUI = new Label();
+		GridPane.setRowIndex(swordCountUI, dungeonController.getDungeon().getHeight()+2);
+    	GridPane.setColumnIndex(swordCountUI, 2);
+    	UIitems.put("sword_count", swordCountUI);
+
+
+    	GridPane.setRowIndex(bomb_missingIV, dungeonController.getDungeon().getHeight()+2);
+    	GridPane.setColumnIndex(bomb_missingIV, 3);
+    	UIitems.put("bomb_missing", bomb_missingIV);
+    	
+		Label bombCountUI = new Label();
+		GridPane.setRowIndex(bombCountUI, dungeonController.getDungeon().getHeight()+2);
+    	GridPane.setColumnIndex(bombCountUI, 4);
+    	UIitems.put("bomb_count", bombCountUI);
+    	
+    	GridPane.setRowIndex(treasure_missingIV, dungeonController.getDungeon().getHeight()+2);
+    	GridPane.setColumnIndex(treasure_missingIV, 5);
+    	UIitems.put("treasure_missing", treasure_missingIV);
+    	
+		Label treasureCountUI = new Label();
+		GridPane.setRowIndex(treasureCountUI, dungeonController.getDungeon().getHeight()+2);
+    	GridPane.setColumnIndex(treasureCountUI, 6);
+    	UIitems.put("treasure_count", treasureCountUI);
+
+    }
+    
 
     /**
      * Set a node in a GridPane to have its position track the position of an
@@ -199,6 +275,12 @@ public class DungeonControllerLoader extends DungeonLoader {
             }
         });
     }
+
+
+    public void endGame(Boolean result) {
+    	
+    }
+
     
     /**
      * Create a controller that can be attached to the DungeonView with all the
@@ -207,7 +289,92 @@ public class DungeonControllerLoader extends DungeonLoader {
      * @throws FileNotFoundException - if file is not JSON available for reading
      */
     public DungeonController loadController() throws FileNotFoundException {
-    	this.dungeonController = new DungeonController(load(), entities_img, entities);
+    	Dungeon ourDungeon = load();
+    	this.dungeonController = new DungeonController(ourDungeon, entities, UIitems);
+    	entities.clear();
+    	UIitems.clear();
+    	initialiseInventoryUIscreen();
+    	Inventory playerInventory = ourDungeon.getInventory();
+    	((Label)UIitems.get("sword_count")).textProperty().bind(playerInventory.getSwordHealth().asString());
+    	((Label)UIitems.get("bomb_count")).textProperty().bind(playerInventory.getBombsCount().asString());
+    	((Label)UIitems.get("treasure_count")).textProperty().bind(playerInventory.getTreasureCount().asString());
+    	
+    	playerInventory.getHasBomb().addListener(new ChangeListener<Boolean>() {
+    		@Override
+    		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+    			if(newValue == true) {
+    				dungeonController.removeNodeFromView(bomb_missingIV);
+    				dungeonController.addNodeToView(bomb_presentIV, 3, dungeonController.getDungeon().getHeight()+2);
+    				
+    			}
+    			else {
+    				dungeonController.removeNodeFromView(bomb_presentIV);
+    				dungeonController.addNodeToView(bomb_missingIV, 3, dungeonController.getDungeon().getHeight()+2);
+    			}
+    		}
+    	});
+    	
+    	playerInventory.getHasSword().addListener(new ChangeListener<Boolean>() {
+    		@Override
+    		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+    			if(newValue == true) {
+    				dungeonController.removeNodeFromView(sword_missingIV);
+    				dungeonController.addNodeToView(sword_presentIV, 1, dungeonController.getDungeon().getHeight()+2);
+    				
+    			}
+    			else {
+    				dungeonController.removeNodeFromView(sword_presentIV);
+    				dungeonController.addNodeToView(sword_missingIV, 1, dungeonController.getDungeon().getHeight()+2);
+    			}
+    		}
+    	});
+    	
+    	
+    	
+    	
+    	playerInventory.getHasKey().addListener(new ChangeListener<Boolean>() {
+    		@Override
+    		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+    			if(newValue == true) {
+    				dungeonController.removeNodeFromView(key_missingIV);
+    				dungeonController.addNodeToView(key_presentIV, 0, dungeonController.getDungeon().getHeight()+2);
+    				
+    			}
+    			else {
+    				dungeonController.removeNodeFromView(key_presentIV);
+    				dungeonController.addNodeToView(key_missingIV, 0, dungeonController.getDungeon().getHeight()+2);
+    			}
+    		}
+    	});
+    	
+    	playerInventory.getHasTreasure().addListener(new ChangeListener<Boolean>() {
+    		@Override
+    		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+    			if(newValue == true) {
+    				dungeonController.removeNodeFromView(treasure_missingIV);
+    				dungeonController.addNodeToView(treasure_presentIV, 5, dungeonController.getDungeon().getHeight()+2);
+    				
+    			}
+    			else {
+    				dungeonController.removeNodeFromView(treasure_presentIV);
+    				dungeonController.addNodeToView(bomb_missingIV, 5, dungeonController.getDungeon().getHeight()+2);
+    			}
+    		}
+    	});
+    	
+    	playerInventory.getHasPotion().addListener(new ChangeListener<Boolean>() {
+    		@Override
+    		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+    			if(newValue == true) {
+    				System.out.println("I will display potion animation");
+    				
+    			}
+    			else {
+    				System.out.println("I will hide potion animation");
+    			}
+    		}
+    	});
+    	
         return this.dungeonController;
     }
     public DungeonController getController() {
@@ -216,7 +383,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     
 	@Override
 	public void onLoad(GoalComponent goal) {
-		// TODO Auto-generated method stub
 		
 	}
 }

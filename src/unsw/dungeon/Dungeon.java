@@ -35,7 +35,6 @@ public class Dungeon implements Observer {
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
-        //this.entities = new ArrayList<>();
         this.player = null;
         this.map = new HashMap<Coord, ArrayList<Entity> >();
     }
@@ -89,7 +88,6 @@ public class Dungeon implements Observer {
      * @param v - view to add it to
      */
     public void addToView(Entity e, ImageView v) {
-    	//dc.trackPosition(e,v);
     	if(v!=null) {
     		dc.addEntityToView(v,e.getX(),e.getY());
     	}
@@ -116,8 +114,6 @@ public class Dungeon implements Observer {
      * @param entity - Entity
      */
 	public void addEntity(Entity entity) {
-        //entities.add(entity);
-        //map.put(new Coord(entity.getX(),entity.getY()), entity);
         Coord newCoord = new Coord(entity.getX(), entity.getY());
 		if(map.containsKey(newCoord)) {
 			map.get(newCoord).add(entity);
@@ -204,7 +200,16 @@ public class Dungeon implements Observer {
     	return allEntities;
     }
     
-    
+    public ArrayList<Entity> getEntities() {
+    	ArrayList<Entity> list = new ArrayList<Entity>();
+    	for (ArrayList<Entity> value : map.values()) {
+    	    for (Entity e: value) {
+    	    		list.add((Entity) e);    	    	
+    	    }
+    		
+    	}
+    	return list;
+    }
     
 	@Override
 	public void update(Observable o, Object info) {
@@ -227,7 +232,9 @@ public class Dungeon implements Observer {
 			update((Player) o, (Direction) info);
 		}
 		else if(o instanceof GoalComponent) {
-			System.out.print("You win!!!!");
+			System.out.println("Won game");
+			dc.endGame(true);
+			
 		}
 		//TODO add more cases
 		else if(o instanceof Sword) {
@@ -295,7 +302,6 @@ public class Dungeon implements Observer {
 	private void changeImpassable(Player p, Coord c) {
 		ArrayList<Entity> stuff = map.get(c);
 		for(int i=0; i<stuff.size();i++) {
-			//if (stuff.get(i) instanceof Boulder) {
 			stuff.get(i).react(p);
 			//}
 		}
@@ -325,7 +331,6 @@ public class Dungeon implements Observer {
 	private void stab(Sword s,Coord c) {
 		if(s.getCount()>0) {
 			if(map.containsKey(c)) {
-				//for (Entity e : map.get(c)) {
 				for(int i = 0; i<map.get(c).size() ;i++) {
 					map.get(c).get(i).react(s);
 				}
@@ -399,14 +404,22 @@ public class Dungeon implements Observer {
 	public void setController(DungeonController dc) {
 		this.dc = dc;
 	}
+	public Controller getDc() {
+		return dc;
+	}
+	
+	public Inventory getInventory() {
+		return this.getPlayer().getPlayerInventory();
+	}
+	
 	/**
 	 * tells the enemy in the dungeon to start moving and hunt the player
 	 */
-	public void startEnemies() {
+	public void startEnemies(String difficulty) {
 		for(ArrayList<Entity> arr :map.values()) {
 			for(Entity e: arr) {
 				if(e instanceof Enemy) {
-					((Enemy) e).start();
+					((Enemy) e).start(difficulty);
 				}
 			}
 		}
