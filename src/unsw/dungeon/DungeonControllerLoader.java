@@ -4,13 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
@@ -18,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.util.Duration;
+
 
 /**
  * A DungeonLoader that also creates the necessary ImageViews for the UI,
@@ -101,9 +95,6 @@ public class DungeonControllerLoader extends DungeonLoader {
      	switchImg = new Image("/pressure_plate.png");
      	closedDoorImg = new Image("/closed_door.png");
      	openedDoorImg = new Image("/open_door.png");
-
-     	exitImg = new Image("/exit.png");  
-
      	exitImg = new Image("/exit.png"); 
      	treasure_present = new Image("/gold_pile.png");
      	treasure_missing = new Image("/gold_pile_missing.png");
@@ -116,6 +107,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     	potion_inactive = new Image("/potion_empty.png");
     	potion_active = new Image("/brilliant_blue_new.png");
     	
+    	//Create imageViews for UI
     	key_missingIV = new ImageView(key_missing);
     	key_presentIV = new ImageView(key_present);
     	sword_missingIV = new ImageView(sword_missing);
@@ -128,6 +120,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     	potion_activeIV = new ImageView(potion_active);
     }
 
+    
     @Override
     public void onLoad(Player player) {
         ImageView view = new ImageView(playerImg);
@@ -205,7 +198,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         ImageView view = new ImageView(exitImg);
         addEntity(exit, view);
 	}
-	
+
+	/**
+	 * Adds entity to dungeon controller, ties it with its respective imageView
+	 * @param entity
+	 * @param view
+	 */
     private void addEntity(Entity entity, ImageView view) {
         trackPosition(entity, view);
         entity.setIv(view);
@@ -213,6 +211,9 @@ public class DungeonControllerLoader extends DungeonLoader {
         entities.add(view);
     }
 
+    /**
+     * Intialises all the sprites at the lowest bar of the screen. Places them into a map and then dungeon controller will display them
+     */
     public void initialiseInventoryUIscreen() {
     	GridPane.setRowIndex(key_missingIV, dungeonController.getDungeon().getHeight()+2);
     	
@@ -227,7 +228,6 @@ public class DungeonControllerLoader extends DungeonLoader {
 		GridPane.setRowIndex(swordCountUI, dungeonController.getDungeon().getHeight()+2);
     	GridPane.setColumnIndex(swordCountUI, 2);
     	UIitems.put("sword_count", swordCountUI);
-
 
     	GridPane.setRowIndex(bomb_missingIV, dungeonController.getDungeon().getHeight()+2);
     	GridPane.setColumnIndex(bomb_missingIV, 3);
@@ -287,16 +287,11 @@ public class DungeonControllerLoader extends DungeonLoader {
             }
         });
     }
-
-
-    public void endGame(Boolean result) {
-    	
-    }
-
     
     /**
      * Create a controller that can be attached to the DungeonView with all the
      * loaded entities.
+     * Also creates bindings for the inventory UI at the bottom of the screen.
      * @return DungeonController
      * @throws FileNotFoundException - if file is not JSON available for reading
      */
@@ -307,11 +302,14 @@ public class DungeonControllerLoader extends DungeonLoader {
     	UIitems.clear();
     	initialiseInventoryUIscreen();
     	Inventory playerInventory = ourDungeon.getInventory();
+    	//Binds the label of sword_count to the integerProperty in inventory to change as the value in inventory also changes
+    	//This is repeated for treasure count, bombs count, potion time
     	((Label)UIitems.get("sword_count")).textProperty().bind(playerInventory.getSwordHealth().asString());
     	((Label)UIitems.get("bomb_count")).textProperty().bind(playerInventory.getBombsCount().asString());
     	((Label)UIitems.get("treasure_count")).textProperty().bind(playerInventory.getTreasureCount().asString());
     	((Label)UIitems.get("potion_time")).textProperty().bind(playerInventory.getPotionTimeLeft().asString());
-    	
+
+    	//Bind boolean hasBomb in inventory to the image of a bomb. The image will then automatically change when the booleanProperty does
     	playerInventory.getHasBomb().addListener(new ChangeListener<Boolean>() {
     		@Override
     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -326,7 +324,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     			}
     		}
     	});
-    	
+    	//Bind boolean hasSword in inventory to the image of a sword. The image will then automatically change when the booleanProperty does
     	playerInventory.getHasSword().addListener(new ChangeListener<Boolean>() {
     		@Override
     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -340,10 +338,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     			}
     		}
     	});
-    	
-    	
-    	
-    	
+    	    	
+    	//Bind boolean hasKey in inventory to the image of a key. The image will then automatically change when the booleanProperty does
     	playerInventory.getHasKey().addListener(new ChangeListener<Boolean>() {
     		@Override
     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -358,7 +354,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     			}
     		}
     	});
-    	
+    	//Bind boolean hasTreasure in inventory to the image of a treasure. The image will then automatically change when the booleanProperty does
     	playerInventory.getHasTreasure().addListener(new ChangeListener<Boolean>() {
     		@Override
     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -373,7 +369,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     			}
     		}
     	});
-    	
+    	//Bind boolean hasPotion in inventory to the image of a potion. The image will then automatically change when the booleanProperty does
     	playerInventory.getHasPotion().addListener(new ChangeListener<Boolean>() {
     		@Override
     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -390,12 +386,23 @@ public class DungeonControllerLoader extends DungeonLoader {
     	
         return this.dungeonController;
     }
+    
+    /**
+     * getter for dungeon controller
+     * @return DungeonController
+     */
     public DungeonController getController() {
     	return this.dungeonController;
     }
-    
+
+    /**
+     * Not used method
+     */
 	@Override
 	public void onLoad(GoalComponent goal) {
-		
+	
 	}
+    
+    
+
 }

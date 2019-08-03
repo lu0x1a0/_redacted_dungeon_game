@@ -212,6 +212,7 @@ public class Dungeon implements Observer {
 	@Override
 	public void update(Observable o, Object info) {
 		if(o instanceof Movable && info instanceof Coord) {
+
 			Coord oldCoord = (Coord) info;
 			Entity m = (Entity) o;
 			map.get(oldCoord).remove(m);
@@ -230,9 +231,7 @@ public class Dungeon implements Observer {
 			update((Player) o, (Direction) info);
 		}
 		else if(o instanceof GoalComponent) {
-			System.out.println("Won game");
 			dc.endGame(true);
-			
 		}
 		else if(o instanceof Sword) {
 			update((Sword) o,info);
@@ -409,6 +408,10 @@ public class Dungeon implements Observer {
 	
 	public Inventory getInventory() {
 		return this.getPlayer().getPlayerInventory();
+	}
+	
+	public void endGame(boolean value) {
+		dc.endGame(value);
 	}
 	
 	/**

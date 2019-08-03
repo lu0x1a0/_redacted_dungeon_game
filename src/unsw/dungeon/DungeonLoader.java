@@ -43,16 +43,30 @@ public abstract class DungeonLoader {
         //Function here to initialise inventory
         
         JSONObject jsonGoals = json.getJSONObject("goal-condition");
-                
-        if(jsonGoals.getString("goal").equals("AND")) {
+        GoalComponent goals = goalAdder(dungeon, jsonGoals);
+        dungeon.addGoal(goals);
+        System.out.println(goals.printGoal("The goals are: "));
+        return dungeon;
+    }
+    
+    private GoalComponent goalAdder(Dungeon dungeon, JSONObject jsonGoals) {
+    	if(jsonGoals.getString("goal").equals("AND")) {
         	// This is an AND goal type. All the subgoals must be combined with AND
         	//Loop through JSON array
         	GoalCompositeComponent parentGoal = new GoalCompositeComponent(true);
         	JSONArray subGoals = jsonGoals.getJSONArray("subgoals");
         	for (int i = 0; i < subGoals.length(); i++) {
-                parentGoal.addChild(loadGoal(dungeon, subGoals.getJSONObject(i)));
+        		if(subGoals.getJSONObject(i).getString("goal").equals("AND")) {
+        			parentGoal.addChild(goalAdder(dungeon, (JSONObject) subGoals.get(i)));
+        		}
+        		else if (subGoals.getJSONObject(i).getString("goal").equals("OR")) {
+        			parentGoal.addChild(goalAdder(dungeon, (JSONObject) subGoals.get(i)));
+        		}
+        		else {
+        			parentGoal.addChild(loadGoal(dungeon, subGoals.getJSONObject(i)));
+        		}
             }
-        	dungeon.addGoal(parentGoal);
+        	return parentGoal;
         	
         }
         else if (jsonGoals.getString("goal").equals("OR")) {
@@ -62,15 +76,23 @@ public abstract class DungeonLoader {
         	GoalCompositeComponent parentGoal = new GoalCompositeComponent(false);
         	JSONArray subGoals = jsonGoals.getJSONArray("subgoals");
         	for (int i = 0; i < subGoals.length(); i++) {
-                parentGoal.addChild(loadGoal(dungeon, subGoals.getJSONObject(i)));
+        		if(subGoals.getJSONObject(i).getString("goal").equals("AND")) {
+        			parentGoal.addChild(goalAdder(dungeon, (JSONObject) subGoals.get(i)));
+        		}
+        		else if (subGoals.getJSONObject(i).getString("goal").equals("OR")) {
+        			parentGoal.addChild(goalAdder(dungeon, (JSONObject) subGoals.get(i)));
+        		}
+        		else {
+        			parentGoal.addChild(loadGoal(dungeon, subGoals.getJSONObject(i)));
+        		}
+//                parentGoal.addChild(loadGoal(dungeon, subGoals.getJSONObject(i)));
             }
-        	dungeon.addGoal(parentGoal);
+        	return parentGoal;
         }
         else {
-        	dungeon.addGoal(loadGoal(dungeon, jsonGoals));
+        	return loadGoal(dungeon, jsonGoals);
         	
         }
-        return dungeon;
     }
     
     private GoalLeafNode loadGoal(Dungeon dungeon, JSONObject json) {
@@ -114,7 +136,11 @@ public abstract class DungeonLoader {
     	}
     }
     
-    
+    /**
+     * Takes a JSON object and parses it into an entity and adds it to dungeon object
+     * @param dungeon
+     * @param json
+     */
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");
@@ -192,30 +218,82 @@ public abstract class DungeonLoader {
         }
     }
 
-    //Create additional abstract methods for the other entities
+
+    /**
+     * Attaches player image to entity player
+     * @param player
+     */
     public abstract void onLoad(Player player);
     
+    /**
+     * Attaches enemy image to entity enemy
+     * @param enemy
+     */
     public abstract void onLoad(Enemy enemy);
     
+    /**
+     * Attaches boulder image to entity boulder
+     * @param boulder
+     */
     public abstract void onLoad(Boulder boulder);
     
+    /**
+     * Attaches bomb image to entity bomb
+     * @param bomb
+     */
     public abstract void onLoad(Bomb bomb);
 
+    /**
+     * Attaches sword image to entity sword
+     * @param sword
+     */
     public abstract void onLoad(Sword sword);    
 
+    /**
+     * Attaches player key to entity key
+     * @param key
+     */
     public abstract void onLoad(Key key);
 
+    /**
+     * Attaches treasure image to entity treasure
+     * @param treasure
+     */
     public abstract void onLoad(Treasure treasure);
     
+    /**
+     * Attaches potion image to entity potion
+     * @param potion
+     */
     public abstract void onLoad(Potion potion);
 
+    /**
+     * Attaches floorswitch image to entity floorswitch
+     * @param floorswitch
+     */
     public abstract void onLoad(FloorSwitch floorswitch);
 
+    /**
+     * Attaches door image to entity door
+     * @param door
+     */
     public abstract void onLoad(Door door);
 
+    /**
+     * Not used
+     * @param goal
+     */
     public abstract void onLoad(GoalComponent goal);
 
+    /**
+     * Not used
+     * @param goal
+     */
 	public abstract void onLoad(Exit exit);
 	
+	/**
+     * Not used
+     * @param goal
+     */
 	public abstract void onLoad(Wall wall);
 }

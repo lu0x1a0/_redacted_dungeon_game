@@ -21,15 +21,9 @@ public class Player extends Movable{
         playerInventory = new Inventory(this);
     }
     
-    
-    
-    
     public Inventory getPlayerInventory() {
 		return playerInventory;
 	}
-
-
-
 
 	public void setPlayerInventory(Inventory playerInvenvtory) {
     	this.playerInventory = playerInvenvtory;
@@ -199,6 +193,11 @@ public class Player extends Movable{
 	@Override
 	public boolean isPassable() {
 		return true;
+	}
+
+	public void dead() {
+		dungeon.endGame(false);
+		
 	}
 	
 

@@ -652,10 +652,12 @@
   ],
   "goal-condition": {
     "goal": "AND",
-    "subgoals": [
-      {
-        "goal": "enemies"
-      },
+	    "subgoals": [
+	      { "goal": "AND", "subgoals":
+	      [ {"goal": "enemies" },
+	        {"goal": "boulders" }
+	      ]
+	    },
       {
         "goal": "treasure"
       }

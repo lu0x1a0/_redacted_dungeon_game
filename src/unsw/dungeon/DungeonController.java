@@ -236,8 +236,7 @@ public class DungeonController implements Controller {
 	public void endGame(boolean b) {
 		squares.getChildren().clear();
 		initialEntities.clear();
-		endScreen.start();
-		
+		endScreen.start(b);
 	}
 	public GridPane getSquares() {
 		return squares;

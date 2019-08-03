@@ -41,13 +41,14 @@ public class DungeonScreen extends Screen {
         return scene;
 	}
 
+
+	
 	public void start(String difficulty) throws IOException {
 		
 		if(((DungeonController ) controller).getSquares().getChildren().size() == 0) {
 			scene = initialiseScene();
 		}
         super.start();
-
         ((DungeonController ) controller).start(difficulty);
         
     }
@@ -59,6 +60,15 @@ public class DungeonScreen extends Screen {
 
 	@Override
 	public void start() {		
+		if(((DungeonController ) controller).getSquares().getChildren().size() == 0) {
+			try {
+				scene = initialiseScene();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+        super.start();
+        ((DungeonController ) controller).start("Hard");
 	}
 
 	
