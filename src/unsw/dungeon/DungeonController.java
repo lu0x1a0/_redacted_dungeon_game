@@ -79,9 +79,6 @@ public class DungeonController implements Controller {
     }
 	
     public void removeEntityFromView(ImageView v) {
-    	//initialEntities.remove(v);
-//    	System.out.println("Doin it");
-//    	System.out.println("Image is: "+v.getImage());
     	squares.getChildren().remove(v);
     }
     public void removeNodeFromView(Node v) {
@@ -103,7 +100,6 @@ public class DungeonController implements Controller {
     @Override
 	@FXML
     public void initialize() {
-    	System.out.println(initialEntities.size());
         Image ground = new Image("/dirt_0_new.png");
 
         // Add the ground first so it is below all other entities
@@ -162,7 +158,6 @@ public class DungeonController implements Controller {
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1),new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("lit2");
 				bomb.lit2();
 			}
 		
@@ -170,7 +165,6 @@ public class DungeonController implements Controller {
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2),new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				System.out.println("lit3");
 				bomb.lit3();
 			}
 		
@@ -178,7 +172,6 @@ public class DungeonController implements Controller {
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(3),new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					//System.out.println("ani-blo");
 					bomb.notifyObservers(bomb, "explode");
 					bomb.explode();
 				}
@@ -187,18 +180,8 @@ public class DungeonController implements Controller {
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4),new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-
-////				bomb.removeFromView();
-////				bomb.setIv(null);
-//				System.out.println("----------------");
-//				System.out.println(bomb.getX()+" - "+bomb.getY());
-//				for (Node node: grid.getChildren()) {
-//					if(grid.getRowIndex(node).equals(bomb.getX()) &&
-//						grid.getColumnIndex(node).equals(bomb.getY())) {
-//						System.out.println("what's on the tile-"+ ((ImageView)node).getImage().impl_getUrl() );
-//					}
-//				}
-//				System.out.println("----------------");
+				bomb.removeFromView();
+				bomb.setIv(null);
 			}
 		
 		}));

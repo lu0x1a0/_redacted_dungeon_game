@@ -19,11 +19,7 @@ public class Inventory {
 	private SimpleBooleanProperty hasPotion = new SimpleBooleanProperty();
 	private SimpleBooleanProperty hasTreasure = new SimpleBooleanProperty();
 	private SimpleIntegerProperty treasureCount = new SimpleIntegerProperty();
-	
-	
-	
-	
-	
+	private SimpleIntegerProperty potion_time = new SimpleIntegerProperty();
 
 
 	public SimpleBooleanProperty getHasTreasure() {
@@ -216,6 +212,9 @@ public class Inventory {
 		return hasPotion;
 	}
 	
+	public SimpleIntegerProperty getPotionTimeLeft() {
+		return null;
+	}
 	
 }
 

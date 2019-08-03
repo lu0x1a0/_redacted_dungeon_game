@@ -55,7 +55,6 @@ public class Bomb extends Collectible {
 	 */
 	@Override
 	public void use(Object info) {
-		System.out.println(x() +" "+ y());
 		if (info instanceof Player) {
 			x().set(((Player) info).getX());
 			y().set(((Player) info).getY());
@@ -96,7 +95,6 @@ public class Bomb extends Collectible {
 	public void explode() {
 		this.setIv(blast);
 		dungeon.changeEntityImage(this,lit3);
-		System.out.println("blasting");
 	}
 	@Override
 	public String toString() {

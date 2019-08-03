@@ -97,7 +97,6 @@ public class Dungeon implements Observer {
      * @param v - image view
      */
 	public void removeFromView(ImageView v) {
-//		System.out.println("removin---"+v);
 		
     	dc.removeEntityFromView(v);
     }
