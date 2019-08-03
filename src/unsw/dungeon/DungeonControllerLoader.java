@@ -51,6 +51,9 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image bomb_present;
 	private Image treasure_missing;
 	private Image treasure_present;
+	private Image potion_inactive;
+	private Image potion_active;
+	
 	private ImageView key_missingIV;
 	private ImageView key_presentIV;
 	private ImageView sword_missingIV;
@@ -59,7 +62,9 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private ImageView bomb_presentIV;
 	private ImageView treasure_missingIV;
 	private ImageView treasure_presentIV;
-
+	private ImageView potion_inactiveIV;
+	private ImageView potion_activeIV;
+	
 	private DungeonController dungeonController;
 
 
@@ -102,6 +107,9 @@ public class DungeonControllerLoader extends DungeonLoader {
     	sword_present = new Image("/greatsword_1_new.png");
     	bomb_missing = new Image("/bomb_unlit_missing.png");
     	bomb_present = new Image("/bomb_unlit.png");
+    	potion_inactive = new Image("/potion_empty.png");
+    	potion_active = new Image("/brilliant_blue_new.png");
+    	
     	key_missingIV = new ImageView(key_missing);
     	key_presentIV = new ImageView(key_present);
     	sword_missingIV = new ImageView(sword_missing);
@@ -110,7 +118,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     	bomb_presentIV = new ImageView(bomb_present);
     	treasure_missingIV = new ImageView(treasure_missing);
     	treasure_presentIV = new ImageView(treasure_present);
-
+    	potion_inactiveIV = new ImageView(potion_inactive);
+    	potion_activeIV = new ImageView(potion_active);
     }
 
     @Override
@@ -233,7 +242,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 		GridPane.setRowIndex(treasureCountUI, dungeonController.getDungeon().getHeight()+2);
     	GridPane.setColumnIndex(treasureCountUI, 6);
     	UIitems.put("treasure_count", treasureCountUI);
-
+    	
+    	GridPane.setRowIndex(potion_inactiveIV, dungeonController.getDungeon().getHeight()+2);
+    	GridPane.setColumnIndex(potion_inactiveIV, 7);
+    	UIitems.put("potion", potion_inactiveIV);
+    	
+		Label potionTimeUI = new Label();
+		GridPane.setRowIndex(potionTimeUI, dungeonController.getDungeon().getHeight()+2);
+    	GridPane.setColumnIndex(potionTimeUI, 8);
+    	UIitems.put("potion_time", potionTimeUI);
+    	
     }
     
 
@@ -288,6 +306,7 @@ public class DungeonControllerLoader extends DungeonLoader {
     	((Label)UIitems.get("sword_count")).textProperty().bind(playerInventory.getSwordHealth().asString());
     	((Label)UIitems.get("bomb_count")).textProperty().bind(playerInventory.getBombsCount().asString());
     	((Label)UIitems.get("treasure_count")).textProperty().bind(playerInventory.getTreasureCount().asString());
+    	((Label)UIitems.get("potion_time")).textProperty().bind(playerInventory.getPotionTimeLeft().asString());
     	
     	playerInventory.getHasBomb().addListener(new ChangeListener<Boolean>() {
     		@Override
@@ -310,7 +329,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     			if(newValue == true) {
     				dungeonController.removeNodeFromView(sword_missingIV);
     				dungeonController.addNodeToView(sword_presentIV, 1, dungeonController.getDungeon().getHeight()+2);
-    				
     			}
     			else {
     				dungeonController.removeNodeFromView(sword_presentIV);
@@ -356,11 +374,13 @@ public class DungeonControllerLoader extends DungeonLoader {
     		@Override
     		public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
     			if(newValue == true) {
-    				System.out.println("I will display potion animation");
-    				
+    				//System.out.println("I will display potion animation");
+    				dungeonController.removeNodeFromView(potion_inactiveIV);
+    				dungeonController.addNodeToView(potion_activeIV, 7, dungeonController.getDungeon().getHeight()+2);
     			}
     			else {
-    				System.out.println("I will hide potion animation");
+    				dungeonController.removeNodeFromView(potion_activeIV);
+    				dungeonController.addNodeToView(potion_inactiveIV, 7, dungeonController.getDungeon().getHeight()+2);
     			}
     		}
     	});

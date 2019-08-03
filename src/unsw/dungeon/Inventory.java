@@ -19,11 +19,7 @@ public class Inventory {
 	private SimpleBooleanProperty hasPotion = new SimpleBooleanProperty();
 	private SimpleBooleanProperty hasTreasure = new SimpleBooleanProperty();
 	private SimpleIntegerProperty treasureCount = new SimpleIntegerProperty();
-	
-	
-	
-	
-	
+	private SimpleIntegerProperty potion_time = new SimpleIntegerProperty();
 
 
 	public SimpleBooleanProperty getHasTreasure() {
@@ -70,6 +66,7 @@ public class Inventory {
     	}
     	else if(c instanceof Potion) {
     		hasPotion.setValue(true);
+    		potion_time.setValue( ((Potion)c).getTime());
     	}
     }
 
@@ -216,6 +213,9 @@ public class Inventory {
 		return hasPotion;
 	}
 	
+	public SimpleIntegerProperty getPotionTimeLeft() {
+		return potion_time;
+	}
 	
 }
 
