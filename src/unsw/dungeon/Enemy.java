@@ -126,6 +126,7 @@ public class Enemy extends Movable {
 			if( ((Player) e).hasPotion() ) {
 				killed();	
 			}else {
+				((Player) e).dead();
 				((Player) e).removeFromView();
 				timer.cancel();
 			}

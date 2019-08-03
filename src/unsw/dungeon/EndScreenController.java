@@ -23,11 +23,14 @@ public class EndScreenController implements Controller {
     
     @FXML
     void handleMainMenu(ActionEvent event) {
-    	makeFadeOut();
+    	makeFadeOut(startScreen);
     }
 
+    
+    
     @FXML
     void handlePlayAgain(ActionEvent event) {
+    	makeFadeOut(dungeonScreen);
     }
 
 	public void setDungeonScreen(DungeonScreen dungeonScreen) {
@@ -57,18 +60,31 @@ public class EndScreenController implements Controller {
 		fadeTransition.play();	
 	}
 
-	private void makeFadeOut() {
+	private void makeFadeOut(Screen destination) {
 		FadeTransition fadeTransition = new FadeTransition();
 		fadeTransition.setDuration(Duration.millis(1000));
 		fadeTransition.setNode(rootPane);
 		fadeTransition.setFromValue(1);
 		fadeTransition.setToValue(0);
 		fadeTransition.setOnFinished((ActionEvent event) -> {
-			startScreen.start();
+//			destination.
+			destination.start();
 			
 			
 		});
 		fadeTransition.play();	
+	}
+
+
+
+	public void setMessage(boolean value) {
+		if(value == false) {
+			winLossMessage.setText("You lost!!");
+		}
+		else {
+			winLossMessage.setText("You win!!");
+		}
+		
 	}
     
 }
