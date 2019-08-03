@@ -1,9 +1,5 @@
 package unsw.dungeon;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.ImageView;
@@ -14,13 +10,12 @@ import javafx.scene.image.ImageView;
  *
  */
 public class Bomb extends Collectible {
-	
+	@SuppressWarnings({"unused"})
 	private ImageView unlit;
 	private ImageView lit1;
 	private ImageView lit2;
 	private ImageView lit3;
 	private ImageView blast;
-	private Timer timer;
 	private BooleanProperty islit;
 	public Bomb(int x, int y, Dungeon dungeon) {
         super(x, y, dungeon);
@@ -39,6 +34,10 @@ public class Bomb extends Collectible {
 		this.lit3 = lit3;
 		this.blast = blast;
 	}
+	/**
+	 * return the property that is tied to UI change
+	 * @return
+	 */
 	public BooleanProperty getIslit() {
 		return islit;
 	}
@@ -61,27 +60,37 @@ public class Bomb extends Collectible {
 			dungeon.addEntity(this);
 			this.lit1();
 			islit.set(true);
-			Bomb bomb = this;
 		}
 	}
+	/**
+	 * part 1 of the exploding animation.
+	 */
 	public void lit1() {
 		this.setIv(lit1);
 		dungeon.addToView(this,getIv());
 	}
+
+	/**
+	 * part 2 of the exploding animation.
+	 */
 	public void lit2() {
 		this.setIv(lit2);
 		dungeon.changeEntityImage(this,lit1);
 	}
+
+	/**
+	 * part 3 of the exploding animation.
+	 */
 	public void lit3() {
 		this.setIv(lit3);
 		dungeon.changeEntityImage(this,lit2);
 	}
+
+	/**
+	 * part 4 of the exploding animation.
+	 */
 	public void explode() {
 		this.setIv(blast);
 		dungeon.changeEntityImage(this,lit3);
-	}
-	@Override
-	public String toString() {
-		return this.getIv().toString();
 	}
 }

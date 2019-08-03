@@ -56,4 +56,13 @@ public class Potion extends Collectible {
 	public BooleanProperty getOnUse() {
 		return onUse;
 	}	
+	@Override
+	public void react(Entity e) {
+		if (e instanceof Player) {
+			Player p = (Player) e;
+			if (!p.hasPotion()) {
+				collect((Player) e);
+			}
+		}
+	}
 }

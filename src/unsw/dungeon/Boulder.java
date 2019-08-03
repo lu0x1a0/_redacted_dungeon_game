@@ -74,9 +74,6 @@ public class Boulder extends Movable {
 				moveUp();
 			}
 		}
-		else if(e instanceof Bomb) {
-			
-		}
 	}
 
 }

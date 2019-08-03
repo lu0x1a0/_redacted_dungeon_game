@@ -222,7 +222,9 @@ public class DungeonController implements Controller {
 
 		return timeline;
     }
-    
+    /**
+     * display countdown for potion
+     */
     public void updateUIPotionTime() {
     	dungeon.getInventory().getPotionTimeLeft().set(
     			dungeon.getInventory().getPotionTimeLeft().get()-1

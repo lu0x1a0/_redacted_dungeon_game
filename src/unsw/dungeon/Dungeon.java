@@ -231,7 +231,8 @@ public class Dungeon implements Observer {
 			update((Player) o, (Direction) info);
 		}
 		else if(o instanceof GoalComponent) {
-			dc.endGame(true);
+			if(dc!=null)
+				dc.endGame(true);
 		}
 		else if(o instanceof Sword) {
 			update((Sword) o,info);
