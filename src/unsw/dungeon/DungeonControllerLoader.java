@@ -104,12 +104,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     	bomb_presentIV = new ImageView(bomb_present);
     	treasure_missingIV = new ImageView(treasure_missing);
     	treasure_presentIV = new ImageView(treasure_present);
-//    	entities.add(key_missingIV);
-//    	entities.add(key_presentIV);
-//    	entities.add(sword_missingIV);
-//    	entities.add(sword_presentIV);
-//    	entities.add(bomb_missingIV);
-//    	entities.add(bomb_presentIV);
 
     }
 
@@ -272,6 +266,8 @@ public class DungeonControllerLoader extends DungeonLoader {
     public DungeonController loadController() throws FileNotFoundException {
     	Dungeon ourDungeon = load();
     	this.dungeonController = new DungeonController(ourDungeon, entities, UIitems);
+    	entities.clear();
+    	UIitems.clear();
     	initialiseInventoryUIscreen();
     	Inventory playerInventory = ourDungeon.getInventory();
     	((Label)UIitems.get("sword_count")).textProperty().bind(playerInventory.getSwordHealth().asString());

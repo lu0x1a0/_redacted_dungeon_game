@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 
-public class EndScreenController {
+public class EndScreenController implements Controller {
 
     @FXML
     private Label winLossMessage;
@@ -28,7 +28,6 @@ public class EndScreenController {
 
     @FXML
     void handlePlayAgain(ActionEvent event) {
-    	
     }
 
 	public void setDungeonScreen(DungeonScreen dungeonScreen) {
@@ -65,7 +64,6 @@ public class EndScreenController {
 		fadeTransition.setFromValue(1);
 		fadeTransition.setToValue(0);
 		fadeTransition.setOnFinished((ActionEvent event) -> {
-
 			startScreen.start();
 			
 			

@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import java.io.IOException;
+
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,7 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.util.Duration;
 
-public class StartScreenController {
+public class StartScreenController implements Controller {
 
 	
 	
@@ -23,9 +25,9 @@ public class StartScreenController {
     
     private DungeonScreen dungeonScreen;
     
-    private InstructionsScreen instructionsScreen;
+    private Screen instructionsScreen;
 
-	public void setInstructionsScreen(InstructionsScreen instructionsScreen) {
+	public void setInstructionsScreen(Screen instructionsScreen) {
 		this.instructionsScreen = instructionsScreen;
 	}
 
@@ -34,7 +36,7 @@ public class StartScreenController {
     
 
     @FXML
-    void startGame(ActionEvent event) {
+    void startGame(ActionEvent event) throws IOException {
     	switch (((Button)event.getSource()).getText()) {
     	case "Easy":
     		dungeonScreen.start("Easy");
@@ -49,7 +51,7 @@ public class StartScreenController {
     	
     	}
     }
-
+    
 	public void setDungeonScreen(DungeonScreen dungeonScreen) {
 		this.dungeonScreen = dungeonScreen;
 	}
@@ -95,6 +97,7 @@ public class StartScreenController {
 		});
 		fadeTransition.play();	
 	}
+
     
 }
 	

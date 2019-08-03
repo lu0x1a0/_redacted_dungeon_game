@@ -10,10 +10,8 @@ public class DungeonApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Dungeon");
 
-        DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
-        
-        DungeonController controller = dungeonLoader.loadController();
-        controller.giveDungeonMyself();
+		DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
+
 
         StartScreenController startController = new StartScreenController();
         
@@ -24,7 +22,7 @@ public class DungeonApplication extends Application {
         StartScreen startScreen = new StartScreen(primaryStage, startController);
         InstructionsScreen instructionsScreen = new InstructionsScreen(primaryStage, instructionsController);
         EndScreen endScreen = new EndScreen(primaryStage, endScreenController);        
-        DungeonScreen dungeonScreen = new DungeonScreen(primaryStage, controller);
+        DungeonScreen dungeonScreen = new DungeonScreen(primaryStage, dungeonLoader);
         
         endScreen.getController().setDungeonScreen(dungeonScreen);
         endScreen.getController().setStartScreen(startScreen);

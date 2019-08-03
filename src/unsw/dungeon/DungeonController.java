@@ -18,7 +18,7 @@ import javafx.scene.layout.GridPane;
  * @author Robert Clifton-Everest
  *
  */
-public class DungeonController {
+public class DungeonController implements Controller {
 
     @FXML
     public GridPane squares;
@@ -44,11 +44,17 @@ public class DungeonController {
     	return dungeon;
     }
     
-    public void setEndScreen(EndScreen endScreen) {
+    public StartScreen getStartScreen() {
+		return startScreen;
+	}
+	public void setEndScreen(EndScreen endScreen) {
     	this.endScreen = endScreen;
     }
     
-    public void setStartScreen(StartScreen startScreen) {
+    public EndScreen getEndScreen() {
+		return endScreen;
+	}
+	public void setStartScreen(StartScreen startScreen) {
 		this.startScreen = startScreen;
 	}
 	public void giveDungeonMyself() {
@@ -63,7 +69,6 @@ public class DungeonController {
     	squares.getChildren().remove(v);
     }
     public void addEntityToView(ImageView v, int x, int y) {
-    	//squares.getChildren().add(v, 3, 4);
     	squares.add(v, x, y);
     }
     public void changeEntityImage(Entity e, ImageView oldv) {
@@ -72,13 +77,14 @@ public class DungeonController {
     }
     
     public void addNodeToView(Node v, int x, int y) {
-    	//squares.getChildren().add(v, 3, 4);
     	squares.add(v, x, y);
     }
     
     
-    @FXML
+    @Override
+	@FXML
     public void initialize() {
+    	System.out.println(initialEntities.size());
         Image ground = new Image("/dirt_0_new.png");
 
         // Add the ground first so it is below all other entities
@@ -144,12 +150,14 @@ public class DungeonController {
         });
         
     }
-    public void start(String difficulty) {
-    	
+
+	public void start(String difficulty) {
     	dungeon.startEnemies(difficulty);
     }
 	public void endGame(boolean b) {
 		// TODO Auto-generated method stub
+		squares.getChildren().clear();
+		initialEntities.clear();
 		endScreen.start();
 		
 	}

@@ -8,35 +8,58 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class DungeonScreen {
+public class DungeonScreen extends Screen {
 
-	private Stage stage;
-	private DungeonController controller;
-	private Scene scene;
-	
-	public DungeonScreen(Stage stage, DungeonController controller) throws IOException{
+	private DungeonControllerLoader dungeonControllerLoader;
+
+	public DungeonScreen(Stage stage, DungeonControllerLoader dungeonControllerLoader) throws IOException{
 		this.stage = stage;
-		this.controller = controller;
+		this.dungeonControllerLoader = dungeonControllerLoader;
+        scene = initialiseScene();
 		
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
+	}
+	
+	
+	private Scene initialiseScene() throws IOException {
+		if(this.controller != null && ((DungeonController )this.controller).getEndScreen() != null) {
+			EndScreen endScreen = ((DungeonController ) this.controller).getEndScreen(); 
+			StartScreen startScreen = ((DungeonController ) this.controller).getStartScreen();
+			this.controller = this.dungeonControllerLoader.loadController();
+			((DungeonController ) this.controller).setEndScreen(endScreen);
+			((DungeonController ) this.controller).setStartScreen(startScreen);
+		}
+		else {
+			this.controller = this.dungeonControllerLoader.loadController();
+		}
+		((DungeonController ) this.controller).giveDungeonMyself();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
 
         loader.setController(this.controller);
         
         Parent root = loader.load();
         scene = new Scene(root);
-		
+        return scene;
 	}
 
-	public void start(String difficulty) {
-        stage.setScene(scene);
-        scene.getRoot().requestFocus();
-        stage.show();
-        controller.start(difficulty);
+	public void start(String difficulty) throws IOException {
+		
+		if(((DungeonController ) controller).getSquares().getChildren().size() == 0) {
+			scene = initialiseScene();
+		}
+        super.start();
+
+        ((DungeonController ) controller).start(difficulty);
+        
+    }
+	
+    public DungeonController getController() {
+        return (DungeonController ) controller;
     }
 
-    public DungeonController getController() {
-        return controller;
-    }
+
+	@Override
+	public void start() {		
+	}
 
 	
 }

@@ -35,7 +35,6 @@ public class Dungeon implements Observer {
     public Dungeon(int width, int height) {
         this.width = width;
         this.height = height;
-        //this.entities = new ArrayList<>();
         this.player = null;
         this.map = new HashMap<Coord, ArrayList<Entity> >();
     }
@@ -89,7 +88,6 @@ public class Dungeon implements Observer {
      * @param v - view to add it to
      */
     public void addToView(Entity e, ImageView v) {
-    	//dc.trackPosition(e,v);
     	if(v!=null) {
     		dc.addEntityToView(v,e.getX(),e.getY());
     	}
@@ -114,8 +112,6 @@ public class Dungeon implements Observer {
      * @param entity - Entity
      */
 	public void addEntity(Entity entity) {
-        //entities.add(entity);
-        //map.put(new Coord(entity.getX(),entity.getY()), entity);
         Coord newCoord = new Coord(entity.getX(), entity.getY());
 		if(map.containsKey(newCoord)) {
 			map.get(newCoord).add(entity);
@@ -371,7 +367,7 @@ public class Dungeon implements Observer {
 	public void setController(DungeonController dc) {
 		this.dc = dc;
 	}
-	public DungeonController getDc() {
+	public Controller getDc() {
 		return dc;
 	}
 	

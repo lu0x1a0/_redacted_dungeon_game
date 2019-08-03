@@ -3,39 +3,34 @@ package unsw.dungeon;
 
 import java.io.IOException;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class InstructionsScreen {
+public class InstructionsScreen extends Screen {
 
-	private Stage stage;
-	private InstructionsPageController controller;
-	private Scene scene;
-	
 	public InstructionsScreen(Stage stage, InstructionsPageController controller) throws IOException{
-		this.stage = stage;
-		this.controller = controller;
-		
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("instructionsScreen.fxml"));
-        loader.setController(this.controller);
-        Parent root = loader.load();
-        scene = new Scene(root);
+		super(stage, controller, "instructionsScreen.fxml");
+
+//		this.stage = stage;
+//		this.controller = controller;
+//		
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("instructionsScreen.fxml"));
+//        loader.setController(this.controller);
+//        Parent root = loader.load();
+//        scene = new Scene(root);
 		
 	}
-
+	@Override
 	public void start() {
-		controller.resetForViewing();
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public InstructionsPageController getController() {
-        return controller;
-    }
-
+		((InstructionsPageController) controller).resetForViewing();
+	    super.start();
+	}
+	
+	public InstructionsPageController getController() {
+		return (InstructionsPageController) controller;
+	}
+	
+	
 	
 }
 

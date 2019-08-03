@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 
-public class InstructionsPageController {
+public class InstructionsPageController implements Controller {
 
     @FXML
     private Label swordInstructions;
@@ -57,7 +57,7 @@ public class InstructionsPageController {
     	}
     }
 
-	protected void makeFadeIn() {
+	private void makeFadeIn() {
 		FadeTransition fadeTransition = new FadeTransition();
 		fadeTransition.setDuration(Duration.millis(2000));
 		fadeTransition.setNode(rootPane);
