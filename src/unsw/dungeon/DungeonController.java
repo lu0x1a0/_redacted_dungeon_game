@@ -63,7 +63,7 @@ public class DungeonController{
     }
     public void changeEntityImage(Entity e, ImageView oldv) {
     	removeEntityFromView(oldv);
-    	//addEntityToView(e.getIv(),e.getX(),e.getY());
+    	addEntityToView(e.getIv(),e.getX(),e.getY());
     }
     @FXML
     public void initialize() {
@@ -119,6 +119,7 @@ public class DungeonController{
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1),new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				System.out.println("lit2");
 				bomb.lit2();
 			}
 		
@@ -126,6 +127,7 @@ public class DungeonController{
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(2),new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+				System.out.println("lit3");
 				bomb.lit3();
 			}
 		
@@ -142,9 +144,18 @@ public class DungeonController{
 		timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(4),new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
+
 				bomb.removeFromView();
 				bomb.setIv(null);
-				System.out.println("what's on the tile-"+grid.getChildren());
+				System.out.println("----------------");
+				System.out.println(bomb.getX()+" - "+bomb.getY());
+				for (Node node: grid.getChildren()) {
+					if(grid.getRowIndex(node).equals(bomb.getX()) &&
+						grid.getColumnIndex(node).equals(bomb.getY())) {
+						System.out.println("what's on the tile-"+ ((ImageView)node).getImage().impl_getUrl() );
+					}
+				}
+				System.out.println("----------------");
 			}
 		
 		}));

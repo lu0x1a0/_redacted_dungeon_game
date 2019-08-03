@@ -27,7 +27,7 @@ public class DungeonApplication extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        controller.start();
+        //controller.start();
         
     }
 
