@@ -198,8 +198,14 @@ public class DungeonController implements Controller {
         });
 		timeline.setOnFinished((ActionEvent event) -> {
 			bomb.removeFromView();
-			Image ground = new Image("/dirt_0_new.png");
-			squares.add(new ImageView(ground), bomb.x().intValue(), bomb.y().getValue());
+//			for (Node node: grid.getChildren()) {
+//				if(GridPane.getRowIndex(node).equals(bomb.getY()) &&
+//					GridPane.getColumnIndex(node).equals(bomb.getX())) {
+//					System.out.println("what's on the tile-"+ ((ImageView)node).getImage().impl_getUrl() );
+////					squares.add((ImageView)node, bomb.x().intValue(), bomb.y().getValue());
+//				}
+//			}
+//			Image ground = new Image("/dirt_0_new.png");
 			
 			
 		});
