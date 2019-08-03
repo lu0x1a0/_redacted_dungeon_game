@@ -13,15 +13,14 @@ import javafx.application.Platform;
 
 /**
  * Enemy entity that aims to kill the player
+ * being observed by the dungeon, observing the player
  * @author Brendan
  *
  */
 public class Enemy extends Movable {
-// being observed by the dungeon, observing the player
 	private Timer timer;
 
 	private long speed;
-	//static int count = 0;
 	Dungeon dungeon;
 	boolean alive = true;
 	

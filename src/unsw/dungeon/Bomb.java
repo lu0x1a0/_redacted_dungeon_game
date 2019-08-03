@@ -62,20 +62,6 @@ public class Bomb extends Collectible {
 			this.lit1();
 			islit.set(true);
 			Bomb bomb = this;
-//			timer= new Timer(true);
-//			TimerTask task = new TimerTask() {
-//				@Override
-//			    public void run() {
-//					Platform.runLater(new Runnable() {
-//			            @Override public void run() {
-//			            	notifyObservers(bomb,"explode");
-//							bomb.removeFromView();
-//							timer.cancel();
-//			            }
-//			        });
-//				}
-//			};
-//			timer.scheduleAtFixedRate(task, 1000, 1000);
 		}
 	}
 	public void lit1() {
@@ -83,9 +69,7 @@ public class Bomb extends Collectible {
 		dungeon.addToView(this,getIv());
 	}
 	public void lit2() {
-		//this.removeFromView();
 		this.setIv(lit2);
-		//dungeon.addToView(this,getIv());
 		dungeon.changeEntityImage(this,lit1);
 	}
 	public void lit3() {
