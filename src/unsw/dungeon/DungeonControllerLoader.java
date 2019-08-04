@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
@@ -68,7 +67,6 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private DungeonController dungeonController;
 
 
-	private HashMap<Entity, Timeline> timelines;
 	
 	private HashMap<String, Node> UIitems;
 
