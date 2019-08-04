@@ -8,8 +8,6 @@ import javafx.scene.image.ImageView;
  *
  */
 public class Door extends Entity {
-	@SuppressWarnings("unused")
-	private ImageView lock;
 	private ImageView unlock;
 	private boolean isopen = false;
 	private int id;
@@ -31,7 +29,6 @@ public class Door extends Entity {
 	 */
 	public void setViews(ImageView lock, ImageView unlock) {
 		this.unlock = unlock;
-		this.lock = lock;
 	}
 	/**
 	 * return the id of the door

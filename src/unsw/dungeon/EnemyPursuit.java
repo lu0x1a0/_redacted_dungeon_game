@@ -32,7 +32,7 @@ public class EnemyPursuit implements EnemyPath {
 			}
 			ptr = queue.poll();
 		}
-		if (ptr.equals(player)) {
+		if (ptr!=null && ptr.equals(player)) {
 			Coord key = ptr;
 			while(!visited.get(key).equals(ori)) {
 				key = visited.get(key);
