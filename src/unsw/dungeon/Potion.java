@@ -38,10 +38,6 @@ public class Potion extends Collectible {
 	public void postCollect() {
 		use(null);
 	}
-	public void pauseuse() {
-		onUse.set(false);
-		notifyObservers(this,"off");
-	}
 	public void wearoff() {
 		onUse.set(false);
 		notifyObservers(this,"off");
@@ -49,9 +45,6 @@ public class Potion extends Collectible {
 	}
 	public int getTime() {
 		return time;
-	}
-	public void setTime(int time) {
-		this.time = time;
 	}
 	public BooleanProperty getOnUse() {
 		return onUse;
