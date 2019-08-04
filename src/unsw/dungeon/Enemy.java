@@ -137,6 +137,11 @@ public class Enemy extends Movable {
 			timer.cancel();
 		}
 	}
+	
+	/**
+	 * sets whether the enemy should presue the player or evade them
+	 * @param on - boolean for status
+	 */
 	public void setPathMethod(boolean on) {
 		if(on) {
 			activeMethod = evade;

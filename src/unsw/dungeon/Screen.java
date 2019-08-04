@@ -7,6 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Abstract class for screens, contains common variables and methods
+ * @author compu
+ *
+ */
 public abstract class Screen  {
 
 	protected Stage stage;
@@ -30,12 +35,19 @@ public abstract class Screen  {
 		
 	}
 
+	/**
+	 * Starts and displays the screen
+	 */
 	public void start() {
 		stage.setScene(scene);
         scene.getRoot().requestFocus();
         stage.show();
 	}
 
+	/**
+	 * Returns the controller for this screen
+	 * @return
+	 */
 	public Controller getController() {
 	    return getController();
 	}

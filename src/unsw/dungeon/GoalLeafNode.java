@@ -11,6 +11,7 @@ public abstract class GoalLeafNode implements GoalComponent {
 
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 
+	
 	@Override
 	abstract public boolean isComplete();
 	

@@ -51,7 +51,6 @@ public abstract class DungeonLoader {
         JSONObject jsonGoals = json.getJSONObject("goal-condition");
         GoalComponent goals = goalAdder(dungeon, jsonGoals);
         dungeon.addGoal(goals);
-        System.out.println(goals.printGoal("The goals are: "));
         return dungeon;
     }
     /**

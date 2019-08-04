@@ -38,21 +38,25 @@ public class Potion extends Collectible {
 	public void postCollect() {
 		use(null);
 	}
-	public void pauseuse() {
-		onUse.set(false);
-		notifyObservers(this,"off");
-	}
+	/**
+	 * Function to call when the potion has expiried
+	 */
 	public void wearoff() {
 		onUse.set(false);
 		notifyObservers(this,"off");
 		getDungeon().getPlayer().potionEffectOff(this);
 	}
+	/**
+	 * Getter for length of potion duration
+	 * @return - integer of time value
+	 */
 	public int getTime() {
 		return time;
 	}
-	public void setTime(int time) {
-		this.time = time;
-	}
+	/**
+	 * getter for BooleanProperty for when potion is used
+	 * @return BooleanProperty
+	 */
 	public BooleanProperty getOnUse() {
 		return onUse;
 	}	

@@ -1,5 +1,11 @@
 package unsw.dungeon;
 
+
+/**
+ * class used a key for a location on the map
+ * @author compu
+ *
+ */
 public class Coord {
 	private int x, y;
 	/**

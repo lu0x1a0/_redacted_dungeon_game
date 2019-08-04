@@ -405,6 +405,11 @@
       "type": "treasure"
     },
     {
+      "x": 7,
+      "y": 11,
+      "type": "treasure"
+    },
+    {
       "x": 11,
       "y": 8,
       "type": "invincibility"
@@ -643,21 +648,6 @@
       "x": 7,
       "y": 5,
       "type": "enemy"
-    },
-    {
-      "x": 16,
-      "y": 14,
-      "type": "enemy"
-    },
-    {
-      "x": 16,
-      "y": 13,
-      "type": "wall"
-    },
-    {
-      "x": 15,
-      "y": 14,
-      "type": "wall"
     },
     {
       "x": 17,

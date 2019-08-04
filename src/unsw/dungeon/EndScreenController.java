@@ -32,11 +32,19 @@ public class EndScreenController implements Controller {
     void handlePlayAgain(ActionEvent event) {
     	makeFadeOut(dungeonScreen);
     }
-
+    
+    /**
+     * Set the dungeon screen, so we can swap to it after a user selected "Play again"
+     * @param dungeonScreen
+     */
 	public void setDungeonScreen(DungeonScreen dungeonScreen) {
 		this.dungeonScreen = dungeonScreen;
 	}
 
+	/**
+     * Set the dungeon screen, so we can swap to it after a user selected "Main Menu"
+     * @param dungeonScreen
+     */
 	public void setStartScreen(StartScreen startScreen) {
 		this.startScreen = startScreen;
 	}
@@ -47,10 +55,16 @@ public class EndScreenController implements Controller {
     	makeFadeIn();
     }
     
+	/**
+	 * Fade the screen in and reset opacity so the screen is viewable
+	 */
 	public void resetForViewing() {
     	makeFadeIn();
     }
 	
+	/**
+	 * Stores animation for fade in
+	 */
 	private void makeFadeIn() {
 		FadeTransition fadeTransition = new FadeTransition();
 		fadeTransition.setDuration(Duration.millis(2000));
@@ -60,6 +74,10 @@ public class EndScreenController implements Controller {
 		fadeTransition.play();	
 	}
 
+	/**
+	 * Fades this screen out and transition to next screen
+	 * @param destination - next screen to transition to
+	 */
 	private void makeFadeOut(Screen destination) {
 		FadeTransition fadeTransition = new FadeTransition();
 		fadeTransition.setDuration(Duration.millis(1000));
@@ -67,16 +85,16 @@ public class EndScreenController implements Controller {
 		fadeTransition.setFromValue(1);
 		fadeTransition.setToValue(0);
 		fadeTransition.setOnFinished((ActionEvent event) -> {
-//			destination.
 			destination.start();
-			
-			
 		});
 		fadeTransition.play();	
 	}
 
 
-
+	/**
+	 * Sets the message to display depending on whether the game was a win or less
+	 * @param value - win or loss boolean
+	 */
 	public void setMessage(boolean value) {
 		if(value == false) {
 			winLossMessage.setText("You lost!!");

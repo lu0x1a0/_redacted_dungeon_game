@@ -3,7 +3,12 @@ package unsw.dungeon;
 import java.io.IOException;
 import javafx.stage.Stage;
 
-
+/**
+ * Wrapper class for the EndScreen that contains the FXML and controller.
+ * The screen is called from here
+ * @author compu
+ *
+ */
 public class EndScreen extends Screen {
 
 	/**

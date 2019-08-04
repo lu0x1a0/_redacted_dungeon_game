@@ -24,7 +24,7 @@ public class GoalLeafTreasureCollected extends GoalLeafNode implements Observabl
 	}
 	
 	/**
-	 * Constructor with no parameters assuming the floor switches will be added
+	 * Constructor with no parameters assuming the treasure will be added
 	 * individually later
 	 */
 	public GoalLeafTreasureCollected() {
@@ -69,7 +69,7 @@ public class GoalLeafTreasureCollected extends GoalLeafNode implements Observabl
 	 */
 	@Override
 	public String printGoal(String message) {
-		return message + " Treasure goal";
+		return message + " Treasure goal, i have count of: " + Treasures.size();
 	}
 
 }
