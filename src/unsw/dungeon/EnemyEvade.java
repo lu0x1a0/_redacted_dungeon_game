@@ -66,7 +66,7 @@ public class EnemyEvade implements EnemyPath {
 			}
 			ptr1 = queue1.poll();
 		}
-		if (ptr1.equals(target)) {
+		if (ptr1!=null && ptr1.equals(target)) {
 			Coord key = ptr1;
 			while(!visited1.get(key).equals(ori1)) {
 				key = visited1.get(key);
