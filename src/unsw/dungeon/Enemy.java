@@ -1,9 +1,5 @@
 package unsw.dungeon;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
-
 import java.util.Timer;
 import java.util.TimerTask;
 

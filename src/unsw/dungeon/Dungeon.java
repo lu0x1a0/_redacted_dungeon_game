@@ -363,6 +363,11 @@ public class Dungeon implements Observer {
 		bombCell(new Coord(centre.getX()+1,centre.getY()+1));
 	}
 	
+	/**
+	 * Observer method for when the potion updates the dungeon. 
+	 * @param p - Potion notifying the dungeon
+	 * @param info - parameter with notifcation
+	 */
 	private void update(Potion p, Object info) {
 		if (info instanceof String) {
 			if((String) info == "on") {
@@ -410,6 +415,10 @@ public class Dungeon implements Observer {
 	public void setController(DungeonController dc) {
 		this.dc = dc;
 	}
+	/**
+	 * getter method to get the DungeonController
+	 * @return - Dungeon's DungeonController
+	 */
 	public DungeonController getDc() {
 		return dc;
 	}
