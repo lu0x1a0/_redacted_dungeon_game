@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -27,7 +28,12 @@ public abstract class DungeonLoader {
     /**
      * Parses the JSON to create a dungeon.
      * @return - Dungeon
+     * @throws FileNotFoundException 
+     * @throws JSONException 
      */
+    public void changeDungeonFile(String filename) throws JSONException, FileNotFoundException {
+    	json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
+    }
     public Dungeon load() {
         int width = json.getInt("width");
         int height = json.getInt("height");

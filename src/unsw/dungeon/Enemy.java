@@ -56,15 +56,17 @@ public class Enemy extends Movable {
 			@Override
 		    public void run() {
 		    	Coord c = e.pathSearch();
-				Coord old = new Coord(e.getX(),e.getY());
-				//sets new coord
-				e.x().set(c.getX());
-				e.y().set(c.getY());
-				Platform.runLater(new Runnable() {
-		            @Override public void run() {
-						notifyObservers(e,old);
-		            }
-		        });
+		    	if(c!= null) {
+					Coord old = new Coord(e.getX(),e.getY());
+					//sets new coord
+					e.x().set(c.getX());
+					e.y().set(c.getY());
+					Platform.runLater(new Runnable() {
+			            @Override public void run() {
+							notifyObservers(e,old);
+			            }
+			        });
+		    	}
 			}
 		};
 		timer.scheduleAtFixedRate(task, 0, speed);
