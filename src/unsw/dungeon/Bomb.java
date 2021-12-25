@@ -22,9 +22,13 @@ public class Bomb extends Collectible {
         this.islit = new SimpleBooleanProperty();
         islit.set(false);
 	}
+	
 	/**
-	 * setter for different image state of the entity
+	 *  setter for different image state of the entity
 	 * @param unlit - image
+	 * @param lit1 - image
+	 * @param lit2 - image
+	 * @param lit3 - image
 	 * @param blast - image
 	 */
 	public void setImages(ImageView unlit, ImageView lit1, ImageView lit2, ImageView lit3, ImageView blast) {
@@ -36,7 +40,7 @@ public class Bomb extends Collectible {
 	}
 	/**
 	 * return the property that is tied to UI change
-	 * @return
+	 * @return - returns the booleanProperty isLit
 	 */
 	public BooleanProperty getIslit() {
 		return islit;

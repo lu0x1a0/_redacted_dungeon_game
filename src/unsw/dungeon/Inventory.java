@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
+/**
+ * Class to handle inventory of player. Uses variables that are observed by the controller to change
+ * the inventory screen for the front end
+ * @author compu
+ *
+ */
 public class Inventory {
 
 	private ArrayList<Collectible> inventory;
@@ -21,31 +27,52 @@ public class Inventory {
 	private SimpleIntegerProperty treasureCount = new SimpleIntegerProperty();
 	private SimpleIntegerProperty potion_time = new SimpleIntegerProperty();
 
-
+	/**
+	 * getter for hasTreasure booleanProperty
+	 * @return - BooleanProperty of whether treasure is in inventory
+	 */
 	public SimpleBooleanProperty getHasTreasure() {
 		return hasTreasure;
 	}
-
+	
+	/**
+	 * getter for IntegerProperty about how many items of treasure are collected
+	 * @return - IntegerProperty of the amount of treasure held
+	 */
 	public SimpleIntegerProperty getTreasureCount() {
 		return treasureCount;
 	}
 
+	/**
+	 * Contructor that attached the inventory to the player
+	 * @param player - player who holds inventory
+	 */
 	public Inventory(Player player) {
 		this.inventory = new ArrayList<Collectible>();
 		this.player = player;
 		
 	}
 
+	/**
+	 * getter for IntegerProperty about how many bombs are held by player
+	 * @return - Integer property for the number of bombs held by player
+	 */
 	public SimpleIntegerProperty getBombsCount() {
 		return bombsCount;
 	}
 
-
+	/**
+	 * getter for the IntegerProperty of how much health the sword has left
+	 * @return - IntegerProperty for the abount of health the sword has left
+	 */
 	public SimpleIntegerProperty getSwordHealth() {
 		return swordHealth;
 	}
 	
-	
+	/**
+	 * Adds a collectible to the inventory
+	 * @param c - collectable to add
+	 */
 	public void addToInventory(Collectible c) {
     	inventory.add(c);
     	if(c instanceof Sword) {
@@ -96,6 +123,9 @@ public class Inventory {
     	return null;
     }
     
+    /**
+     * Action for player to way the sword
+     */
     public void waveSword() {
     	for( Collectible e: inventory) {
     		if(e instanceof Sword) {
@@ -197,22 +227,38 @@ public class Inventory {
 		hasPotion.setValue(false);
 	}
 
+	/**
+	 * getter for if the player has a sword
+	 * @return - BooleanProperty for if player has sword
+	 */
 	public SimpleBooleanProperty getHasSword() {
 		return hasSword;
 	}
-
+	/**
+	 * getter for if the player has a bomb
+	 * @return - BooleanProperty for if player has bomb
+	 */
 	public SimpleBooleanProperty getHasBomb() {
 		return hasBomb;
 	}
-
+	/**
+	 * getter for if the player has a key
+	 * @return - BooleanProperty for if player has key
+	 */
 	public SimpleBooleanProperty getHasKey() {
 		return hasKey;
 	}
-
+	/**
+	 * getter for if the player has a potion
+	 * @return - BooleanProperty for if player has potion
+	 */
 	public SimpleBooleanProperty getHasPotion() {
 		return hasPotion;
 	}
-	
+	/**
+	 * getter for if the remaining time left on a potion
+	 * @return - IntegerProperty for the time left on the potion
+	 */
 	public SimpleIntegerProperty getPotionTimeLeft() {
 		return potion_time;
 	}

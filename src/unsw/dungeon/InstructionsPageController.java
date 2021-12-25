@@ -10,7 +10,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
-
+/**
+ * Controller for instructions screen
+ * @author compu
+ *
+ */
 public class InstructionsPageController implements Controller {
 
     @FXML
@@ -30,7 +34,10 @@ public class InstructionsPageController implements Controller {
     private StartScreen startScreen;
     
     
-    
+    /**
+     * Set the start screen to go to when returning 
+     * @param startScreen - main menu or beginning screen of the game
+     */
     public void setStartScreen(StartScreen startScreen) {
 		this.startScreen = startScreen;
 	}

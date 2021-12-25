@@ -94,10 +94,6 @@ public abstract class Entity {
 		return;
 
 	}
-	@Override
-	public String toString() {
-		return ""+this.getClass();
-	}
 	/**
 	 * getter for Dungeon
 	 * @return - Dungeon

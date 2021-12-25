@@ -18,18 +18,18 @@ public class Player extends Movable{
         playerInventory = new Inventory(this);
     }
     
+    /**
+     * Getter for the player's inventory
+     * @return player's inventory
+     */
     public Inventory getPlayerInventory() {
 		return playerInventory;
 	}
 
-	public void setPlayerInventory(Inventory playerInvenvtory) {
-    	this.playerInventory = playerInvenvtory;
-    }
-/**
- * returns whether or not the player is holding a sword
- * @return - boolean
- */
-
+	/**
+	 * returns whether or not the player is holding a sword
+	 * @return - boolean
+	 */
 	public boolean hasSword() {
 		return playerInventory.hasSword();
 	} 
@@ -63,8 +63,7 @@ public class Player extends Movable{
     /**
      * returns the inventory held by the player
      * @return ArrayList<Collectible> - Inventory of player
-     */
- 
+     */ 
 	@Override
     public void moveUp() {
         if (getY() > 0 ) { 
@@ -192,6 +191,9 @@ public class Player extends Movable{
 		return true;
 	}
 
+	/**
+	 * Method to call when the player dies
+	 */
 	public void dead() {
 		dungeon.endGame(false);
 		

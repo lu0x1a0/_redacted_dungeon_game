@@ -1,17 +1,21 @@
 package unsw.dungeon;
 
 import java.io.IOException;
-
 import javafx.stage.Stage;
 
-
+/**
+ * Wrapper class for the EndScreen that contains the FXML and controller.
+ * The screen is called from here
+ * @author compu
+ *
+ */
 public class EndScreen extends Screen {
 
 	/**
 	 * constructor for the screen when a dungeon game finishes
-	 * @param stage
-	 * @param controller
-	 * @throws IOException
+	 * @param stage - takes stage that the game will play on
+	 * @param controller - takes the controller for this screen
+	 * @throws IOException - Throws error when the coresponding FXML file is missing
 	 */
 	public EndScreen(Stage stage, EndScreenController controller) throws IOException{
 		super(stage, controller, "EndScreen.fxml");
